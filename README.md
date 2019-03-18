@@ -1,6 +1,8 @@
 # banka
 A light-weight core banking application that supports a single bank and allows users create bank accounts and make withdrawals &amp; deposits by visiting a local branch
 
+![GitHub](https://img.shields.io/github/license/tolulope-od/banka.svg?style=plastic) ![GitHub language count](https://img.shields.io/github/languages/count/tolulope-od/banka.svg)
+
 # Website
 
 https://tolulope-od.github.io/indulgent-treats/
