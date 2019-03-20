@@ -1,0 +1,264 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0%;
+  background-color: #e7e5e5;
+}
+/** Landing Page */
+#navbar {
+  overflow: hidden;
+  background-color: transparent;
+  padding: 40px 10px;
+  transition: 0.4s;
+  position: fixed;
+  width: 100%;
+  height: 20px;
+  top: 0;
+  z-index: 99;
+  left: -10px;
+  margin: -10px 0px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#navbar a {
+  padding: 12px;
+  text-decoration: none;
+  margin: 0px 10px 15px 10px;
+}
+
+#navbar #logo {
+  font-size: 35px;
+  font-weight: bold;
+  transition: 0.6s;
+  color: white;
+  width: 50%;
+  align-self: center;
+}
+
+#navbar-right a {
+  color: #6f26c9;
+  padding: 12px;
+  text-align: center;
+  border: 2px solid #6f26c9;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+#navbar-right a:hover {
+  background-color: #6f26c9;
+  color: white;
+  transition: 0.8s ease-in;
+}
+
+.auth-btn {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  padding: 12px 15px;
+  background: linear-gradient(270deg, #21D4FD, #B721FF);
+  border-radius: 25px;
+}
+
+.auth-btn-side {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  border: 2px solid white;
+  border-radius: 25px;
+  padding: 5px 10px;
+  transition: 0.5s ease-in;
+}
+
+.auth-btn-side:hover {
+  background: white;
+  color: #6f26c9;
+}
+
+#navbar-right {
+  padding: 15px;
+  transition: 0.6s;
+  font-size: 18px;
+  width: 25%;
+  align-self: center;
+  margin-left: 50%;
+}
+
+.main {
+  min-height: calc(100vh - 70px);
+}
+
+.item-content-container {
+  height: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.content-container {
+  height: 500px;
+  width: 100%;
+  padding-top: 100px;
+  border-bottom-right-radius: 500px;
+  flex-direction: row;
+}
+
+.content-container::before {
+  box-shadow: 0 0 0 1000px #6f26c9;
+  border-radius: 100%;
+  position: absolute;
+  height: 100px;
+  left: -450px;
+  width: 100px;
+  z-index: -1;
+  content: "";
+}
+
+.main-content {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.tag-heading {
+  color: white;
+  margin-top: 100px;
+  font-size: 50px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row .col.s5 {
+  width: 41.6%;
+  margin-left: auto;
+  left: auto;
+  right: auto;
+}
+
+.row .col {
+  float: left;
+  box-sizing: border-box;
+  padding: 0 0.75rem;
+}
+
+.illustration {
+  width: 550px;
+  height: 550px;
+  margin-left: 80px;
+}
+
+.description-img {
+  width: 350px;
+  height: 500px;
+  margin-left: auto;
+}
+
+.bodyTxt {
+  color: rgb(207, 206, 206);
+  font-weight: 100;
+}
+
+.description-txt {
+  font-size: 12px;
+  margin-top: auto;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.section-head {
+  font-size: 35px;
+  color: white;
+  text-shadow: 2px 2px #464343;
+  margin-top: 50px;
+}
+
+.action-area {
+  margin-top: 100px;
+  height: 45px !important;
+  margin-bottom: 50px;
+}
+
+.footer {
+  height: 50px;
+  width: 100%;
+  background-color: #6f26c9;
+  color: white;
+  float: left;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  .main-content {
+    width: 85%;
+  }
+
+  .content-container {
+    flex-direction: column;
+  }
+
+  .item-content-container {
+    flex-direction: column;
+    flex-flow: row wrap;
+    overflow: auto;
+  }
+
+  .tag-heading {
+    font-size: 35px;
+  }
+
+  #navbar a {
+    color: #f1f0f3;
+  }
+
+  #navbar-right {
+    font-size: 15px;
+    margin-left: 10%;
+  }
+
+  .illustration {
+    width: 300px;
+    height: 300px;
+    margin-left: auto;
+  }
+
+  .row .col.s5 {
+    width: 80%;
+  }
+
+  .section-head {
+    margin-top: 200px;
+  }
+
+  .footer {
+    position: relative;
+    bottom: 0;
+    top: 0;
+    z-index: 100;
+  }
+}
+
+@media only screen and (min-width: 893px) and (max-width: 1240px){
+  .main-content {
+    width: 80%;
+  }
+
+  .illustration {
+  width: 400px;
+  height: 400px;
+  margin-left: 10px;
+ }
+
+ .description-img {
+  width: 300px;
+  height: 450px;
+  margin-left: auto;
+ }
+}
