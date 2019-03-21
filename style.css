@@ -55,7 +55,7 @@ body {
   text-align: center;
   color: white;
   padding: 12px 15px;
-  background: linear-gradient(270deg, #21D4FD, #B721FF);
+  background: linear-gradient(270deg, #21d4fd, #b721ff);
   border-radius: 25px;
 }
 
@@ -184,14 +184,16 @@ body {
 .action-area {
   margin-top: 100px;
   height: 45px !important;
-  margin-bottom: 50px;
+  margin-bottom: 90px;
 }
 
 .footer {
   height: 50px;
   width: 100%;
   background-color: #6f26c9;
+  bottom: 0;
   color: white;
+  position: fixed;
   float: left;
 }
 
@@ -245,20 +247,96 @@ body {
   }
 }
 
-@media only screen and (min-width: 893px) and (max-width: 1240px){
+@media only screen and (min-width: 893px) and (max-width: 1240px) {
   .main-content {
     width: 80%;
   }
 
   .illustration {
-  width: 400px;
-  height: 400px;
-  margin-left: 10px;
- }
+    width: 400px;
+    height: 400px;
+    margin-left: 10px;
+  }
 
- .description-img {
-  width: 300px;
-  height: 450px;
-  margin-left: auto;
- }
+  .description-img {
+    width: 300px;
+    height: 450px;
+    margin-left: auto;
+  }
+}
+
+/** Sign Up Page */
+.menu-nav {
+  background-color: #6f26c9 !important;
+  padding: 25px 15px !important;
+}
+.menu-nav a {
+  margin-top: 20px !important;
+}
+
+.form-card {
+  float: right; 
+  width: 399px; box-shadow: 1px 2px 5px 3px #d2cbcb; 
+  padding-bottom: 30px; 
+  background: white;
+  margin-bottom: 100px;
+}
+
+.form-body {
+  width: 100%; 
+  display: grid; 
+  justify-content: center;
+}
+
+.signup-login-text {
+  color: #6f26c9;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.input-field-button {
+    margin: 10px 0px;
+}
+
+.sign-up-login-link {
+  margin-left: 5px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 369px;
+    height: 35px;
+    margin-bottom: 20px;
+    border: none;
+    background: #f1efef;
+    padding-left: 10px;
+    outline: none;
+    border-radius: 15px;
+}
+input[type="submit"] {
+    width: 150px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: Montserrat, sans-serif;
+    background: rgb(94, 53, 177);
+    border-radius: 25px;
+}
+
+input:focus {
+  border: 1px solid blue;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  input[type="text"], input[type="password"] {
+    width: 90%;
+}
+
+.form-card {
+  width: 310px; align-self: center;
+}
+}
+
+@media only screen and (min-width: 893px) and (max-width: 1240px) {
+  
 }
