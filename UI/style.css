@@ -88,7 +88,7 @@ body {
 }
 
 .item-content-container {
-  height: 500px;
+  max-height: 500px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -193,8 +193,271 @@ body {
   background-color: #6f26c9;
   bottom: 0;
   color: white;
-  position: fixed;
+  position: relative;
   float: left;
+}
+
+/** Sign Up & Login Page*/
+.menu-nav {
+  background-color: #6f26c9 !important;
+  padding: 25px 15px !important;
+}
+.menu-nav a {
+  margin-top: 20px !important;
+}
+
+.form-card {
+  float: right;
+  width: 399px;
+  box-shadow: 1px 2px 5px 3px #d2cbcb;
+  padding-bottom: 30px;
+  background: white;
+  margin-bottom: 100px;
+}
+
+.form-body {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+}
+
+.signup-login-text {
+  color: #6f26c9;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.input-field-button {
+  margin: 10px 0px;
+}
+
+.sign-up-login-link {
+  margin-left: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 369px;
+  height: 35px;
+  margin-bottom: 20px;
+  border: none;
+  background: #f1efef;
+  padding-left: 10px;
+  outline: none;
+  border-radius: 15px;
+}
+input[type="submit"] {
+  width: 150px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: Montserrat, sans-serif;
+  background: rgb(94, 53, 177);
+  border-radius: 25px;
+}
+
+input:focus {
+  border: 1px solid blue;
+}
+
+.avatar-img {
+  width: 50px;
+  height: 50px;
+}
+
+.profile-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  display: none;
+  width: auto;
+  height: auto;
+  background-color: white;
+  position: fixed;
+  margin-top: 58px;
+  margin-left: 88%;
+  padding: 10px 10px;
+  box-shadow: 1px 2px 5px 3px #d2cbcb;
+}
+
+button.dropdown-trigger {
+  background-color: transparent;
+  color: white;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+}
+
+button.dropdown-trigger:focus {
+  outline: none;
+}
+
+
+.dropdown-item {
+  text-decoration: none;
+  color: black;
+  padding: 10px 10px;
+}
+
+.fa-chevron-down {
+  align-self: center !important;
+  padding-left: 10px;
+}
+
+.side-nav {
+  float: left;
+  left: 0;
+  background-color: white;
+  width: 15%;
+  justify-content: center;
+  margin-top: 60px;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 2px 5px 3px #d2cbcb;
+}
+
+.side-nav-content {
+  align-self: center;
+  margin-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label-lg {
+  margin-top: 80px;
+  margin-right: 750px;
+  font-size: 20px;
+}
+
+.dashboard-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-bottom: 3px solid purple;
+}
+
+.dash-nav-link {
+  padding-right: 15px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  color: rgb(0, 166, 221);
+}
+
+.side-link {
+  font-size: 19px;
+  margin-top: 20px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  text-decoration: none;
+  color: rgb(0, 166, 221);
+}
+
+.shortcut-btns {
+  margin-left: 17.5%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.shortcut-btns a{
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 25px;
+  box-shadow: 1px 2px 5px 3px #d2cbcb
+}
+
+shortcut-btns a:focus{
+  outline: none;
+}
+
+.side-nav-greet {
+  margin-top: -140px;
+  font-size: 15px;
+}
+
+.side-nav-name {
+  font-size: 30px;
+  margin-top: -20px;
+}
+
+.main-dashboard {
+  margin-left: 240px;
+  display: flex;
+  flex-direction: row;
+}
+
+.account-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  flex-flow: row wrap;
+}
+
+.account-stats-card {
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 10px;
+  width: 30%;
+  border-radius: 15px;
+  box-shadow: 1px 2px 5px 3px #d2cbcb;
+}
+
+.accnt-info-btn {
+  text-decoration: none;
+  background-color: #6f26c9;
+  color: white;
+  padding: 5px 5px;
+  border-radius: 25px;
+  font-size: 12px;
+  margin-top: 200px;
+}
+
+.accnt-info-btn:hover {
+    box-shadow: 1px 2px 5px 3px #d2cbcb;
+}
+
+.badge-active {
+  font-size: 10px;
+  float: right;
+  background-color: green;
+  color: white;
+  border-radius: 15px;
+  padding: 5px 5px;
+  text-shadow: 2px 2px #464343;
+}
+
+.badge-inactive {
+  font-size: 10px;
+  float: right;
+  background-color: red;
+  color: white;
+  border-radius: 15px;
+  padding: 5px 5px;
+  text-shadow: 2px 2px #464343;
+  padding: 8px 8px;
+}
+
+.balance-text {
+  font-size: 15px;
+  margin-top: 50px;
+}
+
+.account-balance {
+  font-weight: bolder;
+  font-size: 25px;
+  margin-top: -15px;
 }
 
 @media only screen and (min-width: 320px) and (max-width: 768px) {
@@ -245,6 +508,42 @@ body {
     top: 0;
     z-index: 100;
   }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 80%;
+  }
+
+  .form-card {
+    width: 310px;
+    align-self: center;
+  }
+
+  .side-nav {
+    display: none;
+  }
+  .label-lg {
+    margin-right: 150px !important;
+  }
+  .account-stats {
+    flex-direction: column;
+    align-content: center;
+  }
+  .main-dashboard {
+    margin-left: 20px;
+  }
+  .account-stats-card {
+    width: 90%;
+  }
+
+  .shortcut-btns {
+    margin-left: 10% !important;
+  }
+
+  .profile-dropdown {
+    max-width: 100px;
+    margin-left: 75%;
+  }
 }
 
 @media only screen and (min-width: 893px) and (max-width: 1240px) {
@@ -263,80 +562,6 @@ body {
     height: 450px;
     margin-left: auto;
   }
-}
 
-/** Sign Up Page */
-.menu-nav {
-  background-color: #6f26c9 !important;
-  padding: 25px 15px !important;
-}
-.menu-nav a {
-  margin-top: 20px !important;
-}
-
-.form-card {
-  float: right; 
-  width: 399px; box-shadow: 1px 2px 5px 3px #d2cbcb; 
-  padding-bottom: 30px; 
-  background: white;
-  margin-bottom: 100px;
-}
-
-.form-body {
-  width: 100%; 
-  display: grid; 
-  justify-content: center;
-}
-
-.signup-login-text {
-  color: #6f26c9;
-  text-align: center;
-  font-weight: bolder;
-}
-
-.input-field-button {
-    margin: 10px 0px;
-}
-
-.sign-up-login-link {
-  margin-left: 5px;
-}
-
-input[type="text"], input[type="password"] {
-    width: 369px;
-    height: 35px;
-    margin-bottom: 20px;
-    border: none;
-    background: #f1efef;
-    padding-left: 10px;
-    outline: none;
-    border-radius: 15px;
-}
-input[type="submit"] {
-    width: 150px;
-    height: 40px;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-    font-family: Montserrat, sans-serif;
-    background: rgb(94, 53, 177);
-    border-radius: 25px;
-}
-
-input:focus {
-  border: 1px solid blue;
-}
-
-@media only screen and (min-width: 320px) and (max-width: 768px) {
-  input[type="text"], input[type="password"] {
-    width: 80%;
-}
-
-.form-card {
-  width: 310px; align-self: center;
-}
-}
-
-@media only screen and (min-width: 893px) and (max-width: 1240px) {
-  
+  .dashboard { margin-left: 20%; } .footer { position: fixed } .account-stats { margin-left: -50px; }
 }
