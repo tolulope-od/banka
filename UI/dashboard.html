@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"
+    integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <title>Banka - Dashboard</title>
+</head>
+
+<body>
+  <div id="navbar" class="menu-nav">
+    <a href="/" id="logo"><i class="fas fa-coins"></i>Banka</a>
+    <div id="navbar-right">
+      <div class="profile-action" id="drop-down">
+        <img src="images/avatar.png" alt="Profile Picture" class="avatar-img">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+    
+  </div>
+  <div class="profile-dropdown" id="dropdown-contents">
+    <a href="editProfile.html" class="dropdown-item">Profile</a>
+    <a href="index.html" class="dropdown-item">Logout</a>
+  </div>
+  <div class="main">
+    <div class="item-content-container">
+      <div class="side-nav">
+        <div class="side-nav-content">
+          <h5 class='side-nav-greet'>Welcome,</h5>
+          <h4 class='side-nav-name'>Obiwan</h4>
+          <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i>   Dashboard</a>
+          <a href="accounts.html" class="side-link"><i class="fas fa-file-invoice-dollar"></i>   Accounts</a>
+          <a href="profile.html" class="side-link"><i class="fas fa-user-circle"></i>   Profile</a>
+        </div>
+      </div>
+      <div class="item-content-container dashboard">
+        <div class="col s5">
+          <h2 class="label-lg"><strong>DASHBOARD</strong></h2>
+          <div class="dashboard-links">
+            <a href="dashboard.html" class="dash-nav-link active"><i class="fas fa-columns"></i> Dashboard</a>
+            <a href="accounts.html" class="dash-nav-link"><i class="fas fa-file-invoice-dollar"></i> Accounts</a>
+            <a href="profile.html" class="dash-nav-link"><i class="fas fa-user-circle"></i> Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="shortcut-btns">
+      <a href="createAccount.html">+ Add Account</a>
+    </div>
+    <div class="main-dashboard">
+      <div class="account-stats">
+        <div class="account-stats-card">
+          <p class="badge-active">Active</p>
+          <p class="balance-text">Balance</p>
+          <h3 class="account-balance">&#x20A6; 200,023.09</h3>
+          <p class="balance-text">Account Number</p>
+          <h3 class="account-balance">1903220321</h3>
+          <p class="balance-text">Account Type</p>
+          <h3 class="account-balance">Savings</h3>
+          <a href="accountInfo.html" class="accnt-info-btn">View Details</a>
+        </div>
+        <div class="account-stats-card">
+          <p class="badge-inactive">Inactive</p>
+          <p class="balance-text">Balance</p>
+          <h3 class="account-balance">&#x20A6; 4,600,013.36</h3>
+          <p class="balance-text">Account Number</p>
+          <h3 class="account-balance">1903225001</h3>
+          <p class="balance-text">Account Type</p>
+          <h3 class="account-balance">Savings</h3>
+          <a href="accountInfo.html" class="accnt-info-btn">View Details</a>
+        </div>
+        <div class="account-stats-card">
+          <p class="badge-active">Active</p>
+          <p class="balance-text">Balance</p>
+          <h3 class="account-balance">&#x20A6; 600,423.99</h3>
+          <p class="balance-text">Account Number</p>
+          <h3 class="account-balance">1903224005</h3>
+          <p class="balance-text">Account Type</p>
+          <h3 class="account-balance">Current</h3>
+          <a href="accountInfo.html" class="accnt-info-btn">View Details</a>
+        </div>
+        <div class="account-stats-card">
+          <p class="badge-active">Active</p>
+          <p class="balance-text">Balance</p>
+          <h3 class="account-balance">&#x20A6; 1,700,253.88</h3>
+          <p class="balance-text">Account Number</p>
+          <h3 class="account-balance">1903220662</h3>
+          <p class="balance-text">Account Type</p>
+          <h3 class="account-balance">Current</h3>
+          <a href="accountInfo.html" class="accnt-info-btn">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    <footer class="footer">
+      <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
+    </footer>
+    <script src="js/authNav.js"></script>
+</body>
+
+</html>
