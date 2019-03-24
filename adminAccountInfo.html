@@ -53,6 +53,7 @@
     <div class="shortcut-btns">
       <a href="#" onclick="handleStatusChange()" id="accnt-status-btn">Activate Account</a>
       <a href="#" onclick="handleAccountDebit()" id="accnt-status-btn">Debit Account</a>
+       <a href="#" onclick="handleAccountCredit()" id="accnt-status-btn">Credit Account</a>
     </div>
     <div class="accnt-info-disp">
       <div class="accnt-details">
@@ -121,6 +122,17 @@
             <br>
             <div class="input-field-btn">
               <input type="submit" name="confirmDebit" value="Confirm">
+            </div>
+          </form>
+          <form onsubmit="event.preventDefault()" class="accnt-credit-form" id="accnt-credit-form">
+            <h3>Credit Account</h3>
+            <br>
+            <label>Amount: </label>
+            <br>
+            <input type="text" name="address" placeholder="Enter Amount" required>
+            <br>
+            <div class="input-field-btn">
+              <input type="submit" name="confirmCredit" value="Confirm">
             </div>
           </form>
         </div>

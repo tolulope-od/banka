@@ -8,6 +8,7 @@ let text;
 
 // Account Credit & Debit forms
 const debitForm = document.getElementById("accnt-debit-form");
+const creditForm = document.getElementById("accnt-credit-form");
 
 // Change account status -deactivate or activte a bank account
 const badge = document.getElementById("accnt-badge");
@@ -38,8 +39,18 @@ const handleAccountSubmit = e => {
   modal.style.display = "block";
 };
 
+// Function to debit account
 const handleAccountDebit = () => {
+  // clear form area before displaying
+  creditForm.style.display = "none";
   debitForm.style.display = "block";
+  modal.style.display = "block";
+};
+
+// function to credit account
+const handleAccountCredit = () => {
+  debitForm.style.display = "none";
+  creditForm.style.display = "block";
   modal.style.display = "block";
 };
 

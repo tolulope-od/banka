@@ -375,7 +375,7 @@ button.dropdown-trigger:focus {
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
-  max-width: 25%;
+  max-width: 35%;
   justify-content: space-between;
 }
 
@@ -628,6 +628,10 @@ th.admin-accnts-th {
   display: none;
 }
 
+.accnt-credit-form {
+  display: none;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .main-content {
     width: 85%;
@@ -794,7 +798,7 @@ th.admin-accnts-th {
   }
 
   .shortcut-btns {
-    max-width: 40%;
+    max-width: 50%;
   }
 
   .illustration {
