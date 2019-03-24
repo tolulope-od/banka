@@ -6,6 +6,9 @@ const modalContent = document.getElementById("account-modal-content");
 const para = document.createElement("P");
 let text;
 
+// Account Credit & Debit forms
+const debitForm = document.getElementById("accnt-debit-form");
+
 // Change account status -deactivate or activte a bank account
 const badge = document.getElementById("accnt-badge");
 const accountStatusBtn = document.getElementById("accnt-status-btn");
@@ -32,6 +35,11 @@ const handleAccountSubmit = e => {
 
   para.appendChild(text);
   modalContent.appendChild(para);
+  modal.style.display = "block";
+};
+
+const handleAccountDebit = () => {
+  debitForm.style.display = "block";
   modal.style.display = "block";
 };
 

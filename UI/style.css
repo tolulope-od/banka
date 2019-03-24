@@ -255,6 +255,13 @@ input[type="submit"] {
   font-family: Montserrat, sans-serif;
   background: rgb(94, 53, 177);
   border-radius: 25px;
+  box-shadow: 0 9px #999;
+}
+
+input[type="submit"]:active {
+  background-color: #a971ee;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 input:focus {
@@ -362,22 +369,33 @@ button.dropdown-trigger:focus {
 }
 
 .shortcut-btns {
-  margin-left: 17.5%;
-  margin-top: 20px;
+  margin-left: 17.9%;
+  margin-top: 10px;
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  max-width: 25%;
+  justify-content: space-between;
 }
 
 .shortcut-btns a{
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #6f26c9;
   color: white;
-  padding: 10px 10px;
+  padding: 7px 10px;
   border-radius: 25px;
-  box-shadow: 1px 2px 5px 3px #d2cbcb
+  box-shadow: 0 9px #999;
 }
 
-shortcut-btns a:focus{
+.shortcut-btns a:focus{
   outline: none;
+}
+
+.shortcut-btns a:active {
+  background-color: #a971ee;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .side-nav-greet {
@@ -426,11 +444,15 @@ shortcut-btns a:focus{
   padding: 5px 5px;
   border-radius: 25px;
   font-size: 12px;
-  margin-top: 200px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  box-shadow: 0 3px #999;
 }
 
-.accnt-info-btn:hover {
-    box-shadow: 1px 2px 5px 3px #d2cbcb;
+.accnt-info-btn:active {
+  background-color: #a971ee;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .badge-active {
@@ -496,7 +518,8 @@ input.accnt-create-input {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 60%;
+  width: 450px;
+  max-width: 60%;
   border-radius: 25px;
 }
 
@@ -601,6 +624,10 @@ th.admin-accnts-th {
   box-shadow: 1px 2px 5px 3px #d2cbcb
 }
 
+.accnt-debit-form {
+  display: none;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .main-content {
     width: 85%;
@@ -683,6 +710,16 @@ th.admin-accnts-th {
 
   .shortcut-btns {
     margin-left: 10% !important;
+    max-width: 80%;
+    margin-top: -5px;
+  }
+
+  .shortcut-btns a{
+    margin-top: 5%;
+  }
+
+  .modal-content {
+  width: auto;
   }
 
   .profile-dropdown {
@@ -754,6 +791,10 @@ th.admin-accnts-th {
 @media only screen and (min-width: 893px) and (max-width: 1240px) {
   .main-content {
     width: 80%;
+  }
+
+  .shortcut-btns {
+    max-width: 40%;
   }
 
   .illustration {
