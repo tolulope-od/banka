@@ -375,8 +375,21 @@ button.dropdown-trigger:focus {
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
-  max-width: 35%;
+  max-width: 45%;
   justify-content: space-between;
+}
+
+.delete-accnt-btn {
+  align-self: flex-end;
+  width: 150px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: Montserrat, sans-serif;
+  background: rgb(94, 53, 177);
+  border-radius: 25px;
+  box-shadow: 0 9px #999;
 }
 
 .shortcut-btns a{
@@ -386,6 +399,17 @@ button.dropdown-trigger:focus {
   padding: 7px 10px;
   border-radius: 25px;
   box-shadow: 0 9px #999;
+}
+
+.shortcut-btns a.accnt-delete-btn{
+  text-decoration: none;
+  background-color: red;
+}
+
+.shortcut-btns a.accnt-delete-btn:active{
+   background-color: rgb(255, 89, 29);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
 .shortcut-btns a:focus{
@@ -629,6 +653,10 @@ th.admin-accnts-th {
 }
 
 .accnt-credit-form {
+  display: none;
+}
+
+#confirm-delete {
   display: none;
 }
 

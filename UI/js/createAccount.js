@@ -10,6 +10,8 @@ let text;
 const debitForm = document.getElementById("accnt-debit-form");
 const creditForm = document.getElementById("accnt-credit-form");
 
+const confirmDeleteMsg = document.getElementById("confirm-delete");
+
 // Change account status -deactivate or activte a bank account
 const badge = document.getElementById("accnt-badge");
 const accountStatusBtn = document.getElementById("accnt-status-btn");
@@ -42,6 +44,7 @@ const handleAccountSubmit = e => {
 // Function to debit account
 const handleAccountDebit = () => {
   // clear form area before displaying
+  confirmDeleteMsg.style.display = "none";
   creditForm.style.display = "none";
   debitForm.style.display = "block";
   modal.style.display = "block";
@@ -49,8 +52,16 @@ const handleAccountDebit = () => {
 
 // function to credit account
 const handleAccountCredit = () => {
+  confirmDeleteMsg.style.display = "none";
   debitForm.style.display = "none";
   creditForm.style.display = "block";
+  modal.style.display = "block";
+};
+
+const handleAccountDelete = () => {
+  debitForm.style.display = "none";
+  creditForm.style.display = "none";
+  confirmDeleteMsg.style.display = "block";
   modal.style.display = "block";
 };
 
