@@ -660,6 +660,44 @@ th.admin-accnts-th {
   display: none;
 }
 
+/** Profile Page */
+
+.sm-text {
+  color: rgb(82, 80, 80);
+  font-size: 12px;
+}
+
+.lg-text {
+  margin-top: 5px;
+}
+
+.profile-img {
+  width: 70px;
+  height: 70px;
+}
+
+.edit-profile {
+  background: white;
+  padding: 10px 10px;
+  margin-top: 10px;
+  border-radius: 25px;
+  margin-bottom: 10px;
+}
+
+.edit-profile-field {
+  float: right
+}
+
+#input-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+label {
+  font-size: 12px;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .main-content {
     width: 85%;
@@ -710,7 +748,8 @@ th.admin-accnts-th {
   }
 
   input[type="text"],
-  input[type="password"] {
+  input[type="password"],
+  input[type="file"] {
     width: 80%;
   }
 
