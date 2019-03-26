@@ -692,6 +692,7 @@ th.admin-accnts-th {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 label {
