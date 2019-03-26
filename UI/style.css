@@ -755,6 +755,23 @@ form.search-area button {
   border-bottom-right-radius: 25px;
 }
 
+.not-found {
+  margin-top: 4%;
+  background-color: orangered;
+  padding: 10px;
+  width: 100%;
+}
+
+.error-text {
+  text-align: center;
+  font-size: 50px;
+  color: white;
+}
+
+.error-text-sm { 
+  text-align: center;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .main-content {
     width: 85%;
@@ -926,7 +943,15 @@ form.search-area button {
   .search-area {
     margin-top: 20px;
   }
-	
+  
+  .not-found {
+  max-width: 100%;
+}
+
+.error-text {
+  font-size: 40px;
+}
+
 	td:nth-of-type(1):before { content: "Date"; }
 	td:nth-of-type(2):before { content: "Transaction"; }
 	td:nth-of-type(3):before { content: "Amount"; }
