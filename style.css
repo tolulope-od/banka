@@ -268,6 +268,23 @@ input:focus {
   border: 1px solid blue;
 }
 
+.forgot-password {
+  margin-top: 10px;
+}
+
+.forgot-password a{
+  text-decoration: none;
+  color: limegreen;
+}
+
+.reset-password-text {
+  text-align: center;
+  color: grey;
+  font-size: 12px;
+}
+
+/** Auth Navbar */
+
 .avatar-img {
   width: 50px;
   height: 50px;
@@ -318,6 +335,8 @@ button.dropdown-trigger:focus {
   padding-left: 10px;
 }
 
+/** Side navigator */
+
 .side-nav {
   float: left;
   left: 0;
@@ -344,6 +363,8 @@ button.dropdown-trigger:focus {
   margin-right: 750px;
   font-size: 20px;
 }
+
+/** Dashboard page */
 
 .dashboard-links {
   display: flex;
