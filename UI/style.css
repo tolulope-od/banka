@@ -698,6 +698,41 @@ label {
   font-size: 12px;
 }
 
+/** Users Page */
+
+form.search-area input[type=text] {
+  padding: 5px;
+  font-size: 13px;
+  border: 1px solid grey;
+  float: left;
+  background: #f1f1f1;
+  margin-bottom: -20px;
+  border-right: none;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 20px;
+}
+
+form.search-area input[type=text]:focus {
+  border: 1px solid blue
+}
+
+
+form.search-area button {
+  float: left;
+  padding: 5px;
+  background: #6f26c9;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 768px) {
   .main-content {
     width: 85%;
@@ -845,6 +880,30 @@ label {
 		padding-right: 10px; 
 		white-space: nowrap;
   }
+
+  td.user-info { 
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td.user-info:before { 
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+  }
+
+  form.search-area input[type=text] {
+    width: 150px;
+  }
+
+  .search-area {
+    margin-top: 20px;
+  }
 	
 	td:nth-of-type(1):before { content: "Date"; }
 	td:nth-of-type(2):before { content: "Transaction"; }
@@ -857,6 +916,11 @@ label {
   td.admin-accnts-td:nth-of-type(4):before { content: "Status"; }
   td.admin-accnts-td:nth-of-type(5):before { content: "View"; }
   td.admin-accnts-td:nth-of-type(4):after { content: "."; }
+
+  td.user-info:nth-of-type(1):before { content: "Name"; }
+  td.user-info:nth-of-type(2):before { content: "Created"; }
+  td.user-info:nth-of-type(3):before { content: "Status"; }
+  td.user-info:nth-of-type(4):before { content: ""; }
 }
 
 @media only screen and (min-width: 893px) and (max-width: 1240px) {
@@ -866,6 +930,10 @@ label {
 
   .shortcut-btns {
     max-width: 50%;
+  }
+
+  form.search-area input[type=text] {
+    width: 250px;
   }
 
   .illustration {
