@@ -996,5 +996,9 @@ form.search-area button {
     margin-left: auto;
   }
 
-  .dashboard { margin-left: 20%; } .footer { position: fixed } .account-stats { margin-left: -50px; }
+  .dashboard { margin-left: 20%; } 
+
+  .footer { position: fixed } 
+  
+  .account-stats { margin-left: -50px; }
 }
