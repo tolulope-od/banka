@@ -1,9 +1,18 @@
-import dotenv from 'dotenv';
+/* eslint-disable no-console */
+import express from 'express';
+import bodyParser from 'body-parser';
 
-dotenv.config();
+// Set up the app with express
+const app = express();
+app.use(bodyParser({ extended: false }));
+app.use(bodyParser.json());
 
-console.log(
-  `${
-    process.env.APP_NAME
-  } is a lightweight core banking application that will change the face of banking`
-);
+/**
+ * @route /test
+ * @description use to test server response
+ */
+app.get('/test', (req, res) => res.status(200).send('Response Returned Successfully'));
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server Running on Port ${PORT}`));
