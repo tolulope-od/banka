@@ -193,8 +193,10 @@ body {
   background-color: #6f26c9;
   bottom: 0;
   color: white;
-  position: relative;
   float: left;
+  z-index: 5;
+  margin-top: 20px;
+  position: relative;
 }
 
 /** Sign Up & Login Page*/
@@ -818,7 +820,6 @@ form.search-area button {
     position: relative;
     bottom: 0;
     top: 0;
-    z-index: 100;
   }
 
   input[type="text"],
