@@ -11,8 +11,10 @@ app.use(bodyParser.json());
  * @route /test
  * @description use to test server response
  */
-app.get('/test', (req, res) => res.status(200).send('Response Returned Successfully'));
+app.get('/test', (req, res) => res.status(200).json({ message: 'Response Returned Successfully' }));
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server Running on Port ${PORT}`));
+
+export default app;
