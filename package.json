@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "a lightweight core banking application",
   "main": "index.js",
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon --exec babel-node index.js",
-    "test": "./node_modules/.bin/mocha --exit --timeout 10000 --require @babel/register ./test/*.js"
+    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov ./node_modules/.bin/mocha --exit --timeout 10000 --reporter spec --require @babel/register ./test/*.js",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -27,6 +35,7 @@
     "@babel/core": "^7.4.0",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.2",
+    "babel-plugin-istanbul": "^5.1.1",
     "eslint": "^5.15.3",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
@@ -40,6 +49,8 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "coveralls": "^3.0.3",
+    "cross-env": "^5.2.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4"
   }

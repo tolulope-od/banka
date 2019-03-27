@@ -1,8 +1,11 @@
 language: node_js
 node_js:
-- "stable"
+  - 'stable'
 install: npm install
 script: ./node_modules/.bin/mocha --exit --timeout 10000 --require @babel/register ./test/*.js
+before_script:
+  - npm install nyc coveralls cross-env -g
+after_script: cross-env NODE_ENV=test npm run coveralls
 cache:
   directories:
-    - "node_modules"
+    - 'node_modules'
