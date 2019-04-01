@@ -57,6 +57,7 @@ body {
   padding: 12px 15px;
   background: linear-gradient(270deg, #21d4fd, #b721ff);
   border-radius: 25px;
+  width: 100px;
 }
 
 .auth-btn-side {
@@ -119,6 +120,12 @@ body {
   width: 90%;
 }
 
+.description-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .tag-heading {
   color: white;
   margin-top: 100px;
@@ -128,6 +135,8 @@ body {
 .column {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
@@ -155,9 +164,8 @@ body {
 }
 
 .description-img {
-  width: 350px;
-  height: 500px;
-  margin-left: auto;
+  width: 150px;
+  height: 250px;
 }
 
 .bodyTxt {
@@ -167,6 +175,7 @@ body {
 
 .description-txt {
   font-size: 12px;
+  width: 50%;
   margin-top: auto;
 }
 
@@ -210,11 +219,12 @@ body {
 
 .form-card {
   float: right;
-  width: 399px;
+  width: 450px;
   box-shadow: 1px 2px 5px 3px #d2cbcb;
   padding-bottom: 30px;
   background: white;
   margin-bottom: 100px;
+  border-radius: 15px;
 }
 
 .form-body {
@@ -257,7 +267,7 @@ input[type="submit"] {
   font-family: Montserrat, sans-serif;
   background: rgb(94, 53, 177);
   border-radius: 25px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 2px #999;
 }
 
 input[type="submit"]:active {
@@ -789,6 +799,11 @@ form.search-area button {
     overflow: auto;
   }
 
+  .column {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .tag-heading {
     font-size: 35px;
   }
@@ -953,6 +968,10 @@ form.search-area button {
   font-size: 40px;
 }
 
+.description-img {
+  margin-left: none !important;
+}
+
 	td:nth-of-type(1):before { content: "Date"; }
 	td:nth-of-type(2):before { content: "Transaction"; }
 	td:nth-of-type(3):before { content: "Amount"; }
@@ -991,9 +1010,8 @@ form.search-area button {
   }
 
   .description-img {
-    width: 300px;
-    height: 450px;
-    margin-left: auto;
+    width: 150px;
+    height: 250px;
   }
 
   .dashboard { margin-left: 20%; } .footer { position: fixed } .account-stats { margin-left: -50px; }
