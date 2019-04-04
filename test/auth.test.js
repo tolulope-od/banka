@@ -77,7 +77,7 @@ describe('User', () => {
       .send(newUser)
       .end((err, res) => {
         expect(res.body)
-          .to.have.preperty('status')
+          .to.have.property('status')
           .eql(400);
         expect(res.body)
           .to.have.property('error')
@@ -198,11 +198,11 @@ describe('User', () => {
       .end((err, res) => {
         expect(res.body)
           .to.have.property('status')
-          .eql(400);
+          .eql(409);
         expect(res.body)
           .to.have.property('error')
           .eql('User already exists');
-        expect(res.status).to.equal(400);
+        expect(res.status).to.equal(409);
         done();
       });
   });
@@ -274,6 +274,30 @@ describe('User', () => {
         expect(res.body)
           .to.have.property('error')
           .eql('Password must be at least 6 characters long');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not register a new user with if confirm password field is missing', done => {
+    const newUser = {
+      firstName: 'Marshall',
+      lastName: 'Matters',
+      email: 'eminem@eminem.com',
+      password: 'superman123',
+      password2: ''
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/signup`)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Confirm password field is required');
         expect(res.status).to.equal(400);
         done();
       });

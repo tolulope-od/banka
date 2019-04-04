@@ -7,10 +7,11 @@ export default {
       lastName: 'Kenobi',
       password: 'password1',
       address: 'Lane 251, The Empire',
+      avatar: '/uploads/avatar/obiwan.jpg',
       phoneNumber: '08044039084',
       type: 'staff',
       isAdmin: true,
-      createdAt: Date.now()
+      createdAt: new Date(2016, 1, 2)
     },
     {
       id: 2,
@@ -19,10 +20,11 @@ export default {
       lastName: 'Odinson',
       password: 'password123',
       address: 'Asgardian Empire',
+      avatar: '/uploads/avatar/thor.jpg',
       phoneNumber: '09070883920',
       type: 'client',
       isAdmin: false,
-      createdAt: Date.now()
+      createdAt: new Date(2019, 1, 12)
     },
     {
       id: 3,
@@ -31,10 +33,11 @@ export default {
       lastName: 'Solksjaer',
       password: 'olesathewheel',
       address: 'Old Trafford, Manchester',
+      avatar: '/uploads/avatar/ole.jpg',
       phoneNumber: '08024098738',
       type: 'client',
       isAdmin: false,
-      createdAt: Date.now()
+      createdAt: new Date(2018, 4, 22)
     },
     {
       id: 4,
@@ -43,10 +46,11 @@ export default {
       lastName: 'Ren',
       password: 'bensolo',
       address: 'Tatooine, Planet C53',
+      avatar: '/uploads/avatar/kylo.jpg',
       phoneNumber: '09082009398',
       type: 'staff',
       isAdmin: false,
-      createdAt: Date.now()
+      createdAt: new Date(2016, 9, 2)
     }
   ]
 };

@@ -6,6 +6,7 @@ export default class User {
     this.lastName = null;
     this.password = null;
     this.address = null;
+    this.avatar = null;
     this.phoneNumber = null;
     this.type = null;
     this.isAdmin = false;
