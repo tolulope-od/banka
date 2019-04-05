@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - 'stable'
 install: npm install
+env:
+  - SECRET_KEY=somesuperlongsecretkeyhere
 script: ./node_modules/.bin/mocha --exit --timeout 10000 --require @babel/register ./test/*.js
 before_script:
   - npm install nyc coveralls cross-env -g
