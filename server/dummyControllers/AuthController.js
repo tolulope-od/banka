@@ -101,12 +101,12 @@ const AuthController = {
               message: 'Login successful'
             });
           }
-          res.status(403).json({
+          return res.status(403).json({
             status: 403,
             error: 'Password Incorrect'
           });
         }
-        res.status(403).json({
+        return res.status(403).json({
           status: 403,
           error: 'User not found'
         });

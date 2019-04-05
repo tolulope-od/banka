@@ -1,9 +1,9 @@
 language: node_js
-env:
-  - secure: CYJmtkzZVoWRfpFAO6TEtg2kR9/5DPH51iQkonR20ac0QsXSb//hVtS4aetEx/nbOecT9nb/Km52F1if6UqofIhcrhgtq7SAJ72Pmcunvd8pyfCh+O2pliD9PujZGDPcXADpEJePmqdqnlN3pYbMGoMAak4neAGWMNhFUB+Pl3W0yk+2RZobdiEUDkk/Acq+1Ird5G4JxRbRMsbZAXfjcXYsMPENZfEl2+xqXBAnxFdtlbfsMHYA5VZbgTzYZ/1EGXJ8JJw3DWHpTKgJFFQYfEhtkuLIOgfIck19S5EcUzhVgPW3ybWFkoTV9seS1/40S3k0GQJUnjq8HFcMGcAU65wnSE/mtS+nW5JrGbNDZgyehZ2HYdX2MRtIZvS9fs7OJ1y+7+VxlRe3RvT/VzjE0Spwrj3pPKsNtTK3od2Jrtp+WWPsvoFccKqkr3AzBqxdpm5zWvfQWqi+vJlIaZiVdyDcbrfOkvpQaGmiVnRLM+erlqM+aRu80Z+RIecHG7Sb+3GOwzdKyG2vCEpdN5erw7lV0MWFJsxCiO0fhjdj8ebN3YHPpMU/CAlnDP9LG4Zk0OmdYz3qbdGWuhA9MZDMQJ3uUdpc0JzdgNIgdsUkGeTaoRyIQ+lPorQvj+vVQXv/oRvo1vFDbVr/7v2LK43dVxIjxpDj+ohOVkQrp4nG/g4=
 node_js:
   - 'stable'
 install: npm install
+env:
+  - SECRET_KEY=somesuperlongsecretkeyhere
 script: ./node_modules/.bin/mocha --exit --timeout 10000 --require @babel/register ./test/*.js
 before_script:
   - npm install nyc coveralls cross-env -g
