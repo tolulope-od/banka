@@ -98,4 +98,40 @@ const validateUserSignup = (req, res, next) => {
   return next();
 };
 
-export { validateUserSignup };
+/**
+ * @description Function to check that the input fields for user log in are properly fillerd
+ * @param {Object} req The request object
+ * @param {Object} res The response object
+ * @param {Function} next Call back function
+ * @route POST /api/v1/auth/signin
+ * @returns {Object} status code and error message properties
+ * @access public
+ */
+const validateUserLogIn = (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (isEmpty(email) && isEmpty(password)) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Email and password are required'
+    });
+  }
+
+  if (isEmpty(email)) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Email is required'
+    });
+  }
+
+  if (isEmpty(password)) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Password is required'
+    });
+  }
+
+  return next();
+};
+
+export { validateUserSignup, validateUserLogIn, isEmpty };
