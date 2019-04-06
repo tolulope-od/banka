@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 
 // Import routes
 import authRoute from './server/routes/AuthRoute';
+import accountRoute from './server/routes/AccountRoute';
 
 // Set up the app with express
 const app = express();
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 
 // Use the routes for the apps routing logic
 app.use(`${API_PREFIX}/auth`, authRoute);
+app.use(`${API_PREFIX}/accounts`, accountRoute);
 
 app.listen(PORT, () => console.log(`Server Running on Port ${PORT}`));
 
