@@ -76,7 +76,10 @@ const AuthController = {
           const payload = {
             id: userInfo.id,
             email: userInfo.email,
-            type: userInfo.type
+            type: userInfo.type,
+            firstName: userInfo.firstName,
+            lastName: userInfo.lastName,
+            isAdmin: userInfo.isAdmin
           };
           const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1hr' });
           const data = {

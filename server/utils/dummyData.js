@@ -52,5 +52,26 @@ export default {
       isAdmin: false,
       createdAt: new Date(2016, 9, 2)
     }
+  ],
+
+  accounts: [
+    {
+      id: 1,
+      accountNumber: 5563847290,
+      createdOn: new Date(2019, 1, 12),
+      owner: 2,
+      type: 'current',
+      status: 'active',
+      balance: 349876358.08
+    },
+    {
+      id: 2,
+      accountNumber: 8897654324,
+      createdOn: new Date(2018, 4, 22),
+      owner: 4,
+      type: 'savings',
+      status: 'dormant',
+      balance: 7665435.97
+    }
   ]
 };
