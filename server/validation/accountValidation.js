@@ -74,4 +74,34 @@ const validateEditAccount = (req, res, next) => {
   return next();
 };
 
-export { validateAccountCreation, validateEditAccount };
+/**
+ * @description Function to check that the parameters for editing an account status are properly formatted
+ * @param {Object} req The request object
+ * @param {Object} res The response object
+ * @param {Function} next Call back function
+ * @route PATCH /api/v1/accounts
+ * @returns {Object} status code and error message properties
+ * @access private
+ */
+const validateGetSingleAccount = (req, res, next) => {
+  const { accountNumber } = req.params;
+  const isNum = /^\d+$/; // gotten from Scott Evernden on Stack Overflow
+
+  if (accountNumber.length !== 10) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Account number must be 10 digits'
+    });
+  }
+
+  if (!isNum.test(accountNumber)) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Account number can only contain digits'
+    });
+  }
+
+  return next();
+};
+
+export { validateAccountCreation, validateEditAccount, validateGetSingleAccount };

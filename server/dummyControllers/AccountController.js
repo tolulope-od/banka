@@ -122,6 +122,33 @@ const AccountController = {
       status: 200,
       data
     });
+  },
+
+  /**
+   * @description Get a single account
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route Get /api/v1/accounts/:accountNumber
+   * @returns {Object} status code, data and message properties
+   * @access private Staff and Client
+   */
+  getSingleAccount(req, res) {
+    const { accountNumber } = req.params;
+    const accountToRetrieve = accounts.find(
+      account => account.accountNumber === parseInt(accountNumber, 10)
+    );
+    if (isEmpty(accountToRetrieve)) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account does not exist'
+      });
+    }
+    const { id, balance, owner, createdOn, type } = accountToRetrieve;
+    const data = { id, accountNumber, owner, balance, createdOn, type };
+    return res.status(200).json({
+      status: 200,
+      data
+    });
   }
 };
 
