@@ -149,6 +149,41 @@ const AccountController = {
       status: 200,
       data
     });
+  },
+
+  /**
+   * @description Delete a single account
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route Get /api/v1/accounts/:accountNumber
+   * @returns {Object} status code, data and message properties
+   * @access private Staff only
+   */
+  deleteAccount(req, res) {
+    const { accountNumber } = req.params;
+    if (req.decoded.type === 'staff') {
+      const accountToDelete = accounts.find(
+        account => account.accountNumber === parseInt(accountNumber, 10)
+      );
+      if (isEmpty(accountToDelete)) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Account does not exist'
+        });
+      }
+      const index = accounts.indexOf(accountToDelete);
+      if (index > -1) {
+        accounts.splice(index, 1);
+        return res.status(200).json({
+          status: 200,
+          message: 'Account deleted successfully'
+        });
+      }
+    }
+    return res.status(401).json({
+      status: 401,
+      error: 'You are not authorized to delete an account'
+    });
   }
 };
 

@@ -424,4 +424,58 @@ describe('Account Route', () => {
         done();
       });
   });
+
+  it('Should allow a staff user to do delete an account', done => {
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .delete(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body)
+          .to.have.property('message')
+          .eql('Account deleted successfully');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not allow a non-staff user to do delete an account', done => {
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .delete(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('You are not authorized to delete an account');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
+
+  it('Should not delete a non-existing single account', done => {
+    const accountNumber = 5563847299;
+    chai
+      .request(app)
+      .delete(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
 });
