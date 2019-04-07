@@ -7,7 +7,7 @@ import { isEmpty } from './authValidation';
  * @param {Function} next Call back function
  * @route POST /api/v1/accounts
  * @returns {Object} status code and error message properties
- * @access public
+ * @access private
  */
 const validateAccountCreation = (req, res, next) => {
   const { type } = req.body;
@@ -29,4 +29,49 @@ const validateAccountCreation = (req, res, next) => {
   return next();
 };
 
-export default validateAccountCreation;
+/**
+ * @description Function to check that the parameters for editing an account status are properly formatted
+ * @param {Object} req The request object
+ * @param {Object} res The response object
+ * @param {Function} next Call back function
+ * @route PATCH /api/v1/accounts
+ * @returns {Object} status code and error message properties
+ * @access private
+ */
+const validateEditAccount = (req, res, next) => {
+  const { accountNumber } = req.params;
+  const { status } = req.body;
+  const isNum = /^\d+$/; // gotten from Scott Evernden on Stack Overflow
+
+  if (accountNumber.length !== 10) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Account number must be 10 digits'
+    });
+  }
+
+  if (!isNum.test(accountNumber)) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Account number can only contain digits'
+    });
+  }
+
+  if (isEmpty(status)) {
+    return res.status(400).json({
+      status: 400,
+      error: 'Please specify a status, either active or dormant'
+    });
+  }
+
+  if (status !== 'active' && status !== 'dormant') {
+    return res.status(400).json({
+      status: 400,
+      error: 'Status can only be active or dormant'
+    });
+  }
+
+  return next();
+};
+
+export { validateAccountCreation, validateEditAccount };
