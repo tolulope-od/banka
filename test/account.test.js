@@ -354,4 +354,74 @@ describe('Account Route', () => {
         done();
       });
   });
+
+  it('Should get a single account by the account number', done => {
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.nested.property('data.accountNumber');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not get a non-existing single account', done => {
+    const accountNumber = 5563847299;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+
+  it('Should not get a single account record if the number is not an integer', done => {
+    const accountNumber = '553s847290';
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account number can only contain digits');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not get a single account if the account number is more than 10 digits', done => {
+    const accountNumber = 556384729990;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account number must be 10 digits');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
 });
