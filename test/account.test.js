@@ -188,4 +188,170 @@ describe('Account Route', () => {
         done();
       });
   });
+
+  it("Should edit an account's status when a staff accesses the route", done => {
+    const newStatus = {
+      status: 'dormant'
+    };
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.nested.property('data.accountNumber');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it("Should not edit an account's status if a non-staff user accesses the route", done => {
+    const newStatus = {
+      status: 'dormant'
+    };
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', authToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('You are not authorized to carry out that action');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
+
+  it("Should not edit an account's status if the account number is more than 10 digits", done => {
+    const newStatus = {
+      status: 'dormant'
+    };
+    const accountNumber = 556384729990;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account number must be 10 digits');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it("Should not edit an account's status if a status is not provided", done => {
+    const newStatus = { status: '' };
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Please specify a status, either active or dormant');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it("Should not edit an account's status if an invalid status is provided", done => {
+    const newStatus = { status: 'lkdlskl' };
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Status can only be active or dormant');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it("Should not deactivate an account that's already deactived", done => {
+    const newStatus = { status: 'dormant' };
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(409);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account is already dormant');
+        expect(res.status).to.equal(409);
+        done();
+      });
+  });
+
+  it('Should return an error for an invalid account number', done => {
+    const newStatus = { status: 'dormant' };
+    const accountNumber = '553s847290';
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account number can only contain digits');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should return an error message when an account that does not exist is requested', done => {
+    const newStatus = {
+      status: 'dormant'
+    };
+    const accountNumber = 5563847299;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
 });

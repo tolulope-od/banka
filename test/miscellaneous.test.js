@@ -8,7 +8,7 @@ const { expect } = chai;
 /**
  * @description test for helper function
  */
-describe('Account model', () => {
+describe('Helper Function', () => {
   it('Should return true for an empty string', () => {
     const emptyString = isEmpty(' ');
     expect(emptyString).to.equal(true);
