@@ -1,8 +1,22 @@
+import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
+import chalk from 'chalk';
 import Transaction from '../dummyModels/Transaction';
+import Mail from '../utils/Mail';
 import dummyData from '../utils/dummyData';
 import { isEmpty } from '../validation/authValidation';
 
-const { transactions, accounts } = dummyData;
+dotenv.config();
+const { log } = console;
+const { transactions, accounts, users } = dummyData;
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.USER_EMAIL,
+    pass: process.env.USER_PASSWORD
+  }
+});
 
 const TransactionController = {
   /**
@@ -34,6 +48,7 @@ const TransactionController = {
     }
 
     const { balance, owner } = accountToCredit;
+    const accountOwner = users.find(user => user.id === owner);
     const transactionsLastID = transactions[transactions.length - 1].id;
     const newID = transactionsLastID + 1;
     const transaction = new Transaction();
@@ -50,6 +65,15 @@ const TransactionController = {
 
     // update the balance of the old account
     accountToCredit.balance = transaction.newBalance;
+
+    // send notification to account owner
+    const emailNotif = new Mail(transaction, accountOwner, accountNumber, accountToCredit);
+    transporter.sendMail(emailNotif.getMailOptions(), (err, info) => {
+      if (err) {
+        log(chalk.red('Error, Mail Not Sent: \n', err));
+      }
+      log(info);
+    });
     const data = {
       transactionId: transaction.id,
       accountNumber,
