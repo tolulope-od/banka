@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import AccountController from '../dummyControllers/AccountController';
 import Authorization from '../middleware/Authorization';
-import AccountValidation from '../validation/AccountValidation';
+import AccountValidation from '../validation/accountValidation';
 
 const router = Router();
 

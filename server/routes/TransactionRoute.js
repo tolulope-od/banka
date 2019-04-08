@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import TransactionController from '../dummyControllers/TransactionController';
 import Authorization from '../middleware/Authorization';
-import AccountValidation from '../validation/AccountValidation';
-import TransactionValidation from '../validation/TransactionValidation';
+import AccountValidation from '../validation/accountValidation';
+import TransactionValidation from '../validation/transactionValidation';
 
 const router = Router();
 
