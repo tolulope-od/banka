@@ -1,5 +1,5 @@
 export default class Account {
-  constuctor() {
+  constructor() {
     this.id = null;
     this.accountNumber = null;
     this.createdOn = null;

@@ -1,11 +1,7 @@
 import { Router } from 'express';
 import AccountController from '../dummyControllers/AccountController';
 import Authorization from '../middleware/Authorization';
-import {
-  validateAccountCreation,
-  validateEditAccount,
-  validateGetSingleAccount
-} from '../validation/accountValidation';
+import AccountValidation from '../validation/AccountValidation';
 
 const router = Router();
 
@@ -16,6 +12,11 @@ const {
   getSingleAccount,
   deleteAccount
 } = AccountController;
+const {
+  validateAccountCreation,
+  validateEditAccount,
+  validateGetSingleAccount
+} = AccountValidation;
 const { checkToken } = Authorization;
 
 router.get('/', checkToken, fetchAllAccounts);

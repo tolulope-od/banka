@@ -7,7 +7,7 @@ dotenv.config();
 
 const { accounts } = dummyData;
 
-const AccountController = {
+export default class AccountController {
   /**
    * @description Fetch all accounts
    * @param {Object} req The request object
@@ -16,7 +16,7 @@ const AccountController = {
    * @returns {Object} status code, data and message properties
    * @access private
    */
-  fetchAllAccounts(req, res) {
+  static fetchAllAccounts(req, res) {
     if (req.decoded.type === 'staff' || req.decoded.isAdmin) {
       return res.status(200).json({
         status: 200,
@@ -31,7 +31,7 @@ const AccountController = {
       });
     }
     return true;
-  },
+  }
 
   /**
    * @description Create a new account
@@ -41,7 +41,7 @@ const AccountController = {
    * @returns {Object} status code, data and message properties
    * @access private Client only
    */
-  createAccount(req, res) {
+  static createAccount(req, res) {
     const { type } = req.body;
     const { id, firstName, lastName, email } = req.decoded;
     if (req.decoded.type === 'client') {
@@ -76,7 +76,7 @@ const AccountController = {
       status: 401,
       error: 'Only clients can create accounts'
     });
-  },
+  }
 
   /**
    * @description Edit an account status
@@ -86,7 +86,7 @@ const AccountController = {
    * @returns {Object} status code, data and message properties
    * @access private Staff only
    */
-  editAccountStatus(req, res) {
+  static editAccountStatus(req, res) {
     const { accountNumber } = req.params;
     const { status } = req.body;
     if (req.decoded.type !== 'staff') {
@@ -122,7 +122,7 @@ const AccountController = {
       status: 200,
       data
     });
-  },
+  }
 
   /**
    * @description Get a single account
@@ -132,7 +132,7 @@ const AccountController = {
    * @returns {Object} status code, data and message properties
    * @access private Staff and Client
    */
-  getSingleAccount(req, res) {
+  static getSingleAccount(req, res) {
     const { accountNumber } = req.params;
     const accountToRetrieve = accounts.find(
       account => account.accountNumber === parseInt(accountNumber, 10)
@@ -149,7 +149,7 @@ const AccountController = {
       status: 200,
       data
     });
-  },
+  }
 
   /**
    * @description Delete a single account
@@ -159,7 +159,7 @@ const AccountController = {
    * @returns {Object} status code, data and message properties
    * @access private Staff only
    */
-  deleteAccount(req, res) {
+  static deleteAccount(req, res) {
     const { accountNumber } = req.params;
     if (req.decoded.type === 'staff') {
       const accountToDelete = accounts.find(
@@ -185,6 +185,4 @@ const AccountController = {
       error: 'You are not authorized to delete an account'
     });
   }
-};
-
-export default AccountController;
+}

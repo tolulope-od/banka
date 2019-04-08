@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
 
-const Authorization = {
+export default class Authorization {
   /**
    * @description method to protect routes and check for token in incoming requests
    * @param {Object} req The request object
    * @param {Object} res The resposnse object
    * @returns {Object} status code and message
    */
-  checkToken(req, res, next) {
+  static checkToken(req, res, next) {
     const token = req.headers['x-access-token'] || req.headers.authorization;
     if (token) {
       jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
@@ -27,6 +27,4 @@ const Authorization = {
       });
     }
   }
-};
-
-export default Authorization;
+}
