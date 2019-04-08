@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-const TransactionController = {
+export default class TransactionController {
   /**
    * @description Credit an account
    * @param {Object} req The request object
@@ -26,7 +26,7 @@ const TransactionController = {
    * @returns {Object} status code, data and message properties
    * @access private Admin or staff only
    */
-  creditAccount(req, res) {
+  static creditAccount(req, res) {
     const { accountNumber } = req.params;
     const { creditAmount } = req.body;
     if (req.decoded.type !== 'staff') {
@@ -86,7 +86,7 @@ const TransactionController = {
       data,
       message: 'Account credited successfully'
     });
-  },
+  }
 
   /**
    * @description Credit an account
@@ -96,7 +96,7 @@ const TransactionController = {
    * @returns {Object} status code, data and message properties
    * @access private Admin or staff only
    */
-  debitAccount(req, res) {
+  static debitAccount(req, res) {
     const { accountNumber } = req.params;
     const { debitAmount } = req.body;
     if (req.decoded.type !== 'staff') {
@@ -165,6 +165,4 @@ const TransactionController = {
       message: 'Account debited successfully'
     });
   }
-};
-
-export default TransactionController;
+}
