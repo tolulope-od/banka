@@ -181,4 +181,160 @@ describe('Transaction Route', () => {
         done();
       });
   });
+
+  it("Should let a cashier debit a customer's account", done => {
+    const debitTransaction = {
+      debitAmount: 90900.05
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', staffAuthToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(201);
+        expect(res.body).to.have.nested.property('data.transactionId');
+        expect(res.body)
+          .to.have.nested.property('data.transactionType')
+          .eql('debit');
+        expect(res.body)
+          .to.have.property('message')
+          .eql('Account debited successfully');
+        expect(res.status).to.equal(201);
+        done();
+      });
+  });
+
+  it('Should not let a customer debit an account', done => {
+    const debitTransaction = {
+      debitAmount: 500900.05
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', authToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('You are not authorized to carry out that action');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
+
+  it('Should not debit an account if an invalid amount is provided', done => {
+    const debitTransaction = {
+      debitAmount: '5sggy0d'
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', staffAuthToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Transactions can only contain digits');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Shold not debit an account if the input is empty', done => {
+    const debitTransaction = {
+      debitAmount: ''
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', staffAuthToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Transaction amount cannot be empty');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Shold not debit an account if the amount is more than the available balance', done => {
+    const debitTransaction = {
+      debitAmount: 2000000000.99
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', staffAuthToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(409);
+        expect(res.body).to.have.property('error');
+        expect(res.status).to.equal(409);
+        done();
+      });
+  });
+
+  it('Should not debit an account that does not exist', done => {
+    const debitTransaction = {
+      debitAmount: 500900.05
+    };
+    const accountNumber = 7897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', staffAuthToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+
+  it('Should not debit an account with a negative input', done => {
+    const debitTransaction = {
+      debitAmount: -500900.05
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', staffAuthToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Debit transaction cannot be less than 1 Naira');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
 });

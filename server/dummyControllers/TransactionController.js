@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
-import chalk from 'chalk';
 import Transaction from '../dummyModels/Transaction';
 import Mail from '../utils/Mail';
 import dummyData from '../utils/dummyData';
@@ -70,7 +69,7 @@ const TransactionController = {
     const emailNotif = new Mail(transaction, accountOwner, accountNumber, accountToCredit);
     transporter.sendMail(emailNotif.getMailOptions(), (err, info) => {
       if (err) {
-        log(chalk.red('Error, Mail Not Sent: \n', err));
+        log(err);
       }
       log(info);
     });
@@ -86,6 +85,84 @@ const TransactionController = {
       status: 201,
       data,
       message: 'Account credited successfully'
+    });
+  },
+
+  /**
+   * @description Credit an account
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route POST /api/v1/transactions/<account-number>/credit
+   * @returns {Object} status code, data and message properties
+   * @access private Admin or staff only
+   */
+  debitAccount(req, res) {
+    const { accountNumber } = req.params;
+    const { debitAmount } = req.body;
+    if (req.decoded.type !== 'staff') {
+      return res.status(401).json({
+        status: 401,
+        error: 'You are not authorized to carry out that action'
+      });
+    }
+    const accountToDebit = accounts.find(
+      account => account.accountNumber === parseInt(accountNumber, 10)
+    );
+
+    if (isEmpty(accountToDebit)) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account does not exist'
+      });
+    }
+
+    const { balance, owner } = accountToDebit;
+
+    if (debitAmount > balance) {
+      return res.status(409).json({
+        status: 409,
+        error: `Insufficient funds, your account balance is ${balance}`
+      });
+    }
+
+    const accountOwner = users.find(user => user.id === owner);
+    const transactionsLastID = transactions[transactions.length - 1].id;
+    const newID = transactionsLastID + 1;
+    const transaction = new Transaction();
+
+    transaction.id = newID;
+    transaction.cashier = req.decoded.id;
+    transaction.createdOn = new Date();
+    transaction.type = 'debit';
+    transaction.amount = parseFloat(debitAmount);
+    transaction.accountNumber = accountNumber;
+    transaction.owner = owner;
+    transaction.oldBalance = balance;
+    transaction.newBalance = balance - parseFloat(debitAmount);
+
+    // update the balance of the old account
+    accountToDebit.balance = transaction.newBalance;
+
+    // send notification to account owner
+    const emailNotif = new Mail(transaction, accountOwner, accountNumber, accountToDebit);
+    transporter.sendMail(emailNotif.getMailOptions(), (err, info) => {
+      if (err) {
+        log(err);
+      }
+      log(info);
+    });
+    const data = {
+      transactionId: transaction.id,
+      accountNumber,
+      amount: transaction.amount,
+      cashier: transaction.cashier,
+      transactionType: transaction.type,
+      accountBalance: accountToDebit.balance
+    };
+    return res.status(201).json({
+      status: 201,
+      data,
+      message: 'Account debited successfully'
     });
   }
 };
