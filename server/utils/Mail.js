@@ -9,7 +9,7 @@ export default class Mail {
   getMailOptions() {
     return {
       from: 'transactions@banka.com',
-      to: `tolulope.od@gmail.com`,
+      to: `${this.accountOwner.email}`,
       subject: `${this.transaction.type.toUpperCase()} alert for your Banka Account: ${
         this.accountNumber
       }`,
