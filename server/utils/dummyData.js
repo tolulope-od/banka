@@ -68,10 +68,46 @@ export default {
       id: 2,
       accountNumber: 8897654324,
       createdOn: new Date(2018, 4, 22),
-      owner: 4,
+      owner: 3,
       type: 'savings',
       status: 'dormant',
       balance: 7665435.97
+    }
+  ],
+
+  transactions: [
+    {
+      id: 1,
+      createdOn: new Date(2019, 4, 23),
+      tranactionType: 'credit',
+      accountNumber: 8897654324,
+      cashier: 4,
+      owner: 3,
+      amount: 400500.0,
+      oldBalance: 7264935.97,
+      newBalance: 7665435.97
+    },
+    {
+      id: 2,
+      createdOn: new Date(2019, 1, 20),
+      tranactionType: 'debit',
+      accountNumber: 8897654324,
+      cashier: 1,
+      owner: 3,
+      amount: 100500.0,
+      oldBalance: 7264935.97,
+      newBalance: 7665435.97
+    },
+    {
+      id: 3,
+      createdOn: new Date(2019, 2, 12),
+      tranactionType: 'credit',
+      accountNumber: 5563847290,
+      cashier: 4,
+      owner: 2,
+      amount: 400500.0,
+      oldBalance: 7264935.97,
+      newBalance: 7665435.97
     }
   ]
 };
