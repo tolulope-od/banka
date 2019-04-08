@@ -2,11 +2,11 @@ import { Router } from 'express';
 import TransactionController from '../dummyControllers/TransactionController';
 import Authorization from '../middleware/Authorization';
 import { validateGetSingleAccount } from '../validation/accountValidation';
-import { validateCreditTransaction } from '../validation/transactionValidation';
+import { validateCreditTransaction, validateDebitTransaction } from '../validation/transactionValidation';
 
 const router = Router();
 
-const { creditAccount } = TransactionController;
+const { creditAccount, debitAccount } = TransactionController;
 const { checkToken } = Authorization;
 
 router.post(
@@ -15,6 +15,13 @@ router.post(
   validateGetSingleAccount,
   validateCreditTransaction,
   creditAccount
+);
+router.post(
+  '/:accountNumber/debit',
+  checkToken,
+  validateGetSingleAccount,
+  validateDebitTransaction,
+  debitAccount
 );
 
 export default router;
