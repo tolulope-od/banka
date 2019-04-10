@@ -11,8 +11,11 @@
     "instrument": false
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "npm run build && node ./build/index.js",
     "dev": "nodemon --exec babel-node index.js",
+    "build-babel": "babel -d ./build index.js && babel ./server --out-dir build/server",
+    "build": "npm run clean && npm run build-babel",
+    "clean": "rm -rf build && mkdir build && cp swagger.json build",
     "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov ./node_modules/.bin/mocha --exit --timeout 10000 --reporter spec --require @babel/register ./test/*.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
@@ -32,6 +35,7 @@
   },
   "homepage": "https://github.com/tolulope-od/banka#readme",
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.0",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.2",

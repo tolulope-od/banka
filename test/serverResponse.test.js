@@ -12,11 +12,11 @@ describe('Server', () => {
   it('Should return a response with a message', done => {
     chai
       .request(app)
-      .get('/test')
+      .get('/')
       .end((err, res) => {
         expect(res.body)
           .to.have.property('message')
-          .eql('Response Returned Successfully');
+          .eql('BANKA APP API RESPONSE SUCCESSFUL');
         expect(res.status).to.equal(200);
         done();
       });
