@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
 import express from 'express';
 import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+
+import swaggerDoc from './swagger.json';
 
 // Import routes
 import authRoute from './server/routes/AuthRoute';
@@ -26,6 +29,8 @@ app.use(bodyParser.json());
 app.use(`${API_PREFIX}/auth`, authRoute);
 app.use(`${API_PREFIX}/accounts`, accountRoute);
 app.use(`${API_PREFIX}/transactions`, transactionRoute);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.listen(PORT, () => console.log(`Server Running on Port ${PORT}`));
 

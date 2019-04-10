@@ -1,0 +1,1080 @@
+{
+  "basePath": "/",
+  "host": "localhost:5000",
+  "info": {
+    "title": "Banka App",
+    "version": "1.0.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "contact": "tolulope.od@gmail.com",
+    "description": "A light-weight core banking application that supports a single bank and allows users create bank accounts and make withdrawals & deposits by visiting a local branch"
+  },
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "API Endpoints for authentication users in the app"
+    },
+    {
+      "name": "Accounts",
+      "description": "API Endpoints for bank accounts in the app"
+    },
+    {
+      "name": "Transactions",
+      "description": "API Endpoints for transactions in the app"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/test": {
+      "get": {
+        "summary": "Server Test Response",
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Test server response",
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Response Returned Successfully"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signup": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Registration of new users in the app",
+        "summary": "User Registration",
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "firstName",
+            "in": "body",
+            "required": true,
+            "description": "First Name of the User"
+          },
+          {
+            "name": "lastName",
+            "in": "body",
+            "required": true,
+            "description": "Last Name of the User"
+          },
+          {
+            "name": "email",
+            "in": "body",
+            "required": true,
+            "description": "Email of the User"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "description": "Password of the User"
+          },
+          {
+            "name": "password2",
+            "in": "body",
+            "required": true,
+            "description": "Confirm password for the User"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful user registration",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJkYXJ0aEB0aGVlbXBpcmUuY29tIiwiaWF0IjoxNTU0OTA4MzMxLCJleHAiOjE1NTQ5MTE5MzF9.OXvz8qfUIoqAurpvs1DxM4oEyjP-hxzKM_iQetAE3q0"
+                    },
+                    "id": {
+                      "type": "number",
+                      "example": 5
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Darth"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Vader"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "darth@theempire.com"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "staff"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2019-04-10T14:58:51.810Z"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User registered successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed user registration when a required field is missing",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "First name is required"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Failed user registration when the user already exists",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 409
+                },
+                "error": {
+                  "type": "string",
+                  "example": "User already exists"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Log in a registered user",
+        "summary": "User Login",
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "body",
+            "required": true,
+            "description": "Email of the User"
+          },
+          {
+            "name": "password",
+            "in": "body",
+            "required": true,
+            "description": "Password of the User"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0aG9yQGF2ZW5nZXJzLmNvbSIsInR5cGUiOiJjbGllbnQiLCJmaXJzdE5hbWUiOiJUaG9yIiwibGFzdE5hbWUiOiJPZGluc29uIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU1NDkwODMzMSwiZXhwIjoxNTU0OTExOTMxfQ.SrgxrGmQ6sBwhl-BTH_kYXCrE7gTVTElFeVxxKGo1Zw"
+                    },
+                    "id": {
+                      "type": "number",
+                      "example": 2
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Thor"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Odinson"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "thor@avengers.com"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "client"
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Login successful"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed user login when a required field is missing",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Email is required"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Failed user login when the user does not exist",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 403
+                },
+                "error": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Return all user bank accounts in the system",
+        "summary": "Get All Bank Accounts",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All accounts returned successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "number"
+                      },
+                      "createdOn": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "balance": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "accountNumber",
+                      "createdOn",
+                      "owner",
+                      "type",
+                      "status",
+                      "balance"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 1,
+                      "accountNumber": 5563847290,
+                      "createdOn": "2019-02-11T23:00:00.000Z",
+                      "owner": 2,
+                      "type": "current",
+                      "status": "active",
+                      "balance": 349876358.08
+                    },
+                    {
+                      "id": 3,
+                      "accountNumber": 9427914582,
+                      "createdOn": "2019-04-10T14:58:51.203Z",
+                      "owner": 2,
+                      "type": "savings",
+                      "status": "active",
+                      "balance": 0
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when authorization token is invalid",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Token is invalid"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error when an unauthorized user tries to access a protected route",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 403
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Unauthorized! You must be logged in for that"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "User can create a bank account",
+        "summary": "Create Bank Account",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "body",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful creation of a bank account for a user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "accountNumber": {
+                      "type": "number",
+                      "example": 9427914582
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Thor"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Odinson"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "thor@avengers.com"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "savings"
+                    },
+                    "openingBalance": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Account created successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error when the required field to create a bank account is missing",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account type is required"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when a user that's not a 'client' attempts to create a bank account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Only clients can create accounts"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts/{accountNumber}": {
+      "patch": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Edit a bank account's status",
+        "summary": "Edit Bank Account Status",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "status",
+            "in": "body",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful modification of a bank account's status",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "accountNumber": {
+                      "type": "number",
+                      "example": 5563847290
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "dormant"
+                    },
+                    "owner": {
+                      "type": "number",
+                      "example": 2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error when the account number is greater than the required number",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account number must be 10 digits"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when a non-staff user tries to modify an account's status",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "You are not authorized to carry out that action"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error when trying to modify the status of an non-existent bank account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account does not exist"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error when trying to set the status of an account to its already current state",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 409
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account is already dormant"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Return a single user's bank account in the system",
+        "summary": "Fetch Single Bank Account",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success when the account is found and details are returned",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 2
+                    },
+                    "accountNumber": {
+                      "type": "string",
+                      "example": "8897654324"
+                    },
+                    "owner": {
+                      "type": "number",
+                      "example": 3
+                    },
+                    "balance": {
+                      "type": "number",
+                      "example": 7665435.97
+                    },
+                    "createdOn": {
+                      "type": "string",
+                      "example": "2018-05-21T23:00:00.000Z"
+                    },
+                    "type": {
+                      "type": "string",
+                      "example": "savings"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account number can only contain digits"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error when the account doesn't exist",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account does not exist"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Delete a user's account in the system",
+        "summary": "Delete Bank Account",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "description": "Success when an account is deleted",
+          "200": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Account deleted successfully"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when an unauthorized used tries to delete a bank account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "You are not authorized to delete an account"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error when trying to delete an account that doesn't exist inthe system",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account does not exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{accountNumber}/credit": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Credit a user's account",
+        "summary": "Credit Transaction",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "creditAmount",
+            "in": "body",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "description": "Response when an account has been credited successfully",
+          "201": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "transactionId": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "accountNumber": {
+                      "type": "string",
+                      "example": "8897654324"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "example": 500900.05
+                    },
+                    "cashier": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "transactionType": {
+                      "type": "string",
+                      "example": "credit"
+                    },
+                    "accountBalance": {
+                      "type": "number",
+                      "example": 8166336.02
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Account credited successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error when trying to credit an account with a negative figure",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Credit transaction cannot be less than 1 Naira"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when a non-staff user tries to credit an account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "You are not authorized to carry out that action"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error when trying to credit an account that does not exist",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account does not exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{accountNumber}/debit": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Debit a user's bank account in the system",
+        "summary": "Debit Transaction",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "debitAmount",
+            "in": "body",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Response when an account is debited succesffuly",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "transactionId": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "accountNumber": {
+                      "type": "string",
+                      "example": "8897654324"
+                    },
+                    "amount": {
+                      "type": "number",
+                      "example": 90900.05
+                    },
+                    "cashier": {
+                      "type": "number",
+                      "example": 4
+                    },
+                    "transactionType": {
+                      "type": "string",
+                      "example": "debit"
+                    },
+                    "accountBalance": {
+                      "type": "number",
+                      "example": 8075435.97
+                    }
+                  }
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Account debited successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error when the transaction amount contains non-numbers",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Transactions can only contain digits"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when a non-staff user tries to debit an account",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "You are not authorized to carry out that action"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error when trying to debit an account that doesn't exist",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Account does not exist"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error if the amount being debited is more than the account balance",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 409
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Insufficient funds, your account balance is 8075435.97"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basicAuth": {
+      "type": "basic",
+      "name": "Authorization",
+      "scheme": "",
+      "in": "header"
+    }
+  },
+  "swagger": "2.0"
+}
