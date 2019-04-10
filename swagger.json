@@ -25,28 +25,17 @@
       "description": "API Endpoints for transactions in the app"
     }
   ],
-  "schemes": [
-    "http"
-  ],
-  "consumes": [
-    "application/json",
-    "application/x-www-form-urlencoded"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["http"],
+  "consumes": ["application/json", "application/x-www-form-urlencoded"],
+  "produces": ["application/json"],
   "paths": {
-    "/test": {
+    "/": {
       "get": {
         "summary": "Server Test Response",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "description": "Test server response",
         "parameters": [],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "schema": {
@@ -54,7 +43,7 @@
               "properties": {
                 "message": {
                   "type": "string",
-                  "example": "Response Returned Successfully"
+                  "example": "BANKA APP API RESPONSE SUCCESSFUL"
                 }
               }
             }
@@ -64,15 +53,10 @@
     },
     "/api/v1/auth/signup": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "description": "Registration of new users in the app",
         "summary": "User Registration",
-        "consumes": [
-          "application/json",
-          "application/x-www-form-urlencoded"
-        ],
+        "consumes": ["application/json", "application/x-www-form-urlencoded"],
         "parameters": [
           {
             "name": "firstName",
@@ -105,9 +89,7 @@
             "description": "Confirm password for the User"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "201": {
             "description": "Successful user registration",
@@ -195,15 +177,10 @@
     },
     "/api/v1/auth/signin": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "description": "Log in a registered user",
         "summary": "User Login",
-        "consumes": [
-          "application/json",
-          "application/x-www-form-urlencoded"
-        ],
+        "consumes": ["application/json", "application/x-www-form-urlencoded"],
         "parameters": [
           {
             "name": "email",
@@ -218,9 +195,7 @@
             "description": "Password of the User"
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Successful login",
@@ -304,18 +279,12 @@
     },
     "/api/v1/accounts": {
       "get": {
-        "tags": [
-          "Accounts"
-        ],
+        "tags": ["Accounts"],
         "description": "Return all user bank accounts in the system",
         "summary": "Get All Bank Accounts",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "All accounts returned successfully",
@@ -422,14 +391,10 @@
         }
       },
       "post": {
-        "tags": [
-          "Accounts"
-        ],
+        "tags": ["Accounts"],
         "description": "User can create a bank account",
         "summary": "Create Bank Account",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "type",
@@ -437,9 +402,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "201": {
             "description": "Successful creation of a bank account for a user",
@@ -523,14 +486,10 @@
     },
     "/api/v1/accounts/{accountNumber}": {
       "patch": {
-        "tags": [
-          "Accounts"
-        ],
+        "tags": ["Accounts"],
         "description": "Edit a bank account's status",
         "summary": "Edit Bank Account Status",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "accountNumber",
@@ -543,9 +502,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Successful modification of a bank account's status",
@@ -643,14 +600,10 @@
         }
       },
       "get": {
-        "tags": [
-          "Accounts"
-        ],
+        "tags": ["Accounts"],
         "description": "Return a single user's bank account in the system",
         "summary": "Fetch Single Bank Account",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "accountNumber",
@@ -658,9 +611,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "Success when the account is found and details are returned",
@@ -737,14 +688,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "Accounts"
-        ],
+        "tags": ["Accounts"],
         "description": "Delete a user's account in the system",
         "summary": "Delete Bank Account",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "accountNumber",
@@ -752,9 +699,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "description": "Success when an account is deleted",
           "200": {
@@ -809,14 +754,10 @@
     },
     "/api/v1/transactions/{accountNumber}/credit": {
       "post": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "description": "Credit a user's account",
         "summary": "Credit Transaction",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "accountNumber",
@@ -829,9 +770,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "description": "Response when an account has been credited successfully",
           "201": {
@@ -931,14 +870,10 @@
     },
     "/api/v1/transactions/{accountNumber}/debit": {
       "post": {
-        "tags": [
-          "Transactions"
-        ],
+        "tags": ["Transactions"],
         "description": "Debit a user's bank account in the system",
         "summary": "Debit Transaction",
-        "consumes": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "accountNumber",
@@ -951,9 +886,7 @@
             "required": true
           }
         ],
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "201": {
             "description": "Response when an account is debited succesffuly",
