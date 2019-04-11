@@ -124,6 +124,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 85%;
+  margin: auto;
 }
 
 .tag-heading {
@@ -248,6 +250,7 @@ body {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
   width: 369px;
   height: 35px;
@@ -284,7 +287,7 @@ input:focus {
   margin-top: 10px;
 }
 
-.forgot-password a{
+.forgot-password a {
   text-decoration: none;
   color: limegreen;
 }
@@ -334,7 +337,6 @@ button.dropdown-trigger {
 button.dropdown-trigger:focus {
   outline: none;
 }
-
 
 .dropdown-item {
   text-decoration: none;
@@ -422,30 +424,30 @@ button.dropdown-trigger:focus {
   font-family: Montserrat, sans-serif;
   background: rgb(94, 53, 177);
   border-radius: 25px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 5px #999;
 }
 
-.shortcut-btns a{
+.shortcut-btns a {
   text-decoration: none;
   background-color: #6f26c9;
   color: white;
   padding: 7px 10px;
   border-radius: 25px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 5px #999;
 }
 
-.shortcut-btns a.accnt-delete-btn{
+.shortcut-btns a.accnt-delete-btn {
   text-decoration: none;
   background-color: red;
 }
 
-.shortcut-btns a.accnt-delete-btn:active{
-   background-color: rgb(255, 89, 29);
+.shortcut-btns a.accnt-delete-btn:active {
+  background-color: rgb(255, 89, 29);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
 
-.shortcut-btns a:focus{
+.shortcut-btns a:focus {
   outline: none;
 }
 
@@ -559,7 +561,7 @@ input.accnt-create-input {
 }
 
 .modal {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -567,8 +569,8 @@ input.accnt-create-input {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .modal-content {
   background-color: #fefefe;
@@ -603,7 +605,7 @@ input.accnt-create-input {
   padding: 15px 15px;
   border-radius: 25px;
   margin-top: 20px;
-  box-shadow: 1px 2px 5px 3px #d2cbcb
+  box-shadow: 1px 2px 5px 3px #d2cbcb;
 }
 
 .accnt-details {
@@ -618,7 +620,7 @@ input.accnt-create-input {
 
 .accnt-details-hd {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .accnt-badge {
@@ -626,27 +628,29 @@ input.accnt-create-input {
   margin-top: -5px;
 }
 
-table { 
-  width: 100%; 
-  border-collapse: collapse; 
+table {
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 20px;
 }
 /* Zebra striping */
-tr:nth-of-type(odd) { 
-  background: #eee; 
+tr:nth-of-type(odd) {
+  background: #eee;
 }
-th { 
-  background: #333; 
-  color: white; 
-  font-weight: bold; 
+th {
+  background: #333;
+  color: white;
+  font-weight: bold;
 }
-td, th { 
-  padding: 6px; 
-  border: 1px solid #ccc; 
-  text-align: left; 
+td,
+th {
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: left;
 }
 
-.admin-accnts-th, .admin-accnts-td {
+.admin-accnts-th,
+.admin-accnts-td {
   padding: 8px;
   border: none;
   border-bottom: 1px solid black;
@@ -678,7 +682,7 @@ th.admin-accnts-th {
   padding: 5px;
   border-radius: 25px;
   font-size: 15px;
-  box-shadow: 1px 2px 5px 3px #d2cbcb
+  box-shadow: 1px 2px 5px 3px #d2cbcb;
 }
 
 .accnt-debit-form {
@@ -718,7 +722,7 @@ th.admin-accnts-th {
 }
 
 .edit-profile-field {
-  float: right
+  float: right;
 }
 
 #input-area {
@@ -734,7 +738,7 @@ label {
 
 /** Users Page */
 
-form.search-area input[type=text] {
+form.search-area input[type="text"] {
   padding: 5px;
   font-size: 13px;
   border: 1px solid grey;
@@ -749,10 +753,9 @@ form.search-area input[type=text] {
   height: 20px;
 }
 
-form.search-area input[type=text]:focus {
-  border: 1px solid blue
+form.search-area input[type="text"]:focus {
+  border: 1px solid blue;
 }
-
 
 form.search-area button {
   float: left;
@@ -780,7 +783,7 @@ form.search-area button {
   color: white;
 }
 
-.error-text-sm { 
+.error-text-sm {
   text-align: center;
 }
 
@@ -838,6 +841,7 @@ form.search-area button {
   }
 
   input[type="text"],
+  input[type="email"],
   input[type="password"],
   input[type="file"] {
     width: 80%;
@@ -875,12 +879,12 @@ form.search-area button {
     margin-top: -5px;
   }
 
-  .shortcut-btns a{
+  .shortcut-btns a {
     margin-top: 5%;
   }
 
   .modal-content {
-  width: auto;
+    width: auto;
   }
 
   .profile-dropdown {
@@ -889,105 +893,140 @@ form.search-area button {
   }
 
   .accnt-details {
-  flex-direction: column;
-}
-
-  table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
-	
-	td:before { 
-		position: absolute;
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-  }
-  
-  td.admin-accnts-td { 
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
-	
-	td.admin-accnts-td:before { 
-		position: absolute;
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
+    flex-direction: column;
   }
 
-  td.user-info { 
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
-	
-	td.user-info:before { 
-		position: absolute;
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
   }
 
-  form.search-area input[type=text] {
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  td.admin-accnts-td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td.admin-accnts-td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  td.user-info {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td.user-info:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  form.search-area input[type="text"] {
     width: 150px;
   }
 
   .search-area {
     margin-top: 20px;
   }
-  
+
   .not-found {
-  max-width: 100%;
-}
+    max-width: 100%;
+  }
 
-.error-text {
-  font-size: 40px;
-}
+  .error-text {
+    font-size: 40px;
+  }
 
-.description-img {
-  margin-left: none !important;
-}
+  .description-img {
+    margin-left: none !important;
+  }
 
-	td:nth-of-type(1):before { content: "Date"; }
-	td:nth-of-type(2):before { content: "Transaction"; }
-	td:nth-of-type(3):before { content: "Amount"; }
-  td:nth-of-type(4):before { content: "Balance"; }
-  
-  td.admin-accnts-td:nth-of-type(1):before { content: "Name"; }
-	td.admin-accnts-td:nth-of-type(2):before { content: "A/c No."; }
-	td.admin-accnts-td:nth-of-type(3):before { content: "Created"; }
-  td.admin-accnts-td:nth-of-type(4):before { content: "Status"; }
-  td.admin-accnts-td:nth-of-type(5):before { content: "View"; }
-  td.admin-accnts-td:nth-of-type(4):after { content: "."; }
+  td:nth-of-type(1):before {
+    content: "Date";
+  }
+  td:nth-of-type(2):before {
+    content: "Transaction";
+  }
+  td:nth-of-type(3):before {
+    content: "Amount";
+  }
+  td:nth-of-type(4):before {
+    content: "Balance";
+  }
 
-  td.user-info:nth-of-type(1):before { content: "Name"; }
-  td.user-info:nth-of-type(2):before { content: "Created"; }
-  td.user-info:nth-of-type(3):before { content: "Status"; }
-  td.user-info:nth-of-type(4):before { content: ""; }
+  td.admin-accnts-td:nth-of-type(1):before {
+    content: "Name";
+  }
+  td.admin-accnts-td:nth-of-type(2):before {
+    content: "A/c No.";
+  }
+  td.admin-accnts-td:nth-of-type(3):before {
+    content: "Created";
+  }
+  td.admin-accnts-td:nth-of-type(4):before {
+    content: "Status";
+  }
+  td.admin-accnts-td:nth-of-type(5):before {
+    content: "View";
+  }
+  td.admin-accnts-td:nth-of-type(4):after {
+    content: ".";
+  }
+
+  td.user-info:nth-of-type(1):before {
+    content: "Name";
+  }
+  td.user-info:nth-of-type(2):before {
+    content: "Created";
+  }
+  td.user-info:nth-of-type(3):before {
+    content: "Status";
+  }
+  td.user-info:nth-of-type(4):before {
+    content: "";
+  }
 }
 
 @media only screen and (min-width: 893px) and (max-width: 1240px) {
@@ -999,7 +1038,7 @@ form.search-area button {
     max-width: 50%;
   }
 
-  form.search-area input[type=text] {
+  form.search-area input[type="text"] {
     width: 250px;
   }
 
@@ -1014,5 +1053,17 @@ form.search-area button {
     height: 250px;
   }
 
-  .dashboard { margin-left: 20%; } .footer { position: fixed } .account-stats { margin-left: -50px; }
+  .accnt-info-disp {
+    margin-bottom: 7%;
+  }
+
+  .dashboard {
+    margin-left: 20%;
+  }
+  .footer {
+    position: fixed;
+  }
+  .account-stats {
+    margin-left: -50px;
+  }
 }
