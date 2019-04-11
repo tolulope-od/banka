@@ -30,7 +30,7 @@ export default class AuthController {
       newUser.lastName = lastName.trim();
       newUser.email = email.trim();
       newUser.password = password.trim();
-      newUser.type = 'staff';
+      newUser.type = 'client';
       newUser.createdAt = new Date();
 
       users.push(newUser);
