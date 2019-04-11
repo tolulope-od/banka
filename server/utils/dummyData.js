@@ -79,7 +79,7 @@ export default {
     {
       id: 1,
       createdOn: new Date(2019, 4, 23),
-      tranactionType: 'credit',
+      transactionType: 'credit',
       accountNumber: 8897654324,
       cashier: 4,
       owner: 3,
@@ -90,7 +90,7 @@ export default {
     {
       id: 2,
       createdOn: new Date(2019, 1, 20),
-      tranactionType: 'debit',
+      transactionType: 'debit',
       accountNumber: 8897654324,
       cashier: 1,
       owner: 3,
@@ -101,7 +101,7 @@ export default {
     {
       id: 3,
       createdOn: new Date(2019, 2, 12),
-      tranactionType: 'credit',
+      transactionType: 'credit',
       accountNumber: 5563847290,
       cashier: 4,
       owner: 2,

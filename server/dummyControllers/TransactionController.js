@@ -65,6 +65,8 @@ export default class TransactionController {
     // update the balance of the old account
     accountToCredit.balance = transaction.newBalance;
 
+    transactions.push(transaction);
+
     // send notification to account owner
     const emailNotif = new Mail(transaction, accountOwner, accountNumber, accountToCredit);
     transporter.sendMail(emailNotif.getMailOptions(), (err, info) => {
@@ -142,6 +144,8 @@ export default class TransactionController {
 
     // update the balance of the old account
     accountToDebit.balance = transaction.newBalance;
+
+    transactions.push(transaction);
 
     // send notification to account owner
     const emailNotif = new Mail(transaction, accountOwner, accountNumber, accountToDebit);
