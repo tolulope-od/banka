@@ -42,7 +42,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 // Handle errors
 app.use((err, req, res, next) => {
   log(err.stack);
-  res.status(500).json({ error: err.message });
+  res.status(500).json({ error: "Something broke, don't worry, it's not you, it's us" });
   next();
 });
 
