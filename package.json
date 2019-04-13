@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "npm run build && node ./build/index.js",
-    "dev": "nodemon --exec babel-node index.js",
+    "dev": "DEBUG=dev nodemon --exec babel-node index.js",
     "build-babel": "babel -d ./build index.js && babel ./server --out-dir build/server",
     "build": "npm run clean && npm run build-babel",
     "clean": "rm -rf build && mkdir build && cp swagger.json build",
@@ -55,9 +55,11 @@
     "chai-http": "^4.2.1",
     "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
+    "debug": "^4.1.1",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
     "nodemailer": "^6.1.0",
     "swagger-ui-express": "^4.0.2"
   }
