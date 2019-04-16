@@ -325,27 +325,6 @@ describe('User Route', () => {
       });
   });
 
-  it('Should not log in a non-existent user', done => {
-    const user = {
-      email: 'harrypotter@hogwarts.com',
-      password: 'lumosMaxima'
-    };
-    chai
-      .request(app)
-      .post(`${API_PREFIX}/signin`)
-      .send(user)
-      .end((err, res) => {
-        expect(res.body)
-          .to.have.property('status')
-          .eql(404);
-        expect(res.body)
-          .to.have.property('error')
-          .eql('User not found');
-        expect(res.status).to.equal(404);
-        done();
-      });
-  });
-
   it('Should not log in a user with an empty email field', done => {
     const user = {
       email: '',
@@ -409,7 +388,7 @@ describe('User Route', () => {
       });
   });
 
-  it('Should not log in a user with a wrong password', done => {
+  it('Should not log in a user with wrong details', done => {
     const user = {
       email: 'obiwan@therebellion.com',
       password: 'pass'
@@ -421,11 +400,11 @@ describe('User Route', () => {
       .end((err, res) => {
         expect(res.body)
           .to.have.property('status')
-          .eql(403);
+          .eql(404);
         expect(res.body)
           .to.have.property('error')
-          .eql('Password Incorrect');
-        expect(res.status).to.equal(403);
+          .eql('Email or password is incorrect');
+        expect(res.status).to.equal(404);
         done();
       });
   });

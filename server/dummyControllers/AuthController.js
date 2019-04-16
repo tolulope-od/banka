@@ -70,41 +70,35 @@ export default class AuthController {
   static signIn(req, res) {
     const { email, password } = req.body;
     for (let i = 0; i < users.length; i += 1) {
-      if (email === users[i].email) {
-        if (password === users[i].password) {
-          const userInfo = users[i];
-          const payload = {
-            id: userInfo.id,
-            email: userInfo.email,
-            type: userInfo.type,
-            firstName: userInfo.firstName,
-            lastName: userInfo.lastName,
-            isAdmin: userInfo.isAdmin
-          };
-          const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1hr' });
-          const data = {
-            token,
-            id: userInfo.id,
-            firstName: userInfo.firstName,
-            lastName: userInfo.lastName,
-            email: userInfo.email,
-            type: userInfo.type
-          };
-          return res.status(200).json({
-            status: 200,
-            data,
-            message: 'Login successful'
-          });
-        }
-        return res.status(403).json({
-          status: 403,
-          error: 'Password Incorrect'
+      if (email === users[i].email && password === users[i].password) {
+        const userInfo = users[i];
+        const payload = {
+          id: userInfo.id,
+          email: userInfo.email,
+          type: userInfo.type,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
+          isAdmin: userInfo.isAdmin
+        };
+        const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1hr' });
+        const data = {
+          token,
+          id: userInfo.id,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
+          email: userInfo.email,
+          type: userInfo.type
+        };
+        return res.status(200).json({
+          status: 200,
+          data,
+          message: 'Login successful'
         });
       }
     }
     return res.status(404).json({
       status: 404,
-      error: 'User not found'
+      error: 'Email or password is incorrect'
     });
   }
 }
