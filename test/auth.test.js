@@ -18,8 +18,7 @@ describe('User Route', () => {
       firstName: 'Darth',
       lastName: 'Vader',
       email: 'darth@theempire.com',
-      password: 'empireRulez',
-      password2: 'empireRulez'
+      password: 'empireRulez'
     };
     chai
       .request(app)
@@ -43,8 +42,7 @@ describe('User Route', () => {
       firstName: 'Severus',
       lastName: 'Snape',
       email: 'snape@hogwarts.com',
-      password: 'mischiefmanaged',
-      password2: 'mischiefmanaged'
+      password: 'mischiefmanaged'
     };
     chai
       .request(app)
@@ -68,8 +66,7 @@ describe('User Route', () => {
       firstName: '',
       lastName: 'MarVell',
       email: 'captain@marvel.com',
-      password: 'quantum',
-      password2: 'quantum'
+      password: 'quantum'
     };
     chai
       .request(app)
@@ -92,8 +89,7 @@ describe('User Route', () => {
       firstName: 'Carol',
       lastName: '',
       email: 'carol@marvell.com',
-      password: 'quantom1',
-      password2: 'quantom2'
+      password: 'quantom1'
     };
     chai
       .request(app)
@@ -116,8 +112,7 @@ describe('User Route', () => {
       firstName: 'Bon',
       lastName: 'Iver',
       email: '',
-      password: '715creeks',
-      password2: '715creeks'
+      password: '715creeks'
     };
     chai
       .request(app)
@@ -140,8 +135,7 @@ describe('User Route', () => {
       firstName: 'Bon',
       lastName: 'Iver',
       email: 'boniver@creeks.com',
-      password: '',
-      password2: '715Creeks'
+      password: ''
     };
     chai
       .request(app)
@@ -159,37 +153,12 @@ describe('User Route', () => {
       });
   });
 
-  it('Should not register a user without matching passwords', done => {
-    const newUser = {
-      firstName: 'Bon',
-      lastName: 'Iver',
-      email: 'boniver@creeks.com',
-      password: '715Creeks',
-      password2: 'creeks'
-    };
-    chai
-      .request(app)
-      .post(`${API_PREFIX}/signup`)
-      .send(newUser)
-      .end((err, res) => {
-        expect(res.body)
-          .to.have.property('status')
-          .eql(400);
-        expect(res.body)
-          .to.have.property('error')
-          .eql('Passwords must match');
-        expect(res.status).to.equal(400);
-        done();
-      });
-  });
-
   it('Should not register a user with an existing email address', done => {
     const newUser = {
       firstName: 'Thor',
       lastName: 'Odinson',
       email: 'thor@avengers.com',
-      password: 'password123',
-      password2: 'password123'
+      password: 'password123'
     };
     chai
       .request(app)
@@ -212,8 +181,7 @@ describe('User Route', () => {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
-      password2: ''
+      password: ''
     };
     chai
       .request(app)
@@ -236,8 +204,7 @@ describe('User Route', () => {
       firstName: 'Marshall',
       lastName: 'Matters',
       email: 'eminem',
-      password: 'superman1',
-      password2: 'superman1'
+      password: 'superman1'
     };
     chai
       .request(app)
@@ -260,8 +227,7 @@ describe('User Route', () => {
       firstName: 'Marshall',
       lastName: 'Matters',
       email: 'eminem@eminem.com',
-      password: 'supes',
-      password2: 'supes'
+      password: 'supes'
     };
     chai
       .request(app)
@@ -274,30 +240,6 @@ describe('User Route', () => {
         expect(res.body)
           .to.have.property('error')
           .eql('Password must be at least 6 characters long');
-        expect(res.status).to.equal(400);
-        done();
-      });
-  });
-
-  it('Should not register a new user with if confirm password field is missing', done => {
-    const newUser = {
-      firstName: 'Marshall',
-      lastName: 'Matters',
-      email: 'eminem@eminem.com',
-      password: 'superman123',
-      password2: ''
-    };
-    chai
-      .request(app)
-      .post(`${API_PREFIX}/signup`)
-      .send(newUser)
-      .end((err, res) => {
-        expect(res.body)
-          .to.have.property('status')
-          .eql(400);
-        expect(res.body)
-          .to.have.property('error')
-          .eql('Confirm password field is required');
         expect(res.status).to.equal(400);
         done();
       });

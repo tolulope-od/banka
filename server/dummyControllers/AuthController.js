@@ -17,46 +17,43 @@ export default class AuthController {
    * @access public
    */
   static signUp(req, res) {
-    // eslint-disable-next-line no-unused-vars
-    const { firstName, lastName, email, password, password2 } = req.body;
+    const { firstName, lastName, email, password } = req.body;
     const existingUser = users.some(user => user.email === email);
-    if (!existingUser) {
-      const newUser = new User();
-      const usersLength = users.length;
-      const lastID = users[usersLength - 1].id;
-      const newID = lastID + 1;
-      newUser.id = newID;
-      newUser.firstName = firstName.trim();
-      newUser.lastName = lastName.trim();
-      newUser.email = email.trim();
-      newUser.password = password.trim();
-      newUser.type = 'client';
-      newUser.createdAt = new Date();
-
-      users.push(newUser);
-      const payload = { id: newUser.id, email: newUser.email };
-      const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1hr' });
-      const data = {
-        token,
-        id: newUser.id,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-        type: newUser.type,
-        createdAt: newUser.createdAt
-      };
-      return res.status(201).json({
-        status: 201,
-        data,
-        message: 'User registered successfully'
+    if (existingUser) {
+      return res.status(409).json({
+        status: 409,
+        error: 'User already exists'
       });
     }
-    res.status(409).json({
-      status: 409,
-      error: 'User already exists'
-    });
+    const newUser = new User();
+    const usersLength = users.length;
+    const lastID = users[usersLength - 1].id;
+    const newID = lastID + 1;
+    newUser.id = newID;
+    newUser.firstName = firstName.trim();
+    newUser.lastName = lastName.trim();
+    newUser.email = email.trim();
+    newUser.password = password.trim();
+    newUser.type = 'client';
+    newUser.createdAt = new Date();
 
-    return true;
+    users.push(newUser);
+    const payload = { id: newUser.id, email: newUser.email };
+    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1hr' });
+    const data = {
+      token,
+      id: newUser.id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      type: newUser.type,
+      createdAt: newUser.createdAt
+    };
+    return res.status(201).json({
+      status: 201,
+      data,
+      message: 'User registered successfully'
+    });
   }
 
   /**
