@@ -9,22 +9,21 @@ export default class Authorization {
    */
   static checkToken(req, res, next) {
     const token = req.headers['x-access-token'] || req.headers.authorization;
-    if (token) {
-      jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
-        if (err) {
-          return res.status(401).json({
-            status: 401,
-            error: 'Token is invalid'
-          });
-        }
-        req.decoded = decoded;
-        return next();
-      });
-    } else {
+    if (!token) {
       return res.status(403).json({
         status: 403,
         error: 'Unauthorized! You must be logged in for that'
       });
     }
+    return jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+      if (err) {
+        return res.status(401).json({
+          status: 401,
+          error: 'Token is invalid'
+        });
+      }
+      req.decoded = decoded;
+      return next();
+    });
   }
 }

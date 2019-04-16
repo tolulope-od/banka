@@ -83,8 +83,8 @@ export default class TransactionController {
       transactionType: transaction.type,
       accountBalance: accountToCredit.balance
     };
-    return res.status(201).json({
-      status: 201,
+    return res.status(200).json({
+      status: 200,
       data,
       message: 'Account credited successfully'
     });
@@ -121,8 +121,8 @@ export default class TransactionController {
     const { balance, owner } = accountToDebit;
 
     if (debitAmount > balance) {
-      return res.status(409).json({
-        status: 409,
+      return res.status(400).json({
+        status: 400,
         error: `Insufficient funds, your account balance is ${balance}`
       });
     }
@@ -163,8 +163,8 @@ export default class TransactionController {
       transactionType: transaction.type,
       accountBalance: accountToDebit.balance
     };
-    return res.status(201).json({
-      status: 201,
+    return res.status(200).json({
+      status: 200,
       data,
       message: 'Account debited successfully'
     });
