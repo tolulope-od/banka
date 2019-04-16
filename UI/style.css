@@ -1,5 +1,5 @@
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0%;
   background-color: #e7e5e5;
 }
@@ -112,7 +112,7 @@ body {
   left: -450px;
   width: 100px;
   z-index: -1;
-  content: "";
+  content: '';
 }
 
 .main-content {
@@ -249,9 +249,10 @@ body {
   margin-left: 5px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+input[type='text'],
+input[type='number'],
+input[type='email'],
+input[type='password'] {
   width: 369px;
   height: 35px;
   margin-bottom: 20px;
@@ -261,7 +262,7 @@ input[type="password"] {
   outline: none;
   border-radius: 15px;
 }
-input[type="submit"] {
+input[type='submit'] {
   width: 150px;
   height: 40px;
   color: white;
@@ -273,7 +274,7 @@ input[type="submit"] {
   box-shadow: 0 2px #999;
 }
 
-input[type="submit"]:active {
+input[type='submit']:active {
   background-color: #a971ee;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -738,7 +739,7 @@ label {
 
 /** Users Page */
 
-form.search-area input[type="text"] {
+form.search-area input[type='text'] {
   padding: 5px;
   font-size: 13px;
   border: 1px solid grey;
@@ -753,7 +754,7 @@ form.search-area input[type="text"] {
   height: 20px;
 }
 
-form.search-area input[type="text"]:focus {
+form.search-area input[type='text']:focus {
   border: 1px solid blue;
 }
 
@@ -840,10 +841,11 @@ form.search-area button {
     top: 0;
   }
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="file"] {
+  input[type='text'],
+  input[type='email'],
+  input[type='number'],
+  input[type='password'],
+  input[type='file'] {
     width: 80%;
   }
 
@@ -963,7 +965,7 @@ form.search-area button {
     white-space: nowrap;
   }
 
-  form.search-area input[type="text"] {
+  form.search-area input[type='text'] {
     width: 150px;
   }
 
@@ -984,48 +986,48 @@ form.search-area button {
   }
 
   td:nth-of-type(1):before {
-    content: "Date";
+    content: 'Date';
   }
   td:nth-of-type(2):before {
-    content: "Transaction";
+    content: 'Transaction';
   }
   td:nth-of-type(3):before {
-    content: "Amount";
+    content: 'Amount';
   }
   td:nth-of-type(4):before {
-    content: "Balance";
+    content: 'Balance';
   }
 
   td.admin-accnts-td:nth-of-type(1):before {
-    content: "Name";
+    content: 'Name';
   }
   td.admin-accnts-td:nth-of-type(2):before {
-    content: "A/c No.";
+    content: 'A/c No.';
   }
   td.admin-accnts-td:nth-of-type(3):before {
-    content: "Created";
+    content: 'Created';
   }
   td.admin-accnts-td:nth-of-type(4):before {
-    content: "Status";
+    content: 'Status';
   }
   td.admin-accnts-td:nth-of-type(5):before {
-    content: "View";
+    content: 'View';
   }
   td.admin-accnts-td:nth-of-type(4):after {
-    content: ".";
+    content: '.';
   }
 
   td.user-info:nth-of-type(1):before {
-    content: "Name";
+    content: 'Name';
   }
   td.user-info:nth-of-type(2):before {
-    content: "Created";
+    content: 'Created';
   }
   td.user-info:nth-of-type(3):before {
-    content: "Status";
+    content: 'Status';
   }
   td.user-info:nth-of-type(4):before {
-    content: "";
+    content: '';
   }
 }
 
@@ -1038,7 +1040,7 @@ form.search-area button {
     max-width: 50%;
   }
 
-  form.search-area input[type="text"] {
+  form.search-area input[type='text'] {
     width: 250px;
   }
 
