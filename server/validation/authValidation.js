@@ -24,16 +24,10 @@ export default class AuthValidation {
    * @access public
    */
   static validateUserSignup(req, res, next) {
-    const { firstName, lastName, email, password, password2 } = req.body;
+    const { firstName, lastName, email, password } = req.body;
     // Regular expression to check for valid email address - emailregex.com
     const validEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (
-      isEmpty(firstName) &&
-      isEmpty(lastName) &&
-      isEmpty(email) &&
-      isEmpty(password) &&
-      isEmpty(password2)
-    ) {
+    if (isEmpty(firstName) && isEmpty(lastName) && isEmpty(email) && isEmpty(password)) {
       return res.status(400).json({
         status: 400,
         error: 'All fields are required'
@@ -72,20 +66,6 @@ export default class AuthValidation {
       return res.status(400).json({
         status: 400,
         error: 'Password is required'
-      });
-    }
-
-    if (isEmpty(password2)) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Confirm password field is required'
-      });
-    }
-
-    if (password !== password2) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Passwords must match'
       });
     }
 
