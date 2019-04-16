@@ -337,11 +337,11 @@ describe('User Route', () => {
       .end((err, res) => {
         expect(res.body)
           .to.have.property('status')
-          .eql(403);
+          .eql(404);
         expect(res.body)
           .to.have.property('error')
           .eql('User not found');
-        expect(res.status).to.equal(403);
+        expect(res.status).to.equal(404);
         done();
       });
   });

@@ -59,7 +59,7 @@ describe('Transaction Route', () => {
       .end((err, res) => {
         expect(res.body)
           .to.have.property('status')
-          .eql(201);
+          .eql(200);
         expect(res.body).to.have.nested.property('data.transactionId');
         expect(res.body)
           .to.have.nested.property('data.transactionType')
@@ -67,7 +67,7 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.property('message')
           .eql('Account credited successfully');
-        expect(res.status).to.equal(201);
+        expect(res.status).to.equal(200);
         done();
       });
   });
@@ -195,7 +195,7 @@ describe('Transaction Route', () => {
       .end((err, res) => {
         expect(res.body)
           .to.have.property('status')
-          .eql(201);
+          .eql(200);
         expect(res.body).to.have.nested.property('data.transactionId');
         expect(res.body)
           .to.have.nested.property('data.transactionType')
@@ -203,7 +203,7 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.property('message')
           .eql('Account debited successfully');
-        expect(res.status).to.equal(201);
+        expect(res.status).to.equal(200);
         done();
       });
   });
@@ -287,9 +287,9 @@ describe('Transaction Route', () => {
       .end((err, res) => {
         expect(res.body)
           .to.have.property('status')
-          .eql(409);
+          .eql(400);
         expect(res.body).to.have.property('error');
-        expect(res.status).to.equal(409);
+        expect(res.status).to.equal(400);
         done();
       });
   });

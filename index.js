@@ -46,6 +46,13 @@ app.use((err, req, res, next) => {
   next();
 });
 
+app.get('*', (req, res) => {
+  res.status(404).send({
+    status: 404,
+    error: 'Not found'
+  });
+});
+
 app.listen(PORT, () => debug(`Server Running on Port ${PORT}`));
 
 export default app;
