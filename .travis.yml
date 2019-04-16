@@ -6,7 +6,7 @@ env:
   - SECRET_KEY=somesuperlongsecretkeyhere USER_EMAIL=software.sorcery000@gmail.com USER_PASSWORD=softwareislife
 script: ./node_modules/.bin/mocha --exit --timeout 10000 --require @babel/register ./test/*.js
 before_script:
-  - npm install nyc coveralls cross-env -g
+  - npm install nyc@13.2.0 coveralls cross-env -g
 after_script: cross-env NODE_ENV=test npm run coveralls
 cache:
   directories:
