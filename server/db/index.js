@@ -38,13 +38,13 @@ export default class Model {
   }
 
   static initConn() {
-    const { USER, HOST, DATABASE, PASSWORD, PORT } = process.env;
+    const { USER, HOST, DATABASE, PASSWORD, DB_PORT } = process.env;
     const poolSettings = {
       user: USER,
       host: HOST,
       password: PASSWORD,
       database: DATABASE,
-      port: PORT
+      port: DB_PORT
     };
 
     debug(`Pool Settings: ${JSON.stringify(poolSettings)}`);
