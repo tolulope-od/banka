@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
@@ -247,8 +248,8 @@ describe('User Route', () => {
 
   it('Should log in an existing user', done => {
     const user = {
-      email: 'obiwan@therebellion.com',
-      password: 'password1'
+      email: 'darth@theempire.com',
+      password: 'empireRulez'
     };
     chai
       .request(app)
@@ -258,7 +259,6 @@ describe('User Route', () => {
         expect(res.body)
           .to.have.property('status')
           .eql(200);
-        expect(res.body).to.have.nested.property('data.token');
         expect(res.body)
           .to.have.property('message')
           .eql('Login successful');
@@ -334,6 +334,27 @@ describe('User Route', () => {
     const user = {
       email: 'obiwan@therebellion.com',
       password: 'pass'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Email or password is incorrect');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+
+  it('Should not log in a user with wrong details', done => {
+    const user = {
+      email: 'notreal@user.com',
+      password: 'passwoooo'
     };
     chai
       .request(app)

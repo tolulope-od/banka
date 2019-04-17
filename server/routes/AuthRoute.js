@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import AuthController from '../dummyControllers/AuthController';
+import AuthController from '../controllers/AuthController';
 import AuthValidation from '../validation/authValidation';
+import asyncErrorHandler from '../middleware/asyncErrorHandler';
 
 const router = Router();
 
 const { signUp, signIn } = AuthController;
 const { validateUserSignup, validateUserLogIn } = AuthValidation;
 
-router.post('/signup', validateUserSignup, signUp);
-router.post('/signin', validateUserLogIn, signIn);
+router.post('/signup', validateUserSignup, asyncErrorHandler(signUp));
+router.post('/signin', validateUserLogIn, asyncErrorHandler(signIn));
 
 export default router;
