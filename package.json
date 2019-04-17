@@ -13,10 +13,11 @@
   "scripts": {
     "start": "npm run build && node ./build/index.js",
     "dev": "DEBUG=dev nodemon --exec babel-node index.js",
+    "migration": "DEBUG=postgres babel-node server/db/seeder.js",
     "build-babel": "babel -d ./build index.js && babel ./server --out-dir build/server",
     "build": "npm run clean && npm run build-babel",
     "clean": "rm -rf build && mkdir build && cp swagger.json build",
-    "test": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov ./node_modules/.bin/mocha --exit --timeout 10000 --reporter spec --require @babel/register ./test/*.js",
+    "test": "npm run migration && cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text-lcov ./node_modules/.bin/mocha --exit --timeout 10000 --reporter spec --require @babel/register ./test/*.js",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -50,6 +51,7 @@
     "prettier": "^1.16.4"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
@@ -61,6 +63,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "nodemailer": "^6.1.0",
+    "pg": "^7.10.0",
     "swagger-ui-express": "^4.0.2"
   }
 }
