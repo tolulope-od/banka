@@ -20,6 +20,21 @@ body {
   justify-content: space-between;
 }
 
+#active {
+  background-color: #6f26c9;
+  padding: 2px 10px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  color: white;
+  border-radius: 10px;
+}
+
+#sidelink-active {
+  border-left: 3px solid #6f26c9;
+  padding: 5px;
+  color: #6f26c9;
+}
+
 #navbar a {
   padding: 12px;
   text-decoration: none;
@@ -342,7 +357,10 @@ button.dropdown-trigger:focus {
 .dropdown-item {
   text-decoration: none;
   color: black;
-  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 20px;
+  border-bottom: 1px solid black;
 }
 
 .fa-chevron-down {
@@ -426,6 +444,19 @@ button.dropdown-trigger:focus {
   background: rgb(94, 53, 177);
   border-radius: 25px;
   box-shadow: 0 5px #999;
+}
+
+.confirm-delete-accnt-btn {
+  align-self: flex-end;
+  width: 150px;
+  height: 40px;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: Montserrat, sans-serif;
+  border-radius: 25px;
+  box-shadow: 0 5px #999;
+  background: orangered;
 }
 
 .shortcut-btns a {
@@ -996,6 +1027,10 @@ form.search-area button {
   }
   td:nth-of-type(4):before {
     content: 'Balance';
+  }
+
+  td:nth-of-type(5):before {
+    content: 'Cashier';
   }
 
   td.admin-accnts-td:nth-of-type(1):before {
