@@ -37,6 +37,30 @@ export default class Model {
     }
   }
 
+  async update(params, constraints) {
+    try {
+      const result = await this.pool.query(
+        `UPDATE ${this.table} SET ${params} WHERE ${constraints}`
+      );
+      debug(result.rowCount);
+      return result.rowCount;
+    } catch (err) {
+      return debug(err.message);
+    }
+  }
+
+  async delete(params, constraint) {
+    try {
+      const result = await this.pool.query(
+        `DELETE FROM ${this.table} ${params} WHERE ${constraint}`
+      );
+      debug(result);
+      return result;
+    } catch (err) {
+      return debug(err.message);
+    }
+  }
+
   static initConn() {
     const { USER, HOST, DATABASE, PASSWORD, DB_PORT } = process.env;
     const poolSettings = {

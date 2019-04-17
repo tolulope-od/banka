@@ -60,7 +60,7 @@ describe('Account Route', () => {
         expect(res.body)
           .to.have.property('status')
           .eql(201);
-        expect(res.body).to.have.nested.property('data.accountNumber');
+        expect(res.body).to.have.nested.property('data[0].accountNumber');
         expect(res.body)
           .to.have.property('message')
           .eql('Account created successfully');
@@ -204,7 +204,7 @@ describe('Account Route', () => {
         expect(res.body)
           .to.have.property('status')
           .eql(200);
-        expect(res.body).to.have.nested.property('data.accountNumber');
+        expect(res.body).to.have.nested.property('data[0].accountNumber');
         expect(res.status).to.equal(200);
         done();
       });
