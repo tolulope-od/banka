@@ -1,120 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"
+      integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y"
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
+    <title>Banka - Account Details</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"
-    integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <title>Banka - Account Details</title>
-</head>
-
-<body>
-  <div id="navbar" class="menu-nav">
-    <a href="/" id="logo"><i class="fas fa-coins"></i>Banka</a>
-    <div id="navbar-right">
-      <div class="profile-action" id="drop-down">
-        <img src="images/avatar.png" alt="Profile Picture" class="avatar-img">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-    </div>
-
-  </div>
-  <div class="profile-dropdown" id="dropdown-contents">
-    <a href="editProfile.html" class="dropdown-item">Profile</a>
-    <a href="index.html" class="dropdown-item">Logout</a>
-  </div>
-  <div class="main">
-    <div class="item-content-container">
-      <div class="side-nav">
-        <div class="side-nav-content">
-          <h5 class='side-nav-greet'>Welcome,</h5>
-          <h4 class='side-nav-name'>Obiwan</h4>
-          <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
-          <a href="#" class="side-link"><i class="fas fa-file-invoice-dollar"></i> Accounts</a>
-          <a href="profile.html" class="side-link"><i class="fas fa-user-circle"></i> Profile</a>
+  <body>
+    <div id="navbar" class="menu-nav">
+      <a href="dashboard.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
+      <div id="navbar-right">
+        <div class="profile-action" id="drop-down">
+          <img src="images/avatar.png" alt="Profile Picture" class="avatar-img" />
+          <i class="fas fa-chevron-down"></i>
         </div>
       </div>
-      <div class="item-content-container dashboard">
-        <div class="col s5">
-          <h2 class="label-lg"><strong>ACCOUNTS</strong></h2>
-          <div class="dashboard-links">
-            <a href="dashboard.html" class="dash-nav-link active"><i class="fas fa-columns"></i> Dashboard</a>
-            <a href="#" class="dash-nav-link"><i class="fas fa-file-invoice-dollar"></i> Accounts</a>
-            <a href="profile.html" class="dash-nav-link"><i class="fas fa-user-circle"></i> Profile</a>
+    </div>
+    <div class="profile-dropdown" id="dropdown-contents">
+      <a href="editprofile.html" class="dropdown-item">Profile</a>
+      <a href="index.html" class="dropdown-item">Logout</a>
+    </div>
+    <div class="main">
+      <div class="item-content-container">
+        <div class="side-nav">
+          <div class="side-nav-content">
+            <h5 class="side-nav-greet">Welcome,</h5>
+            <h4 class="side-nav-name">Obiwan</h4>
+            <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
+            <a href="#" class="side-link"><i class="fas fa-file-invoice-dollar"></i> Accounts</a>
+            <a href="profile.html" class="side-link"><i class="fas fa-user-circle"></i> Profile</a>
+          </div>
+        </div>
+        <div class="item-content-container dashboard">
+          <div class="col s5">
+            <h2 class="label-lg"><strong>ACCOUNTS</strong></h2>
+            <div class="dashboard-links">
+              <a href="dashboard.html" class="dash-nav-link active"
+                ><i class="fas fa-columns"></i> Dashboard</a
+              >
+              <a href="#" class="dash-nav-link"
+                ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
+              >
+              <a href="profile.html" class="dash-nav-link"
+                ><i class="fas fa-user-circle"></i> Profile</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shortcut-btns">
+        <a href="dashboard.html"><i class="fas fa-chevron-left"></i> Dashboard</a>
+      </div>
+      <div class="accnt-info-disp">
+        <div class="accnt-details">
+          <div class="accnt-detail-hd">
+            <p class="balance-text accnt-info-txt">Account Name:</p>
+            <h3 class="accnt-name">Obiwan Kenobi</h3>
+          </div>
+          <div class="accnt-detail-hd">
+            <p class="balance-text accnt-info-txt">Status:</p>
+            <p class="badge-active accnt-badge" id="accnt-badge">Active</p>
+          </div>
+          <div class="accnt-detail-hd">
+            <p class="balance-text accnt-info-txt">Account Number:</p>
+            <h3 class="accnt-name">1903220321</h3>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Transaction</th>
+              <th>Amount</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>21-03-19</td>
+              <td>Debit</td>
+              <td>&#x20A6; 5,000.00</td>
+              <td>&#x20A6; 200,023.09</td>
+            </tr>
+            <tr>
+              <td>19-03-19</td>
+              <td>Credit</td>
+              <td>&#x20A6; 28,000.00</td>
+              <td>&#x20A6; 205,023.09</td>
+            </tr>
+            <tr>
+              <td>15-03-19</td>
+              <td>Debit</td>
+              <td>&#x20A6; 5,000.00</td>
+              <td>&#x20A6; 177,023.09</td>
+            </tr>
+            <tr>
+              <td>13-03-19</td>
+              <td>Debit</td>
+              <td>&#x20A6; 5,000.00</td>
+              <td>&#x20A6; 182,023.09</td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="myModal" class="modal">
+          <div class="modal-content" id="account-modal-content">
+            <span class="close">&times;</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="shortcut-btns">
-      <a href="dashboard.html"><i class="fas fa-chevron-left"></i> Dashboard</a>
-    </div>
-    <div class="accnt-info-disp">
-      <div class="accnt-details">
-        <div class="accnt-detail-hd">
-          <p class="balance-text accnt-info-txt">Account Name: </p>
-          <h3 class="accnt-name">Obiwan Kenobi</h3>
-        </div>
-        <div class="accnt-detail-hd">
-          <p class="balance-text accnt-info-txt">Status: </p>
-          <p class="badge-active accnt-badge" id="accnt-badge">Active</p>
-        </div>
-        <div class="accnt-detail-hd">
-          <p class="balance-text accnt-info-txt">Account Number: </p>
-          <h3 class="accnt-name">1903220321</h3>
-        </div>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Transaction</th>
-            <th>Amount</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>21-03-19</td>
-            <td>Debit</td>
-            <td>&#x20A6; 5,000.00</td>
-            <td>&#x20A6; 200,023.09</td>
-          </tr>
-          <tr>
-            <td>19-03-19</td>
-            <td>Credit</td>
-            <td>&#x20A6; 28,000.00</td>
-            <td>&#x20A6; 205,023.09</td>
-          </tr>
-          <tr>
-            <td>15-03-19</td>
-            <td>Debit</td>
-            <td>&#x20A6; 5,000.00</td>
-            <td>&#x20A6; 177,023.09</td>
-          </tr>
-          <tr>
-            <td>13-03-19</td>
-            <td>Debit</td>
-            <td>&#x20A6; 5,000.00</td>
-            <td>&#x20A6; 182,023.09</td>
-          </tr>
-        </tbody>
-      </table>
-      <div id="myModal" class="modal">
-        <div class="modal-content" id="account-modal-content">
-          <span class="close">&times;</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <footer class="footer">
-    <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
-  </footer>
-  <script src="js/authNav.js"></script>
-  <script src="js/createAccount.js"></script>
-</body>
-
+    <footer class="footer">
+      <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
+    </footer>
+    <script src="js/authNav.js"></script>
+    <script src="js/createAccount.js"></script>
+  </body>
 </html>

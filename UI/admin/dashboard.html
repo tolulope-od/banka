@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="../style.css" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.0/css/all.css"
@@ -20,24 +20,30 @@
       <a href="dashboard.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
       <div id="navbar-right">
         <div class="profile-action" id="drop-down">
-          <img src="images/avatar.png" alt="Profile Picture" class="avatar-img" />
+          <img src="../images/avatar.png" alt="Profile Picture" class="avatar-img" />
           <i class="fas fa-chevron-down"></i>
         </div>
       </div>
     </div>
     <div class="profile-dropdown" id="dropdown-contents">
-      <a href="editprofile.html" class="dropdown-item">Profile</a>
-      <a href="index.html" class="dropdown-item">Logout</a>
+      <a href="../editProfile.html" class="dropdown-item">Profile</a>
+      <a href="../index.html" class="dropdown-item">Logout</a>
     </div>
     <div class="main">
       <div class="item-content-container">
         <div class="side-nav">
           <div class="side-nav-content">
-            <h5 class="side-nav-greet">Welcome,</h5>
+            <h5 class="side-nav-greet-admin">Welcome,</h5>
             <h4 class="side-nav-name">Obiwan</h4>
             <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
-            <a href="#" class="side-link"><i class="fas fa-file-invoice-dollar"></i> Accounts</a>
-            <a href="profile.html" class="side-link"><i class="fas fa-user-circle"></i> Profile</a>
+            <a href="viewaccounts.html" class="side-link"
+              ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
+            >
+            <a href="../profile.html" class="side-link"
+              ><i class="fas fa-user-circle"></i> Profile</a
+            >
+
+            <a href="users.html" class="side-link"><i class="fas fa-users"></i> Users</a>
           </div>
         </div>
         <div class="item-content-container dashboard">
@@ -47,18 +53,15 @@
               <a href="dashboard.html" class="dash-nav-link active"
                 ><i class="fas fa-columns"></i> Dashboard</a
               >
-              <a href="#" class="dash-nav-link"
+              <a href="viewaccounts.html" class="dash-nav-link"
                 ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
               >
-              <a href="profile.html" class="dash-nav-link"
+              <a href="../profile.html" class="dash-nav-link"
                 ><i class="fas fa-user-circle"></i> Profile</a
               >
             </div>
           </div>
         </div>
-      </div>
-      <div class="shortcut-btns">
-        <a href="createaccount.html">+ Add Account</a>
       </div>
       <div class="main-dashboard">
         <div class="account-stats">
@@ -108,6 +111,6 @@
     <footer class="footer">
       <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
     </footer>
-    <script src="js/authNav.js"></script>
+    <script src="../js/authNav.js"></script>
   </body>
 </html>
