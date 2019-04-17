@@ -19,14 +19,14 @@ describe('Account Route', () => {
   before(done => {
     const user = {
       email: 'thor@avengers.com',
-      password: 'password123'
+      password: 'password1'
     };
     chai
       .request(app)
       .post(`${API_PREFIX}/auth/signin`)
       .send(user)
       .end((err, res) => {
-        authToken = res.body.data.token;
+        authToken = res.body.data[0].token;
         done();
       });
   });
@@ -34,14 +34,14 @@ describe('Account Route', () => {
   before(done => {
     const staff = {
       email: 'obiwan@therebellion.com',
-      password: 'password1'
+      password: 'password123'
     };
     chai
       .request(app)
       .post(`${API_PREFIX}/auth/signin`)
       .send(staff)
       .end((err, res) => {
-        staffAuthToken = res.body.data.token;
+        staffAuthToken = res.body.data[0].token;
         done();
       });
   });
