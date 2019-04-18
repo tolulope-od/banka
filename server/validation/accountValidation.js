@@ -65,7 +65,7 @@ export default class AccountValidation {
       });
     }
 
-    if (status !== 'active' && status !== 'dormant') {
+    if (status !== 'active' && status !== 'dormant' && status !== 'draft') {
       return res.status(400).json({
         status: 400,
         error: 'Status can only be active or dormant'
