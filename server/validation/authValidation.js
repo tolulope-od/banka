@@ -24,6 +24,12 @@ export default class AuthValidation {
    * @access public
    */
   static validateUserSignup(req, res, next) {
+    if (Object.keys(req.body).length > 4) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Only first name, last name, email and password fields are required'
+      });
+    }
     const { firstName, lastName, email, password } = req.body;
     // Regular expression to check for valid email address - emailregex.com
     const validEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -89,6 +95,12 @@ export default class AuthValidation {
    * @access public
    */
   static validateUserLogIn(req, res, next) {
+    if (Object.keys(req.body).length > 2) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Only email and password fields are required'
+      });
+    }
     const { email, password } = req.body;
 
     if (isEmpty(email) && isEmpty(password)) {

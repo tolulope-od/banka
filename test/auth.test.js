@@ -85,6 +85,30 @@ describe('User Route', () => {
       });
   });
 
+  it('Should not register if an extra key exists in the request body', done => {
+    const newUser = {
+      firstName: '',
+      lastName: 'MarVell',
+      email: 'captain@marvel.com',
+      password: 'quantum',
+      something: 'notnecessary'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/signup`)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Only first name, last name, email and password fields are required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
   it('Should not register a user with an empty last name field', done => {
     const newUser = {
       firstName: 'Carol',
@@ -263,6 +287,28 @@ describe('User Route', () => {
           .to.have.property('message')
           .eql('Login successful');
         expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not log in a user when an extra key exists in the request body', done => {
+    const user = {
+      email: 'darth@theempire.com',
+      password: 'password123',
+      something: 'notuseful'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Only email and password fields are required');
+        expect(res.status).to.equal(400);
         done();
       });
   });

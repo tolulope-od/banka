@@ -95,6 +95,29 @@ describe('Transaction Route', () => {
       });
   });
 
+  it('Should not credit an account if the request contains an extra value', done => {
+    const creditTransaction = {
+      creditAmount: 500900.05,
+      something: 'else'
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/credit`)
+      .set('Authorization', authToken)
+      .send(creditTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Only the credit amount is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
   it('Should not credit an account that does not exist', done => {
     const creditTransaction = {
       creditAmount: 500900.05
@@ -227,6 +250,29 @@ describe('Transaction Route', () => {
           .to.have.property('error')
           .eql('You are not authorized to carry out that action');
         expect(res.status).to.equal(401);
+        done();
+      });
+  });
+
+  it('Should not debit an account if the request contains an extra value', done => {
+    const debitTransaction = {
+      debitAmount: 500900.05,
+      something: 'else'
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', authToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Only the debit amount is required');
+        expect(res.status).to.equal(400);
         done();
       });
   });

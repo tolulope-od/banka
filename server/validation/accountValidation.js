@@ -11,6 +11,12 @@ export default class AccountValidation {
    * @access private
    */
   static validateAccountCreation(req, res, next) {
+    if (Object.keys(req.body).length > 1) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Only the account type is required'
+      });
+    }
     const { type } = req.body;
 
     if (isEmpty(type)) {
@@ -40,6 +46,12 @@ export default class AccountValidation {
    * @access private
    */
   static validateEditAccount(req, res, next) {
+    if (Object.keys(req.body).length > 1) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Only the status field is required'
+      });
+    }
     const { accountNumber } = req.params;
     const { status } = req.body;
     const isNum = /^\d+$/; // gotten from Scott Evernden on Stack Overflow
