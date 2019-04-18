@@ -7,10 +7,8 @@ import Debug from 'debug';
 
 import swaggerDoc from './swagger.json';
 
-// Import routes
-import authRoute from './server/routes/AuthRoute';
-import accountRoute from './server/routes/AccountRoute';
-import transactionRoute from './server/routes/TransactionRoute';
+// Import route
+import routes from './server/routes';
 
 const { log } = console;
 const debug = Debug('dev');
@@ -34,9 +32,7 @@ app.use(bodyParser({ extended: false }));
 app.use(bodyParser.json());
 
 // Use the routes for the apps routing logic
-app.use(`${API_PREFIX}/auth`, authRoute);
-app.use(`${API_PREFIX}/accounts`, accountRoute);
-app.use(`${API_PREFIX}/transactions`, transactionRoute);
+app.use(`${API_PREFIX}`, routes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
