@@ -69,6 +69,28 @@ describe('Account Route', () => {
       });
   });
 
+  it('Should not create an account for a new user when an extra key exists in the request', done => {
+    const newAccount = {
+      type: 'savings',
+      something: 'irrelivant'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/accounts`)
+      .set('Authorization', authToken)
+      .send(newAccount)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Only the account type is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
   it('Should not create an account for a staff', done => {
     const newAccount = {
       type: 'current'
@@ -226,6 +248,29 @@ describe('Account Route', () => {
           .eql(200);
         expect(res.body).to.have.nested.property('data[0].accountNumber');
         expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it("Should not edit an account's status when an extra key exists in the request", done => {
+    const newStatus = {
+      status: 'draft',
+      something: 'irrelivant'
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Only the status field is required');
+        expect(res.status).to.equal(400);
         done();
       });
   });

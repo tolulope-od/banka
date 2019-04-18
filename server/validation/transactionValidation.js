@@ -12,6 +12,12 @@ export default class TransactionValidation {
    * @access private
    */
   static validateCreditTransaction(req, res, next) {
+    if (Object.keys(req.body).length > 1) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Only the credit amount is required'
+      });
+    }
     const { creditAmount } = req.body;
 
     if (isEmpty(creditAmount)) {
@@ -49,6 +55,12 @@ export default class TransactionValidation {
    * @access private
    */
   static validateDebitTransaction(req, res, next) {
+    if (Object.keys(req.body).length > 1) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Only the debit amount is required'
+      });
+    }
     const { debitAmount } = req.body;
 
     if (isEmpty(debitAmount)) {
