@@ -40,10 +40,10 @@ export default class Model {
   async update(params, constraints) {
     try {
       const result = await this.pool.query(
-        `UPDATE ${this.table} SET ${params} WHERE ${constraints}`
+        `UPDATE ${this.table} SET ${params} WHERE ${constraints} RETURNING *`
       );
-      debug(result.rowCount);
-      return result.rowCount;
+      debug(result.rows);
+      return result.rows;
     } catch (err) {
       return debug(err.message);
     }

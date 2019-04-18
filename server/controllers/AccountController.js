@@ -4,7 +4,7 @@ import Model from '../db';
 
 dotenv.config();
 
-const accounts = new Model(`accounts`);
+export const accounts = new Model(`accounts`);
 
 export default class AccountController {
   /**

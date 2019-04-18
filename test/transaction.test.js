@@ -61,9 +61,9 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.property('status')
           .eql(200);
-        expect(res.body).to.have.nested.property('data.transactionId');
+        expect(res.body).to.have.nested.property('data[0].transactionId');
         expect(res.body)
-          .to.have.nested.property('data.transactionType')
+          .to.have.nested.property('data[0].transactionType')
           .eql('credit');
         expect(res.body)
           .to.have.property('message')
@@ -197,9 +197,9 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.property('status')
           .eql(200);
-        expect(res.body).to.have.nested.property('data.transactionId');
+        expect(res.body).to.have.nested.property('data[0].transactionId');
         expect(res.body)
-          .to.have.nested.property('data.transactionType')
+          .to.have.nested.property('data[0].transactionType')
           .eql('debit');
         expect(res.body)
           .to.have.property('message')

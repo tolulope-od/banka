@@ -5,7 +5,7 @@ import Model from '../db';
 
 dotenv.config();
 
-const users = new Model(`users`);
+export const users = new Model(`users`);
 
 export default class AuthController {
   /**

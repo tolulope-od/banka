@@ -11,12 +11,12 @@ export default class Mail {
       from: 'transactions@banka.com',
       to: `${this.accountOwner.email}`,
       subject: `${this.transaction.type.toUpperCase()} alert for your Banka Account: ${
-        this.accountNumber
+        this.accountnumber
       }`,
       html: `<h3>${this.transaction.type.toUpperCase()} Alert</h3><p>Hello ${
-        this.accountOwner.firstName
+        this.accountOwner.firstname
       }, your account was credited with <bold>₦${this.transaction.amount}</bold> on ${
-        this.transaction.createdOn
+        this.transaction.creatednn
       }. Your account balance is <bold>₦${
         this.accountToCredit.balance
       }</bold> <br></p><p>Thank you for banking with us <br></p><p> © Banka Inc. </p> <p>https://banka-app.herokuapp.com</p>`

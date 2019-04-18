@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import TransactionController from '../dummyControllers/TransactionController';
+import TransactionController from '../controllers/TransactionController';
 import Authorization from '../middleware/Authorization';
 import AccountValidation from '../validation/accountValidation';
 import TransactionValidation from '../validation/transactionValidation';
+import asyncErrorHandler from '../middleware/asyncErrorHandler';
 
 const router = Router();
 
@@ -16,14 +17,14 @@ router.post(
   checkToken,
   validateGetSingleAccount,
   validateCreditTransaction,
-  creditAccount
+  asyncErrorHandler(creditAccount)
 );
 router.post(
   '/:accountNumber/debit',
   checkToken,
   validateGetSingleAccount,
   validateDebitTransaction,
-  debitAccount
+  asyncErrorHandler(debitAccount)
 );
 
 export default router;
