@@ -210,6 +210,26 @@ describe('Account Route', () => {
       });
   });
 
+  it("Should edit an account's status to draft when a staff accesses the route", done => {
+    const newStatus = {
+      status: 'draft'
+    };
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .patch(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', staffAuthToken)
+      .send(newStatus)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.nested.property('data[0].accountNumber');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
   it("Should not edit an account's status if a non-staff user accesses the route", done => {
     const newStatus = {
       status: 'dormant'
