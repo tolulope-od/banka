@@ -61,6 +61,16 @@ export default class Model {
     }
   }
 
+  async selectAll(params) {
+    try {
+      const result = await this.pool.query(`SELECT ${params} FROM ${this.table}`);
+      debug(result.rows);
+      return result.rows;
+    } catch (err) {
+      return debug(err.message);
+    }
+  }
+
   static initConn() {
     const { USER, HOST, DATABASE, PASSWORD, DB_PORT } = process.env;
     const poolSettings = {

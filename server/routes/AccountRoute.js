@@ -8,7 +8,7 @@ import asyncErrorHandler from '../middleware/asyncErrorHandler';
 const router = Router();
 
 const {
-  fetchAllAccounts,
+  // fetchAllAccounts,
   // createAccount,
   // editAccountStatus,
   getSingleAccount
@@ -21,7 +21,7 @@ const {
 } = AccountValidation;
 const { checkToken } = Authorization;
 
-router.get('/', checkToken, fetchAllAccounts);
+router.get('/', checkToken, asyncErrorHandler(PrimaryAccountController.fetchAllAccounts));
 router.post(
   '/',
   checkToken,
