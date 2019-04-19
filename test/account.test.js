@@ -421,7 +421,7 @@ describe('Account Route', () => {
       });
   });
 
-  it('Should get a single account by the account number', done => {
+  it('Should get a single account by the account number (staff)', done => {
     const accountNumber = 8897654324;
     chai
       .request(app)
@@ -431,8 +431,42 @@ describe('Account Route', () => {
         expect(res.body)
           .to.have.property('status')
           .eql(200);
-        expect(res.body).to.have.nested.property('data.accountNumber');
+        expect(res.body).to.have.nested.property('data[0].accountNumber');
         expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should get a single account by the account number (client)', done => {
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.nested.property('data[0].accountNumber');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not allow a client get an account they do not own', done => {
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account not found');
+        expect(res.status).to.equal(404);
         done();
       });
   });
@@ -449,7 +483,7 @@ describe('Account Route', () => {
           .eql(404);
         expect(res.body)
           .to.have.property('error')
-          .eql('Account does not exist');
+          .eql('Account not found');
         expect(res.status).to.equal(404);
         done();
       });
