@@ -8,30 +8,30 @@ dotenv.config();
 const { accounts } = dummyData;
 
 export default class AccountController {
-  /**
-   * @description Fetch all accounts
-   * @param {Object} req The request object
-   * @param {Object} res The response object
-   * @route POST /api/v1/accounts
-   * @returns {Object} status code, data and message properties
-   * @access private
-   */
-  static fetchAllAccounts(req, res) {
-    if (req.decoded.type === 'staff' || req.decoded.isAdmin) {
-      return res.status(200).json({
-        status: 200,
-        data: accounts
-      });
-    }
-    const userAccounts = accounts.filter(account => account.owner === req.decoded.id);
-    if (userAccounts) {
-      return res.status(200).json({
-        status: 200,
-        data: userAccounts
-      });
-    }
-    return true;
-  }
+  // /**
+  //  * @description Fetch all accounts
+  //  * @param {Object} req The request object
+  //  * @param {Object} res The response object
+  //  * @route POST /api/v1/accounts
+  //  * @returns {Object} status code, data and message properties
+  //  * @access private
+  //  */
+  // static fetchAllAccounts(req, res) {
+  //   if (req.decoded.type === 'staff' || req.decoded.isAdmin) {
+  //     return res.status(200).json({
+  //       status: 200,
+  //       data: accounts
+  //     });
+  //   }
+  //   const userAccounts = accounts.filter(account => account.owner === req.decoded.id);
+  //   if (userAccounts) {
+  //     return res.status(200).json({
+  //       status: 200,
+  //       data: userAccounts
+  //     });
+  //   }
+  //   return true;
+  // }
 
   // /**
   //  * @description Create a new account

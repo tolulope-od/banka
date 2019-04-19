@@ -8,6 +8,30 @@ export const accounts = new Model(`accounts`);
 
 export default class AccountController {
   /**
+   * @description Fetch all accounts
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route POST /api/v1/accounts
+   * @returns {Object} status code, data and message properties
+   * @access private
+   */
+  static async fetchAllAccounts(req, res) {
+    if (req.decoded.type === 'staff' || req.decoded.isadmin) {
+      const allAccounts = await accounts.selectAll(['*']);
+      return res.status(200).json({
+        status: 200,
+        data: allAccounts
+      });
+    }
+    const userAccounts = await accounts.select(['*'], [`owneremail='${req.decoded.email}'`]);
+
+    return res.status(200).json({
+      status: 200,
+      data: userAccounts
+    });
+  }
+
+  /**
    * @description Create a new account
    * @param {Object} req The request object
    * @param {Object} res The response object
