@@ -32,6 +32,53 @@ export default class AccountController {
   }
 
   /**
+   * @description Get a single account
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route Get /api/v1/accounts/:accountNumber
+   * @returns {Object} status code, data and message properties
+   * @access private Staff and Client
+   */
+  static async getSingleAccount(req, res) {
+    const { accountNumber } = req.params;
+    if (req.decoded.type === 'staff') {
+      const accountDetails = await accounts.select(
+        ['*'],
+        [`accountnumber=${parseInt(accountNumber, 10)}`]
+      );
+      if (isEmpty(accountDetails)) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Account not found'
+        });
+      }
+      const { id, balance, owner, createdon, type, owneremail } = accountDetails[0];
+      const data = { id, accountNumber, owner, balance, createdon, type, owneremail };
+      return res.status(200).json({
+        status: 200,
+        data: [data]
+      });
+    }
+
+    const userAccountDetails = await await accounts.select(
+      ['*'],
+      [`accountnumber=${parseInt(accountNumber, 10)} AND owner=${req.decoded.id}`]
+    );
+    if (isEmpty(userAccountDetails)) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account not found'
+      });
+    }
+    const { id, balance, owner, createdon, type, owneremail } = userAccountDetails[0];
+    const data = { id, accountNumber, owner, balance, createdon, type, owneremail };
+    return res.status(200).json({
+      status: 200,
+      data: [data]
+    });
+  }
+
+  /**
    * @description Create a new account
    * @param {Object} req The request object
    * @param {Object} res The response object
