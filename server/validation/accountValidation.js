@@ -116,4 +116,40 @@ export default class AccountValidation {
 
     return next();
   }
+
+  /**
+   * @description Function to check that the parameters getting accounts are correctly formatted
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @param {Function} next Call back function
+   * @route GET /api/v1/accounts?status
+   * @returns {Object} status code and error message properties
+   * @access private
+   */
+  static validateGetAccounts(req, res, next) {
+    if (!isEmpty(req.query)) {
+      if (req.decoded.type !== 'staff') {
+        return res.status(403).json({
+          status: 403,
+          error: 'Unauthorized! you are not allowed to carry out that action'
+        });
+      }
+
+      if (req.query.status !== 'active') {
+        return res.status(400).json({
+          status: 400,
+          error: 'Account status must be either active or dormant'
+        });
+      }
+
+      if (Object.keys(req.query).length > 1) {
+        return res.status(400).json({
+          status: 400,
+          error: 'Only the status is required'
+        });
+      }
+    }
+
+    return next();
+  }
 }

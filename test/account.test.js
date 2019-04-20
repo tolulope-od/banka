@@ -180,6 +180,72 @@ describe('Account Route', () => {
       });
   });
 
+  it('Should fetch all active accounts under the bank for an authorized staff', done => {
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts?status=active`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.property('data');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not fetch accounts by their status if a user requests it', done => {
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts?status=actvie`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(403);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Unauthorized! you are not allowed to carry out that action');
+        expect(res.status).to.equal(403);
+        done();
+      });
+  });
+
+  it('Should not fetch accounts if the query is incorrect', done => {
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts?status=somethingsilly`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account status must be either active or dormant');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not fetch accounts if the query keys are more than one', done => {
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts?status=active&something=else`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Only the status is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
   it('Should not allow a non-logged in user fetch accounts', done => {
     chai
       .request(app)
