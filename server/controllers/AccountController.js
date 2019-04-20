@@ -17,10 +17,18 @@ export default class AccountController {
    */
   static async fetchAllAccounts(req, res) {
     if (req.decoded.type === 'staff' || req.decoded.isadmin) {
-      const allAccounts = await accounts.selectAll(['*']);
+      if (isEmpty(req.query)) {
+        const allAccounts = await accounts.selectAll(['*']);
+        return res.status(200).json({
+          status: 200,
+          data: allAccounts
+        });
+      }
+      const { status } = req.query;
+      const activeAccounts = await accounts.select(['*'], [`status='${status}'`]);
       return res.status(200).json({
         status: 200,
-        data: allAccounts
+        data: activeAccounts
       });
     }
     const userAccounts = await accounts.select(['*'], [`owneremail='${req.decoded.email}'`]);

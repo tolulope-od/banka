@@ -16,11 +16,12 @@ const {
 const {
   validateAccountCreation,
   validateEditAccount,
-  validateGetSingleAccount
+  validateGetSingleAccount,
+  validateGetAccounts
 } = AccountValidation;
 const { checkToken } = Authorization;
 
-router.get('/', checkToken, asyncErrorHandler(fetchAllAccounts));
+router.get('/', checkToken, validateGetAccounts, asyncErrorHandler(fetchAllAccounts));
 router.post('/', checkToken, validateAccountCreation, asyncErrorHandler(createAccount));
 router.patch(
   '/:accountNumber',
