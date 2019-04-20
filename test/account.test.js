@@ -195,6 +195,21 @@ describe('Account Route', () => {
       });
   });
 
+  it('Should fetch all dormant accounts under the bank for an authorized staff', done => {
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts?status=dormant`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.property('data');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
   it('Should not fetch accounts by their status if a user requests it', done => {
     chai
       .request(app)

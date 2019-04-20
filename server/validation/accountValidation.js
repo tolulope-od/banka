@@ -135,7 +135,9 @@ export default class AccountValidation {
         });
       }
 
-      if (req.query.status !== 'active') {
+      const { status } = req.query;
+
+      if (status !== 'active' && status !== 'dormant') {
         return res.status(400).json({
           status: 400,
           error: 'Account status must be either active or dormant'
