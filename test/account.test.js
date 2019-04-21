@@ -659,4 +659,54 @@ describe('Account Route', () => {
         done();
       });
   });
+
+  it('Should get an accounts transaction history (client)', done => {
+    const accountNumber = 4294354324;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}/transactions`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.property('data');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should get an accounts transaction history (admin)', done => {
+    const accountNumber = 8897654324;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}/transactions`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.property('data');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should return an error is a user tries to get the transaction history of a non-existent account', done => {
+    const accountNumber = 6893454001;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/accounts/${accountNumber}/transactions`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account not found');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
 });
