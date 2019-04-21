@@ -4,12 +4,12 @@ import Model from '../db';
 import Mail from '../utils/Mail';
 import { isEmpty } from '../validation/authValidation';
 import { users } from './AuthController';
-import { accounts } from './AccountController';
 
 dotenv.config();
 const { log } = console;
 
 const transactions = new Model(`transactions`);
+const accounts = new Model(`accounts`);
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',

@@ -5,6 +5,7 @@ import Model from '../db';
 dotenv.config();
 
 export const accounts = new Model(`accounts`);
+const transactions = new Model(`transactions`);
 
 export default class AccountController {
   /**
@@ -175,7 +176,7 @@ export default class AccountController {
    * @description Delete a single account
    * @param {Object} req The request object
    * @param {Object} res The response object
-   * @route Get /api/v1/accounts/:accountNumber
+   * @route DELETE /api/v1/accounts/:accountNumber
    * @returns {Object} status code, data and message properties
    * @access private Staff only
    */
@@ -201,6 +202,51 @@ export default class AccountController {
     return res.status(401).json({
       status: 401,
       error: 'You are not authorized to delete an account'
+    });
+  }
+
+  /**
+   * @description Get an accounts transaction history
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route GET /api/v1/accounts/:accountNumber/transactions
+   * @returns {Object} status code, data and message properties
+   * @access private Staff and User
+   */
+  static async getTransactionHistory(req, res) {
+    const { accountNumber } = req.params;
+    const { id, type } = req.decoded;
+    const selectedAccount = await accounts.select(
+      ['*'],
+      [`accountnumber=${parseInt(accountNumber, 10)}`]
+    );
+
+    if (isEmpty(selectedAccount)) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account not found'
+      });
+    }
+
+    if (type === 'client') {
+      const accountTransactions = await transactions.select(
+        ['*'],
+        [`accountnumber=${parseInt(accountNumber, 10)} AND owner=${id}`]
+      );
+
+      return res.status(200).json({
+        status: 200,
+        data: accountTransactions
+      });
+    }
+    const accountTransactions = await transactions.select(
+      ['*'],
+      [`accountnumber=${parseInt(accountNumber, 10)}`]
+    );
+
+    return res.status(200).json({
+      status: 200,
+      data: accountTransactions
     });
   }
 }

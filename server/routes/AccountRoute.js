@@ -11,7 +11,8 @@ const {
   createAccount,
   editAccountStatus,
   getSingleAccount,
-  deleteAccount
+  deleteAccount,
+  getTransactionHistory
 } = AccountController;
 const {
   validateAccountCreation,
@@ -34,6 +35,12 @@ router.get(
   checkToken,
   validateGetSingleAccount,
   asyncErrorHandler(getSingleAccount)
+);
+router.get(
+  '/:accountNumber/transactions',
+  checkToken,
+  validateGetSingleAccount,
+  asyncErrorHandler(getTransactionHistory)
 );
 router.delete(
   '/:accountNumber',
