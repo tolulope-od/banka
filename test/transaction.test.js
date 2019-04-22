@@ -299,7 +299,7 @@ describe('Transaction Route', () => {
       });
   });
 
-  it('Shold not debit an account if the input is empty', done => {
+  it('Should not debit an account if the input is empty', done => {
     const debitTransaction = {
       debitAmount: ''
     };
@@ -380,6 +380,94 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.property('error')
           .eql('Debit transaction cannot be less than 1 Naira');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should get a single transaction for a client', done => {
+    const transactionId = 3;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/transactions/${transactionId}`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.nested.property('data[0].transactionid');
+        expect(res.body).to.have.nested.property('data[0].type');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should get a single transaction for a staff', done => {
+    const transactionId = 2;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/transactions/${transactionId}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.nested.property('data[0].transactionid');
+        expect(res.body).to.have.nested.property('data[0].type');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it("Should not let a user view a transaction that doesn't belong to them", done => {
+    const transactionId = 2;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/transactions/${transactionId}`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Transaction does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+
+  it("Should return an error if a staff tries to view a transaction that doesn't exist", done => {
+    const transactionId = 12;
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/transactions/${transactionId}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(404);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Transaction does not exist');
+        expect(res.status).to.equal(404);
+        done();
+      });
+  });
+
+  it('Should not return any data if the transactionId is not formatted properly', done => {
+    const transactionId = '12sw';
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/transactions/${transactionId}`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Transaction ID can only contain digits');
         expect(res.status).to.equal(400);
         done();
       });

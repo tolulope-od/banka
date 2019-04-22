@@ -52,7 +52,7 @@ const createTable = async () => {
     FOREIGN KEY(owner) REFERENCES users(id) ON DELETE CASCADE
   );
   CREATE TABLE IF NOT EXISTS transactions (
-    id SERIAL PRIMARY KEY,
+    transactionId SERIAL PRIMARY KEY,
     type VARCHAR NOT NULL,
     accountNumber BIGINT NOT NULL,
     owner INT NOT NULL,

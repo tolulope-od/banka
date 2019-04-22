@@ -81,7 +81,7 @@ export default class TransactionController {
       log(info);
     });
     const data = {
-      transactionId: newTransaction[0].id,
+      transactionId: newTransaction[0].transactionid,
       accountNumber,
       amount: newTransaction[0].amount,
       cashier: newTransaction[0].cashier,
@@ -96,10 +96,10 @@ export default class TransactionController {
   }
 
   /**
-   * @description Credit an account
+   * @description Debit an account
    * @param {Object} req The request object
    * @param {Object} res The response object
-   * @route POST /api/v1/transactions/<account-number>/credit
+   * @route POST /api/v1/transactions/<account-number>/debit
    * @returns {Object} status code, data and message properties
    * @access private Admin or staff only
    */
@@ -159,7 +159,7 @@ export default class TransactionController {
     );
     transporter.sendMail(emailNotif.getMailOptions(), (err, info) => err || info);
     const data = {
-      transactionId: newTransaction[0].id,
+      transactionId: newTransaction[0].transactionid,
       accountNumber,
       amount: newTransaction[0].amount,
       cashier: newTransaction[0].cashier,
@@ -170,6 +170,53 @@ export default class TransactionController {
       status: 200,
       data: [data],
       message: 'Account debited successfully'
+    });
+  }
+
+  /**
+   * @description View an account transaction
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route POST /api/v1/transactions/:transactionId
+   * @returns {Object} status code, data and message properties
+   * @access private Userr and Staff
+   */
+  static async getSpecificTransaction(req, res) {
+    const { transactionId } = req.params;
+    const { id, type } = req.decoded;
+    if (type === 'client') {
+      const userAccountTransaction = await transactions.select(
+        ['*'],
+        [`transactionid=${transactionId} AND owner=${id}`]
+      );
+
+      if (isEmpty(userAccountTransaction)) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Transaction does not exist'
+        });
+      }
+
+      return res.status(200).json({
+        status: 200,
+        data: userAccountTransaction
+      });
+    }
+
+    const userAccountTransaction = await transactions.select(
+      ['*'],
+      [`transactionid=${transactionId}`]
+    );
+
+    if (isEmpty(userAccountTransaction)) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Transaction does not exist'
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: userAccountTransaction
     });
   }
 }
