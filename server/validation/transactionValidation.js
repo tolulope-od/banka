@@ -86,4 +86,27 @@ export default class TransactionValidation {
 
     return next();
   }
+
+  /**
+   * @description Function to check that the input parameters for transactions are properly fillerd
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @param {Function} next Call back function
+   * @route GET /api/v1/transactions/:transactionId
+   *
+   * @returns {Object} status code and error message properties
+   * @access private
+   */
+  static validateGetSingleTransaction(req, res, next) {
+    const { transactionId } = req.params;
+    const isNum = /^\d+$/; // gotten from Scott Evernden on Stack Overflow
+    if (!isNum.test(transactionId)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Transaction ID can only contain digits'
+      });
+    }
+
+    return next();
+  }
 }
