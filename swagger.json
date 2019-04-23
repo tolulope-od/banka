@@ -1,6 +1,6 @@
 {
   "basePath": "/",
-  "host": "localhost:5000",
+  "host": "bankaa-app.herokuapp.com",
   "info": {
     "title": "Banka App",
     "version": "1.0.0",
@@ -497,6 +497,161 @@
         }
       }
     },
+    "/api/v1/accounts/{accountNumber}/transactions": {
+      "get": {
+        "tags": ["Accounts"],
+        "description": "View an account’s transaction history",
+        "summary": "View Account Transaction History",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "accountNumber",
+            "in": "path",
+            "required": true,
+            "description": "The account number's transactions to fetch"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "All transactions returned successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transactionId": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "accountNumber": {
+                        "type": "number"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "cashier": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      },
+                      "oldbalance": {
+                        "type": "number"
+                      },
+                      "newbalance": {
+                        "type": "number"
+                      },
+                      "createdon": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "transactionId",
+                      "type",
+                      "accountNumber",
+                      "owner",
+                      "type",
+                      "amount",
+                      "oldbalance",
+                      "newbalance",
+                      "createdon"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "transactionid": 1,
+                      "type": "credit",
+                      "accountnumber": "8897654324",
+                      "owner": 3,
+                      "cashier": 4,
+                      "amount": "400500.0",
+                      "oldbalance": "7264935.97",
+                      "newbalance": "7665435.97",
+                      "createdon": "2019-04-22T16:32:15.625Z"
+                    },
+                    {
+                      "transactionid": 2,
+                      "type": "debit",
+                      "accountnumber": "8897654324",
+                      "owner": 3,
+                      "cashier": 1,
+                      "amount": "100500.0",
+                      "oldbalance": "7264935.97",
+                      "newbalance": "7665435.97",
+                      "createdon": "2019-04-22T16:32:15.625Z"
+                    },
+                    {
+                      "transactionid": 4,
+                      "type": "credit",
+                      "accountnumber": "8897654324",
+                      "owner": 3,
+                      "cashier": 4,
+                      "amount": "500900.05",
+                      "oldbalance": "7665435.97",
+                      "newbalance": "8166336.02",
+                      "createdon": "2019-04-22T16:32:25.574Z"
+                    },
+                    {
+                      "transactionid": 5,
+                      "type": "debit",
+                      "accountnumber": "8897654324",
+                      "owner": 3,
+                      "cashier": 4,
+                      "amount": "90900.05",
+                      "oldbalance": "8166336.02",
+                      "newbalance": "8075435.97",
+                      "createdon": "2019-04-22T16:32:25.610Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when authorization token is invalid",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Token is invalid"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error when an unauthorized user tries to access a protected route",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 403
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Unauthorized! You must be logged in for that"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/accounts?status=active": {
       "get": {
         "tags": ["Accounts"],
@@ -878,7 +1033,7 @@
       "get": {
         "tags": ["Accounts"],
         "description": "Return a single user's bank account in the system",
-        "summary": "Fetch Single Bank Account",
+        "summary": "View an Account's details",
         "consumes": ["application/json"],
         "parameters": [
           {
