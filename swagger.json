@@ -59,40 +59,22 @@
         "consumes": ["application/json", "application/x-www-form-urlencoded"],
         "parameters": [
           {
-            "name": "firstName",
+            "name": "body",
             "in": "body",
             "required": true,
-            "description": "First Name of the User"
-          },
-          {
-            "name": "lastName",
-            "in": "body",
-            "required": true,
-            "description": "Last Name of the User"
-          },
-          {
-            "name": "email",
-            "in": "body",
-            "required": true,
-            "description": "Email of the User"
-          },
-          {
-            "name": "password",
-            "in": "body",
-            "required": true,
-            "description": "Password of the User"
-          },
-          {
-            "name": "password2",
-            "in": "body",
-            "required": true,
-            "description": "Confirm password for the User"
+            "description": "The request body containing all required, first name, last name, email and password fields required for registration",
+            "example": {
+              "firstName": "Albus",
+              "lastName": "Dumbledore",
+              "email": "albus@hogwarts.com",
+              "password": "thephoenix"
+            }
           }
         ],
         "produces": ["application/json"],
         "responses": {
           "201": {
-            "description": "Successful user registration",
+            "description": "Successful User Registration",
             "schema": {
               "type": "object",
               "properties": {
@@ -101,37 +83,44 @@
                   "example": 201
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJkYXJ0aEB0aGVlbXBpcmUuY29tIiwiaWF0IjoxNTU0OTA4MzMxLCJleHAiOjE1NTQ5MTE5MzF9.OXvz8qfUIoqAurpvs1DxM4oEyjP-hxzKM_iQetAE3q0"
-                    },
-                    "id": {
-                      "type": "number",
-                      "example": 5
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "Darth"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "Vader"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "darth@theempire.com"
-                    },
-                    "type": {
-                      "type": "string",
-                      "example": "staff"
-                    },
-                    "createdAt": {
-                      "type": "string",
-                      "example": "2019-04-10T14:58:51.810Z"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "number"
+                      },
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      }
                     }
-                  }
+                  },
+                  "example": [
+                    {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJzbmFwZUBob2d3YXJ0cy5jb20iLCJ0eXBlIjoiY2xpZW50IiwiZmlyc3ROYW1lIjoiU2V2ZXJ1cyIsImxhc3ROYW1lIjoiU25hcGUiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU1OTUwNjU1LCJleHAiOjE1NTU5NTQyNTV9.C04ZzO2jQy-87NTURx2yPg63dsI88pCxG4DqPH8sZLQ",
+                      "id": 6,
+                      "firstName": "Severus",
+                      "lastName": "Snape",
+                      "email": "snape@hogwarts.com",
+                      "type": "client",
+                      "createdAt": "2019-04-22T16:30:55.066Z"
+                    }
+                  ]
                 },
                 "message": {
                   "type": "string",
@@ -141,7 +130,7 @@
             }
           },
           "400": {
-            "description": "Failed user registration when a required field is missing",
+            "description": "Required Field Missing",
             "schema": {
               "type": "object",
               "properties": {
@@ -157,7 +146,7 @@
             }
           },
           "409": {
-            "description": "Failed user registration when the user already exists",
+            "description": "Duplicate Email",
             "schema": {
               "type": "object",
               "properties": {
@@ -183,22 +172,17 @@
         "consumes": ["application/json", "application/x-www-form-urlencoded"],
         "parameters": [
           {
-            "name": "email",
+            "name": "body",
             "in": "body",
             "required": true,
-            "description": "Email of the User"
-          },
-          {
-            "name": "password",
-            "in": "body",
-            "required": true,
-            "description": "Password of the User"
+            "description": "Email and Password of Returning the User",
+            "example": { "email": "someexisting@user.com", "password": "examplePassword1" }
           }
         ],
         "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "Successful login",
+            "description": "Successful User Login",
             "schema": {
               "type": "object",
               "properties": {
@@ -207,33 +191,40 @@
                   "example": 200
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0aG9yQGF2ZW5nZXJzLmNvbSIsInR5cGUiOiJjbGllbnQiLCJmaXJzdE5hbWUiOiJUaG9yIiwibGFzdE5hbWUiOiJPZGluc29uIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU1NDkwODMzMSwiZXhwIjoxNTU0OTExOTMxfQ.SrgxrGmQ6sBwhl-BTH_kYXCrE7gTVTElFeVxxKGo1Zw"
-                    },
-                    "id": {
-                      "type": "number",
-                      "example": 2
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "Thor"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "Odinson"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "thor@avengers.com"
-                    },
-                    "type": {
-                      "type": "string",
-                      "example": "client"
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "number"
+                      },
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
                     }
-                  }
+                  },
+                  "example": [
+                    {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJkYXJ0aEB0aGVlbXBpcmUuY29tIiwidHlwZSI6ImNsaWVudCIsImZpcnN0TmFtZSI6IkRhcnRoIiwibGFzdE5hbWUiOiJWYWRlciIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NTU5NTA2NTUsImV4cCI6MTU1NTk1NDI1NX0.JlfF8g1YUX8mZSgIlud17CMAfUddONImk9nbqxsJm4Q",
+                      "id": 5,
+                      "firstName": "Darth",
+                      "lastName": "Vader",
+                      "email": "darth@theempire.com",
+                      "type": "client"
+                    }
+                  ]
                 },
                 "message": {
                   "type": "string",
@@ -397,9 +388,11 @@
         "consumes": ["application/json"],
         "parameters": [
           {
-            "name": "type",
+            "name": "body",
             "in": "body",
-            "required": true
+            "required": true,
+            "example": { "type": "current" },
+            "description": "The type of account to be created"
           }
         ],
         "produces": ["application/json"],
@@ -414,33 +407,53 @@
                   "example": 201
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "accountNumber": {
-                      "type": "number",
-                      "example": 9427914582
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "number"
+                      },
+                      "createdOn": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "balance": {
+                        "type": "number"
+                      }
                     },
-                    "firstName": {
-                      "type": "string",
-                      "example": "Thor"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "Odinson"
-                    },
-                    "email": {
-                      "type": "string",
-                      "example": "thor@avengers.com"
-                    },
-                    "type": {
-                      "type": "string",
-                      "example": "savings"
-                    },
-                    "openingBalance": {
-                      "type": "number",
-                      "example": 0
+                    "required": [
+                      "id",
+                      "accountNumber",
+                      "createdOn",
+                      "owner",
+                      "type",
+                      "status",
+                      "balance"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 1,
+                      "accountNumber": 5563847290,
+                      "createdOn": "2019-02-11T23:00:00.000Z",
+                      "owner": 2,
+                      "type": "current",
+                      "status": "active",
+                      "balance": 0.0
                     }
-                  }
+                  ]
                 },
                 "message": {
                   "type": "string",
@@ -484,6 +497,234 @@
         }
       }
     },
+    "/api/v1/accounts?status=active": {
+      "get": {
+        "tags": ["Accounts"],
+        "description": "Return all active accounts in the system",
+        "summary": "Get All Active Bank Accounts",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "All accounts returned successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "number"
+                      },
+                      "createdOn": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "balance": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "accountNumber",
+                      "createdOn",
+                      "owner",
+                      "type",
+                      "status",
+                      "balance"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 1,
+                      "accountNumber": 5563847290,
+                      "createdOn": "2019-02-11T23:00:00.000Z",
+                      "owner": 2,
+                      "type": "current",
+                      "status": "active",
+                      "balance": 349876358.08
+                    },
+                    {
+                      "id": 3,
+                      "accountNumber": 9427914582,
+                      "createdOn": "2019-04-10T14:58:51.203Z",
+                      "owner": 2,
+                      "type": "savings",
+                      "status": "active",
+                      "balance": 0
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when authorization token is invalid",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Token is invalid"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error when an unauthorized user tries to access a protected route",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 403
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Unauthorized! You must be logged in for that"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/accounts?status=dormant": {
+      "get": {
+        "tags": ["Accounts"],
+        "description": "Return all dormant accounts in the system",
+        "summary": "Get All Dormant Bank Accounts",
+        "consumes": ["application/json"],
+        "parameters": [],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "All accounts returned successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "number"
+                      },
+                      "createdOn": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "balance": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "accountNumber",
+                      "createdOn",
+                      "owner",
+                      "type",
+                      "status",
+                      "balance"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 4,
+                      "accountNumber": 1458294279,
+                      "createdOn": "2019-02-11T23:00:00.000Z",
+                      "owner": 3,
+                      "type": "current",
+                      "status": "dormant",
+                      "balance": 349876358.08
+                    },
+                    {
+                      "id": 5,
+                      "accountNumber": 9427914582,
+                      "createdOn": "2019-04-10T14:58:51.203Z",
+                      "owner": 4,
+                      "type": "savings",
+                      "status": "dormant",
+                      "balance": 43323.09
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when authorization token is invalid",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Token is invalid"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error when an unauthorized user tries to access a protected route",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 403
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Unauthorized! You must be logged in for that"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/accounts/{accountNumber}": {
       "patch": {
         "tags": ["Accounts"],
@@ -494,12 +735,16 @@
           {
             "name": "accountNumber",
             "in": "path",
-            "required": true
+            "required": true,
+            "example": 1263847087,
+            "description": "Account Number of the account to be edited"
           },
           {
             "name": "status",
             "in": "body",
-            "required": true
+            "required": true,
+            "example": { "status": "dormant" },
+            "description": "The new status of the account"
           }
         ],
         "produces": ["application/json"],
@@ -514,21 +759,52 @@
                   "example": 200
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "accountNumber": {
-                      "type": "number",
-                      "example": 5563847290
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "number"
+                      },
+                      "createdOn": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "balance": {
+                        "type": "number"
+                      }
                     },
-                    "status": {
-                      "type": "string",
-                      "example": "dormant"
-                    },
-                    "owner": {
-                      "type": "number",
-                      "example": 2
+                    "required": [
+                      "id",
+                      "accountNumber",
+                      "createdOn",
+                      "owner",
+                      "type",
+                      "status",
+                      "balance"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 4,
+                      "accountNumber": 1263847087,
+                      "owner": 2,
+                      "type": "current",
+                      "status": "dormant",
+                      "balance": 6358.08
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -623,33 +899,53 @@
                   "example": 200
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "number",
-                      "example": 2
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "number"
+                      },
+                      "createdOn": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "balance": {
+                        "type": "number"
+                      }
                     },
-                    "accountNumber": {
-                      "type": "string",
-                      "example": "8897654324"
-                    },
-                    "owner": {
-                      "type": "number",
-                      "example": 3
-                    },
-                    "balance": {
-                      "type": "number",
-                      "example": 7665435.97
-                    },
-                    "createdOn": {
-                      "type": "string",
-                      "example": "2018-05-21T23:00:00.000Z"
-                    },
-                    "type": {
-                      "type": "string",
-                      "example": "savings"
+                    "required": [
+                      "id",
+                      "accountNumber",
+                      "createdOn",
+                      "owner",
+                      "type",
+                      "status",
+                      "balance"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 3,
+                      "accountNumber": 9427914582,
+                      "createdOn": "2019-04-10T14:58:51.203Z",
+                      "owner": 2,
+                      "type": "savings",
+                      "status": "active",
+                      "balance": 8943898.07
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -696,13 +992,14 @@
           {
             "name": "accountNumber",
             "in": "path",
-            "required": true
+            "required": true,
+            "description": "The number of the account to be deleted must be specified in the request parameters"
           }
         ],
         "produces": ["application/json"],
         "responses": {
-          "description": "Success when an account is deleted",
           "200": {
+            "description": "Success when an account is deleted",
             "schema": {
               "type": "object",
               "properties": {
@@ -752,6 +1049,150 @@
         }
       }
     },
+    "/api/v1/user/{userEmail}/accounts": {
+      "get": {
+        "tags": ["Accounts"],
+        "description": "Fetch all accounts a user owns",
+        "summary": "Get all accounts a user owns",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "path",
+            "required": true,
+            "example": "thor@avengers.com",
+            "description": "The user who's accounts will be retrieved must have the email specified in the request parameters"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Success when an accounts for a user are found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "accountnumber": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "balance": {
+                        "type": "string"
+                      },
+                      "owneremail": {
+                        "type": "string"
+                      },
+                      "createdon": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "accountnumber",
+                      "owner",
+                      "type",
+                      "status",
+                      "balance",
+                      "owneremail",
+                      "createdon"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 3,
+                      "accountnumber": "8894354324",
+                      "owner": 3,
+                      "type": "current",
+                      "status": "draft",
+                      "balance": "43435.97",
+                      "owneremail": "olegunnar@manutd.com",
+                      "createdon": "2019-04-22T16:30:45.163Z"
+                    },
+                    {
+                      "id": 2,
+                      "accountnumber": "8897654324",
+                      "owner": 3,
+                      "type": "savings",
+                      "status": "draft",
+                      "balance": "8075435.97",
+                      "owneremail": "olegunnar@manutd.com",
+                      "createdon": "2019-04-22T16:30:45.163Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error if an invalid email is provided",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Please provide a valid email address"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Error when a non-staff user tries to get list of accounts of other users",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 403
+                },
+                "error": {
+                  "type": "string",
+                  "example": "You are not authorized to carry out that action"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error when the accounts owner does not exist in the db",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/transactions/{accountNumber}/credit": {
       "post": {
         "tags": ["Transactions"],
@@ -762,53 +1203,63 @@
           {
             "name": "accountNumber",
             "in": "path",
-            "required": true
+            "required": true,
+            "example": 8897654324,
+            "description": "Account number of the account to be credited"
           },
           {
-            "name": "creditAmount",
+            "name": "body",
             "in": "body",
-            "required": true
+            "required": true,
+            "example": { "creditAmount": 39000.98 }
           }
         ],
         "produces": ["application/json"],
         "responses": {
-          "description": "Response when an account has been credited successfully",
-          "201": {
+          "200": {
+            "description": "Response when an account has been credited successfully",
             "schema": {
               "type": "object",
               "properties": {
                 "status": {
                   "type": "number",
-                  "example": 201
+                  "example": 200
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "transactionId": {
-                      "type": "number",
-                      "example": 4
-                    },
-                    "accountNumber": {
-                      "type": "string",
-                      "example": "8897654324"
-                    },
-                    "amount": {
-                      "type": "number",
-                      "example": 500900.05
-                    },
-                    "cashier": {
-                      "type": "number",
-                      "example": 4
-                    },
-                    "transactionType": {
-                      "type": "string",
-                      "example": "credit"
-                    },
-                    "accountBalance": {
-                      "type": "number",
-                      "example": 8166336.02
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transactionId": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "string"
+                      },
+                      "cashier": {
+                        "type": "number"
+                      },
+                      "transactionType": {
+                        "type": "string"
+                      },
+                      "accountBalance": {
+                        "type": "string"
+                      }
                     }
-                  }
+                  },
+                  "example": [
+                    {
+                      "transactionId": 4,
+                      "accountNumber": "8897654324",
+                      "amount": "500900.05",
+                      "cashier": 4,
+                      "transactionType": "credit",
+                      "accountBalance": "8166336.02"
+                    }
+                  ]
                 },
                 "message": {
                   "type": "string",
@@ -878,53 +1329,66 @@
           {
             "name": "accountNumber",
             "in": "path",
-            "required": true
+            "required": true,
+            "example": 8897654324,
+            "description": "Account number of the account to be debited"
           },
           {
             "name": "debitAmount",
             "in": "body",
-            "required": true
+            "required": true,
+            "example": {
+              "debitAmount": 39000.98
+            },
+            "description": "The amount to be debited from the account"
           }
         ],
         "produces": ["application/json"],
         "responses": {
-          "201": {
+          "200": {
             "description": "Response when an account is debited succesffuly",
             "schema": {
               "type": "object",
               "properties": {
                 "status": {
                   "type": "number",
-                  "example": 201
+                  "example": 200
                 },
                 "data": {
-                  "type": "object",
-                  "properties": {
-                    "transactionId": {
-                      "type": "number",
-                      "example": 4
-                    },
-                    "accountNumber": {
-                      "type": "string",
-                      "example": "8897654324"
-                    },
-                    "amount": {
-                      "type": "number",
-                      "example": 90900.05
-                    },
-                    "cashier": {
-                      "type": "number",
-                      "example": 4
-                    },
-                    "transactionType": {
-                      "type": "string",
-                      "example": "debit"
-                    },
-                    "accountBalance": {
-                      "type": "number",
-                      "example": 8075435.97
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transactionId": {
+                        "type": "number"
+                      },
+                      "accountNumber": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "string"
+                      },
+                      "cashier": {
+                        "type": "number"
+                      },
+                      "transactionType": {
+                        "type": "string"
+                      },
+                      "accountBalance": {
+                        "type": "string"
+                      }
                     }
-                  }
+                  },
+                  "example": [
+                    {
+                      "transactionId": 5,
+                      "accountNumber": "8897654324",
+                      "amount": "90900.05",
+                      "cashier": 4,
+                      "transactionType": "debit",
+                      "accountBalance": "8075435.97"
+                    }
+                  ]
                 },
                 "message": {
                   "type": "string",
@@ -999,14 +1463,154 @@
           }
         }
       }
+    },
+    "/api/v1/transactions/{transactionId}": {
+      "get": {
+        "tags": ["Transactions"],
+        "description": "Get a single transaction record",
+        "summary": "Fetch a single transaction",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "transactionId",
+            "in": "path",
+            "required": true,
+            "example": 2,
+            "description": "The ID of the transaction record we wish to view"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Response when transaction is found and returned",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transactionid": {
+                        "type": "number"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "accountnumber": {
+                        "type": "string"
+                      },
+                      "owner": {
+                        "type": "number"
+                      },
+                      "cashier": {
+                        "type": "number"
+                      },
+                      "amount": {
+                        "type": "string"
+                      },
+                      "oldbalance": {
+                        "type": "string"
+                      },
+                      "newbalance": {
+                        "type": "string"
+                      },
+                      "createdon": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "transactionid": 3,
+                      "type": "credit",
+                      "accountnumber": "5563847290",
+                      "owner": 2,
+                      "cashier": 4,
+                      "amount": "400500.0",
+                      "oldbalance": "7264935.97",
+                      "newbalance": "7665435.97",
+                      "createdon": "2019-04-22T16:30:45.163Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Response when the ID is not correctly formatted",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Transaction ID can only contain digits"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Response when an the transaction is not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Transaction does not exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "*": {
+      "get": {
+        "tags": ["Errors"],
+        "description": "Error Returned for undefined routes",
+        "summary": "Undefined Route Error",
+        "parameters": [],
+        "produces": ["application/json"],
+        "responses": {
+          "404": {
+            "description": "Response when an undefined route is accessed",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Not Found"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
-    "basicAuth": {
-      "type": "basic",
+    "bearerAuth": {
+      "type": "apiKey",
       "name": "Authorization",
-      "scheme": "",
-      "in": "header"
+      "scheme": "bearer",
+      "in": "header",
+      "description": "For accessing the API routes other than Sign In and Sign Up, a valid JWT must be added in all the requests in the the Authorization Header"
     }
   },
   "swagger": "2.0"
