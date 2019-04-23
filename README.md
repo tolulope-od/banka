@@ -17,16 +17,17 @@ https://tolulope-od.github.io/banka/
 
 1. <a href="#hosted-app">Hosted App</a>
 2. <a href="#pivotal-tracker-board">Pivotal Tracker Board</a>
-3. <a href="#built-with">Built With</a>
-4. <a href="#getting-started">Getting Started</a>
-5. <a href="#application-features">Application Features</a>
-6. <a href="#installation">Installation</a>
-7. <a href="#running-tests">Running Tests</a>
-8. <a href="#deployment">Deployment</a>
-9. <a href="#api-endpoints">API endpoints</a>
-10. <a href="#license">License</a>
-11. <a href="#author">Author</a>
-12. <a href="#acknowledgments">Acknowledgments</a>
+3. <a href="#api-documentation">API Documentation</a>
+4. <a href="#built-with">Built With</a>
+5. <a href="#getting-started">Getting Started</a>
+6. <a href="#application-features">Application Features</a>
+7. <a href="#installation">Installation</a>
+8. <a href="#running-tests">Running Tests</a>
+9. <a href="#deployment">Deployment</a>
+10. <a href="#api-endpoints">API endpoints</a>
+11. <a href="#license">License</a>
+12. <a href="#author">Author</a>
+13. <a href="#acknowledgments">Acknowledgments</a>
 
 ## Hosted App
 
@@ -36,12 +37,17 @@ https://bankaa-app.herokuapp.com
 
 https://www.pivotaltracker.com/n/projects/2319922
 
+## API Documentation
+
+https://bankaa-app.herokuapp.com/api-docs/
+
 ## Built With
 
 - [Node.js](https://nodejs.org/)
 - [Express](https://expressjs.com/)
 - [Html]()
 - [CSS]()
+- [Postgres](https://www.postgresql.org/)
 
 ## Getting Started
 
@@ -77,13 +83,13 @@ $ npm run dev
 
 When the development server is up and running (i.e displays a success message on your command line), you can test the server response by visiting the following endpoint using Postman:
 
-`GET localhost:5000/test` 
+`GET localhost:5000/`
 
 For a sample response from the server
 
 ## Running Tests
 
-Unit tests are available on this repository and dependencies to enable them work are included in the `package.json` file. To run unit tests, you can do the following: 
+Unit tests are available on this repository and dependencies to enable them work are included in the `package.json` file. To run unit tests, you can do the following:
 
 ```bash
 # Enter the project's directory
@@ -107,20 +113,20 @@ If you have Postman installed, you can test routes listed below. An example resp
 # on successful request to the sign in route /api/v1/auth/signin
 {
   "status": 200,
-  "data": {
+  "data": [{
     "token": "kjkskjhfdsjhf_o.jkshdjhsj",
     "id", 1,
     "firstName": "Kylo",
     "lastName": "Ren",
     "email": "kylo@theempire.com"
-  }
+  }]
 }
 ```
 
 ```bash
 # on errored request to the sign in route /api/v1/auth/signin
 {
-  "status": 400,
+  "status": 404,
   "error": "User not found"
 }
 ```
@@ -158,5 +164,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Tolulope Odueke**
 
 ## Acknowledgments
+
 - Brad Traversy - [MERN Stack Front To Back](https://www.udemy.com/mern-stack-front-to-back/)
 - Bolaji Olajide - [Intro to Building APIs](https://www.youtube.com/watch?v=WLIqvJzD9DE)
