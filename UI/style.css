@@ -1107,3 +1107,42 @@ form.search-area button {
     margin-left: -50px;
   }
 }
+
+@media only screen and (min-width: 1241px) and (max-width: 2560px) {
+  .main-content {
+    width: 80%;
+  }
+
+  .shortcut-btns {
+    max-width: 50%;
+  }
+
+  form.search-area input[type='text'] {
+    width: 250px;
+  }
+
+  .illustration {
+    width: 400px;
+    height: 400px;
+    margin-left: 10px;
+  }
+
+  .description-img {
+    width: 150px;
+    height: 250px;
+  }
+
+  .accnt-info-disp {
+    margin-bottom: 7%;
+  }
+
+  .dashboard {
+    margin-left: 20%;
+  }
+  .footer {
+    position: fixed;
+  }
+  .account-stats {
+    margin-left: -50px;
+  }
+}

@@ -11,6 +11,3 @@ before_script:
   - psql -c 'create database test_banka;' -U postgres
   - npm install nyc@13.2.0 coveralls cross-env -g
 after_script: cross-env NODE_ENV=test npm run coveralls
-cache:
-  directories:
-    - 'node_modules'
