@@ -168,6 +168,14 @@ body {
   right: auto;
 }
 
+.nav-area {
+  width: 72.8%;
+  border-bottom: 3px solid purple;
+  margin-left: 240px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
 .row .col {
   float: left;
   box-sizing: border-box;
@@ -406,9 +414,6 @@ button.dropdown-trigger:focus {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  border-bottom: 3px solid purple;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
 }
 
 .dash-nav-link {
@@ -945,6 +950,16 @@ td.user-info {
     flex-direction: column;
   }
 
+  .nav-area {
+    display: none;
+  }
+
+  .dashboard-links {
+    border-bottom: 3px solid purple;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
   table,
   thead,
   tbody,
@@ -1089,6 +1104,13 @@ td.user-info {
 
   .dashboard-links {
     width: 80%;
+    border-bottom: 3px solid purple;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .nav-area {
+    display: none;
   }
 
   .main-content {
@@ -1146,12 +1168,12 @@ td.user-info {
   }
 
   .accnt-info-disp {
-    width: 70%;
-    margin-left: 255px;
+    width: 71.8%;
+    margin-left: 17%;
   }
 
-  .profile-card {
-    margin-left: 20px;
+  .edit-profile {
+    width: 71.8%;
   }
 }
 
@@ -1164,16 +1186,21 @@ td.user-info {
     margin-left: 35px;
   }
 
-  .profile-card {
-    margin-left: 20px;
-  }
-
   .shortcut-btns {
-    max-width: 93.8%;
+    max-width: 94.6%;
   }
 
   .accnt-info-disp {
-    width: 71%;
-    margin-left: 300px;
+    width: 73%;
+    margin-left: 19%;
+  }
+
+  .nav-area {
+    width: 74%;
+    margin-left: 277px;
+  }
+
+  .edit-profile {
+    width: 71.8%;
   }
 }
