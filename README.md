@@ -160,15 +160,22 @@ $ npm run build
 
 ## API endpoints
 
-```
-POST  -> /api/v1/auth/signup
-POST  -> /api/v1/auth/signin
-POST  -> /api/v1/accounts
-PATCH  -> /api/v1/accounts/<account-number>
-DELETE  -> /api/v1/account/<account-number>
-POST  -> /api/v1/transactions/<account-number>/debit
-POST  -> /api/v1/transactions/<account-number>/credit
-```
+| Method   |                    Endpoint                     |                Description                 |        Access         |
+| :------- | :---------------------------------------------: | :----------------------------------------: | :-------------------: |
+| `POST`   |              `/api/v1/auth/signup`              |       Register a new user on the app       |        Clients        |
+| `POST`   |              `/api/v1/auth/signin`              |           Login an existing user           | Clients & Staff/Admin |
+| `POST`   |               `/api/v1/accounts`                |             Create an account              |        Client         |
+| `PATCH`  |       `/api/v1/accounts/<account-number>`       |          Edit an accounts status           |      Admin/Staff      |
+| `DELETE` |       `/api/v1/account/<account-number>`        |             Delete an account              |      Admin/Staff      |
+| `POST`   |  `/api/v1/transactions/<account-number>/debit`  |              Debit an account              |      Admin/Staff      |
+| `POST`   | `/api/v1/transactions/<account-number>/credit`  |             Credit an account              |      Admin/Staff      |
+| `GET`    | `api/v1/accounts/<account-number>/transactions` |   View an account's Transaction history    | Clients & Admin/Staff |
+| `GET`    |   `api/v1/user/<user-email-address>/accounts`   | View all accounts owned by a specific user | Clients & Admin/Staff |
+| `GET`    |       `api/v1/accounts/<account-number>`        |      View aspecific account's details      | Clients & Admin/Staff |
+| `GET`    |                `api/v1/accounts`                |      View a list of all bank accounts      |      Admin/Staff      |
+| `GET`    |         `api/v1/accounts?status=active`         |  View a list of all active bank accounts   |      Admin/Staff      |
+| `GET`    |        `api/v1/accounts?status=dormant`         |  View a list of all dormant bank accounts  |      Admin/Staff      |
+| `GET`    |   `api/v1/user/<user-email-address>/accounts`   | View all accounts owned by a specific user |      Admin/Staff      |
 
 Refer to the [API Documentation](https://bankaa-app.herokuapp.com/api-docs/) for detailed information on all endpoints
 
