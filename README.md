@@ -51,12 +51,25 @@ https://bankaa-app.herokuapp.com/api-docs/
 
 ## Getting Started
 
+**Development**
+
 To clone and run this application, you'll need [Git](https://git-scm.com) installed on your computer. From your command line:
 
 ```bash
 # Clone this repository
 $ git clone https://github.com/tolulope-od/banka.git
 ```
+
+**Production**
+
+This application's frontend is served on [this](https://tolulope-od.github.io/banka/) url and accomodates two types of users; a **client** and an **admin/staff**. All types of users share the same login page. The idea is to check the type of user upon login and then redirect to the appropriate pages. A sample admin login credential as it's stored in the database is:
+
+```gherkin
+email: obiwan@therebellion.com
+password: password123
+```
+
+Upon successful login, the sole admin has the ability to add other staff and/or admin
 
 ## Application Features
 
@@ -113,13 +126,15 @@ If you have Postman installed, you can test routes listed below. An example resp
 # on successful request to the sign in route /api/v1/auth/signin
 {
   "status": 200,
-  "data": [{
-    "token": "kjkskjhfdsjhf_o.jkshdjhsj",
-    "id", 1,
-    "firstName": "Kylo",
-    "lastName": "Ren",
-    "email": "kylo@theempire.com"
-  }]
+  "data": [
+    {
+      "token": "kjkskjhfdsjhf_o.jkshdjhsj",
+      "id", 1,
+      "firstName": "Kylo",
+      "lastName": "Ren",
+      "email": "kylo@theempire.com"
+    }
+  ]
 }
 ```
 
@@ -146,14 +161,16 @@ $ npm run build
 ## API endpoints
 
 ```
-POST Request -> localhost:5000/api/v1/auth/signup
-POST Request -> localhost:5000/api/v1/auth/signin
-POST Request -> localhost:5000/api/v1/accounts
-PATCH Request -> localhost:5000/api/v1/accounts/<account-number>
-DELETE Request -> localhost:5000/api/v1/account/<account-number>
-POST Request -> localhost:5000/api/v1/transactions/<account-number>/debit
-POST Request -> localhost:5000/api/v1/transactions/<account-number>/credit
+POST  -> /api/v1/auth/signup
+POST  -> /api/v1/auth/signin
+POST  -> /api/v1/accounts
+PATCH  -> /api/v1/accounts/<account-number>
+DELETE  -> /api/v1/account/<account-number>
+POST  -> /api/v1/transactions/<account-number>/debit
+POST  -> /api/v1/transactions/<account-number>/credit
 ```
+
+Refer to the [API Documentation](https://bankaa-app.herokuapp.com/api-docs/) for detailed information on all endpoints
 
 ## License
 
