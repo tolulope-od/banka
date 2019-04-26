@@ -1,12 +1,13 @@
 import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
+import Debug from 'debug';
 import Transaction from '../dummyModels/Transaction';
 import Mail from '../utils/Mail';
 import dummyData from '../utils/dummyData';
 import { isEmpty } from '../validation/authValidation';
 
 dotenv.config();
-const { log } = console;
+const debug = Debug('dev');
 const { transactions, accounts, users } = dummyData;
 
 const transporter = nodemailer.createTransport({
@@ -71,9 +72,9 @@ export default class TransactionController {
     const emailNotif = new Mail(transaction, accountOwner, accountNumber, accountToCredit);
     transporter.sendMail(emailNotif.getMailOptions(), (err, info) => {
       if (err) {
-        log(err);
+        debug(err);
       }
-      log(info);
+      debug(info);
     });
     const data = {
       transactionId: transaction.id,
@@ -151,9 +152,9 @@ export default class TransactionController {
     const emailNotif = new Mail(transaction, accountOwner, accountNumber, accountToDebit);
     transporter.sendMail(emailNotif.getMailOptions(), (err, info) => {
       if (err) {
-        log(err);
+        debug(err);
       }
-      log(info);
+      debug(info);
     });
     const data = {
       transactionId: transaction.id,
