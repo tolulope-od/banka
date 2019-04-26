@@ -49,7 +49,7 @@ export default class TransactionController {
       });
     }
 
-    const { balance, owner } = accountToCredit[0];
+    const { balance, owner, status } = accountToCredit[0];
 
     if (req.decoded.id === owner) {
       return res.status(401).json({
@@ -57,6 +57,14 @@ export default class TransactionController {
         error: 'You are not allowed to carry out that action'
       });
     }
+
+    if (status === 'dormant') {
+      return res.status(400).json({
+        status: 400,
+        error: 'Account is dormant, please activate it to carry out a transaction'
+      });
+    }
+
     const accountOwner = await users.select(['*'], [`id='${owner}'`]);
     const newBalance = parseFloat(balance) + parseFloat(creditAmount);
     const newTransaction = await transactions.create(
@@ -131,12 +139,19 @@ export default class TransactionController {
       });
     }
 
-    const { balance, owner } = accountToDebit[0];
+    const { balance, owner, status } = accountToDebit[0];
 
     if (req.decoded.id === owner) {
       return res.status(401).json({
         status: 401,
         error: 'You are not allowed to carry out that action'
+      });
+    }
+
+    if (status === 'dormant') {
+      return res.status(400).json({
+        status: 400,
+        error: 'Account is dormant, please activate it to carry out a transaction'
       });
     }
 

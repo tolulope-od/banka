@@ -82,7 +82,7 @@ const createTable = async () => {
   INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
   VALUES(4294354324, 2, 'thor@avengers.com', 'current', 'draft', 43435.97);
   INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
-  VALUES(6754354123, 4, 'kyloren@vader.com', 'savings', 'active', 321324.7);
+  VALUES(6754354123, 4, 'kyloren@vader.com', 'savings', 'dormant', 321324.7);
   INSERT INTO transactions (type, accountNumber, owner, cashier, amount, oldBalance, newBalance)
   VALUES('credit', 8897654324, 3, 4, 400500.0, 7264935.97, 7665435.97);
   INSERT INTO transactions (type, accountNumber, owner, cashier, amount, oldBalance, newBalance)
