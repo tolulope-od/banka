@@ -12,6 +12,7 @@ const API_PREFIX = '/api/v1';
 
 let authToken;
 let staffAuthToken;
+let nonAdminStaffToken;
 const fakeAuthToken = 'jkkjkjkksdugvydy_.kdhdyuuuwll';
 /**
  * @description Test for accounts endpoint
@@ -43,6 +44,21 @@ describe('Account Route', () => {
       .send(staff)
       .end((err, res) => {
         staffAuthToken = res.body.data[0].token;
+        done();
+      });
+  });
+
+  before(done => {
+    const staff = {
+      email: 'kyloren@vader.com',
+      password: 'password123'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/auth/signin`)
+      .send(staff)
+      .end((err, res) => {
+        nonAdminStaffToken = res.body.data[0].token;
         done();
       });
   });
@@ -606,7 +622,7 @@ describe('Account Route', () => {
       });
   });
 
-  it('Should allow a staff user to do delete an account', done => {
+  it('Should allow an Admin staff user to do delete an account', done => {
     const accountNumber = 5563847290;
     chai
       .request(app)
@@ -620,6 +636,24 @@ describe('Account Route', () => {
           .to.have.property('message')
           .eql('Account deleted successfully');
         expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not allow an non-dmin staff user to do delete an account', done => {
+    const accountNumber = 5563847290;
+    chai
+      .request(app)
+      .delete(`${API_PREFIX}/accounts/${accountNumber}`)
+      .set('Authorization', nonAdminStaffToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('You are not authorized to delete an account');
+        expect(res.status).to.equal(401);
         done();
       });
   });
