@@ -50,6 +50,13 @@ export default class TransactionController {
     }
 
     const { balance, owner } = accountToCredit[0];
+
+    if (req.decoded.id === owner) {
+      return res.status(401).json({
+        status: 401,
+        error: 'You are not allowed to carry out that action'
+      });
+    }
     const accountOwner = await users.select(['*'], [`id='${owner}'`]);
     const newBalance = parseFloat(balance) + parseFloat(creditAmount);
     const newTransaction = await transactions.create(
@@ -125,6 +132,13 @@ export default class TransactionController {
     }
 
     const { balance, owner } = accountToDebit[0];
+
+    if (req.decoded.id === owner) {
+      return res.status(401).json({
+        status: 401,
+        error: 'You are not allowed to carry out that action'
+      });
+    }
 
     if (debitAmount > balance) {
       return res.status(400).json({

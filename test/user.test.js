@@ -179,16 +179,16 @@ describe('User Routes', () => {
       .end((err, res) => {
         expect(res.body)
           .to.have.property('status')
-          .eql(400);
+          .eql(409);
         expect(res.body)
           .to.have.property('error')
           .eql('User is already a staff');
-        expect(res.status).to.equal(400);
+        expect(res.status).to.equal(409);
         done();
       });
   });
 
-  it('Should return an error if the user being upgraded does not exisit', done => {
+  it('Should return an error if the user being upgraded does not exist', done => {
     const userToUpdate = {
       userEmail: 'olesgunnars@manutd.com'
     };
