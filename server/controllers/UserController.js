@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { accounts } from './AccountController';
 import { users } from './AuthController';
 import { isEmpty } from '../validation/authValidation';
@@ -43,12 +45,12 @@ export default class UserController {
   }
 
   /**
-   * @description Get a all accounts owned by a user
+   * @description Upgrade a client to a staff
    * @param {Object} req The request object
    * @param {Object} res The response object
-   * @route Get /api/v1/users/:user-email-address/accounts
+   * @route PATCH /api/v1/users/
    * @returns {Object} status code, data and message properties
-   * @access private Staff and Client
+   * @access private Admin
    */
   static async adminAddStaff(req, res) {
     if (req.decoded.isAdmin) {
@@ -79,6 +81,66 @@ export default class UserController {
 
     return res.status(403).json({
       status: 403,
+      error: 'You are not allowed to carry out that action'
+    });
+  }
+
+  /**
+   * @description Create a staff
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route POST /api/v1/users/
+   * @returns {Object} status code, data and message properties
+   * @access private Admin
+   */
+  static async createStaff(req, res) {
+    if (req.decoded.isAdmin) {
+      const { firstName, lastName, email, admin } = req.body;
+      const existingUser = await users.select(['email'], [`email='${email}'`]);
+      if (existingUser.length > 0) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Staff already exists'
+        });
+      }
+      let isAdmin = true;
+      if (isEmpty(admin)) {
+        isAdmin = false;
+      }
+      const hashed = bcrypt.hashSync(lastName, 10);
+      const newUser = await users.create(
+        ['firstName', 'lastName', 'email', 'password', 'isAdmin', 'type'],
+        [`'${firstName}', '${lastName}', '${email}', '${hashed}', ${isAdmin}, 'staff'`]
+      );
+
+      const payload = {
+        id: newUser[0].id,
+        email: newUser[0].email,
+        type: newUser[0].type,
+        firstName: newUser[0].firstname,
+        lastName: newUser[0].lastname,
+        isAdmin: newUser[0].isadmin
+      };
+      const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1hr' });
+      const data = {
+        token,
+        id: newUser[0].id,
+        firstName: newUser[0].firstname,
+        lastName: newUser[0].lastname,
+        email: newUser[0].email,
+        type: newUser[0].type,
+        isAdmin: newUser[0].isadmin,
+        createdAt: newUser[0].createdat
+      };
+      return res.status(201).json({
+        status: 201,
+        data: [data],
+        message: 'Staff created successfully'
+      });
+    }
+
+    return res.status(401).json({
+      status: 401,
       error: 'You are not allowed to carry out that action'
     });
   }
