@@ -10,7 +10,6 @@ import swaggerDoc from './swagger.json';
 // Import route
 import routes from './server/routes';
 
-const { log } = console;
 const debug = Debug('dev');
 
 // Set up the app with express
@@ -38,7 +37,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // Handle errors
 app.use((err, req, res, next) => {
-  log(err.stack);
+  debug(err.stack);
   res.status(500).json({ error: "Something broke, don't worry, it's not you, it's us" });
   next();
 });
