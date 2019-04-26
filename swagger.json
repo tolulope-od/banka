@@ -23,6 +23,10 @@
     {
       "name": "Transactions",
       "description": "API Endpoints for transactions in the app"
+    },
+    {
+      "name": "User",
+      "description": "API Endpoints for user actions in the app"
     }
   ],
   "schemes": ["http"],
@@ -176,7 +180,10 @@
             "in": "body",
             "required": true,
             "description": "Email and Password of Returning the User",
-            "example": { "email": "someexisting@user.com", "password": "examplePassword1" }
+            "example": {
+              "email": "someexisting@user.com",
+              "password": "examplePassword1"
+            }
           }
         ],
         "produces": ["application/json"],
@@ -391,7 +398,9 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "example": { "type": "current" },
+            "example": {
+              "type": "current"
+            },
             "description": "The type of account to be created"
           }
         ],
@@ -898,7 +907,9 @@
             "name": "status",
             "in": "body",
             "required": true,
-            "example": { "status": "dormant" },
+            "example": {
+              "status": "dormant"
+            },
             "description": "The new status of the account"
           }
         ],
@@ -1366,7 +1377,9 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "example": { "creditAmount": 39000.98 }
+            "example": {
+              "creditAmount": 39000.98
+            }
           }
         ],
         "produces": ["application/json"],
@@ -1724,6 +1737,162 @@
                 "error": {
                   "type": "string",
                   "example": "Transaction does not exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user": {
+      "patch": {
+        "tags": ["User"],
+        "description": "Change a user type from client to staff",
+        "summary": "Change a user type",
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "userDetail",
+            "in": "body",
+            "required": true,
+            "example": {
+              "userEmail": "thor@avengers.com"
+            },
+            "description": "The email of the user to be upgraded to a staff"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Successful modification of a user's type from client to staff",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "firstname": {
+                        "type": "string"
+                      },
+                      "lastname": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "isadmin": {
+                        "type": "boolean"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "createdat": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "firstname",
+                      "lastname",
+                      "email",
+                      "password",
+                      "isadmin",
+                      "type",
+                      "createdat"
+                    ]
+                  },
+                  "example": [
+                    {
+                      "id": 2,
+                      "firstname": "Thor",
+                      "lastname": "Odinson",
+                      "email": "thor@avengers.com",
+                      "password": "$2b$10$pPe2BPbZ.zHkWqEn5h8Zce9jmEExa8NxJKAFVjDAxvz7zEzd.GE1G",
+                      "isadmin": false,
+                      "type": "staff",
+                      "createdat": "2019-04-26T00:35:24.414Z"
+                    }
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "example": "User is now a staff"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error when the aemail address is not properly formatted",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "APlease provide a valid email address"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error when a non-admin user tries to modify user type",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "You are not allowed to carry out that action"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error when trying to modify user type of a non-existing user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 404
+                },
+                "error": {
+                  "type": "string",
+                  "example": "User not found"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error when trying to change an already existing staff to a staff user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 409
+                },
+                "error": {
+                  "type": "string",
+                  "example": "User is already a staff"
                 }
               }
             }
