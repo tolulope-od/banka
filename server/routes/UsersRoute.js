@@ -6,16 +6,10 @@ import asyncErrorHandler from '../middleware/asyncErrorHandler';
 
 const router = Router();
 
-const { fetchAllAccountsByUser, adminAddStaff } = UserController;
+const { createStaff } = UserController;
 const { checkToken } = Authorization;
-const { validateFetchUsersAccounts, validateAddStaff } = UserValidation;
+const { validateCreateStaff } = UserValidation;
 
-router.get(
-  '/:userEmail/accounts',
-  checkToken,
-  validateFetchUsersAccounts,
-  asyncErrorHandler(fetchAllAccountsByUser)
-);
-router.patch('/', checkToken, validateAddStaff, asyncErrorHandler(adminAddStaff));
+router.post('/', checkToken, validateCreateStaff, asyncErrorHandler(createStaff));
 
 export default router;

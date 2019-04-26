@@ -29,7 +29,7 @@
       "description": "API Endpoints for user actions in the app"
     }
   ],
-  "schemes": ["http"],
+  "schemes": ["http", "https"],
   "consumes": ["application/json", "application/x-www-form-urlencoded"],
   "produces": ["application/json"],
   "paths": {
@@ -1217,7 +1217,7 @@
     },
     "/api/v1/user/{userEmail}/accounts": {
       "get": {
-        "tags": ["Accounts"],
+        "tags": ["User"],
         "description": "Fetch all accounts a user owns",
         "summary": "Get all accounts a user owns",
         "consumes": ["application/json"],
@@ -1744,7 +1744,7 @@
         }
       }
     },
-    "/api/v1/user": {
+    "/api/v1/users": {
       "patch": {
         "tags": ["User"],
         "description": "Change a user type from client to staff",
@@ -1893,6 +1893,121 @@
                 "error": {
                   "type": "string",
                   "example": "User is already a staff"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "description": "Create a Staff",
+        "summary": "Admin Staff Registration",
+        "consumes": ["application/json", "application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "newStaff",
+            "in": "body",
+            "required": true,
+            "description": "The request body containing all required, first name, last name, email and admin fields required for registration",
+            "example": {
+              "firstName": "Albus",
+              "lastName": "Dumbledore",
+              "email": "albus@hogwarts.com",
+              "admin": true
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Successful Creation of a Staff",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 201
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "number"
+                      },
+                      "firstName": {
+                        "type": "string"
+                      },
+                      "lastName": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "isadmin": {
+                        "type": "boolean"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJzbmFwZUBob2d3YXJ0cy5jb20iLCJ0eXBlIjoiY2xpZW50IiwiZmlyc3ROYW1lIjoiU2V2ZXJ1cyIsImxhc3ROYW1lIjoiU25hcGUiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU1OTUwNjU1LCJleHAiOjE1NTU5NTQyNTV9.C04ZzO2jQy-87NTURx2yPg63dsI88pCxG4DqPH8sZLQ",
+                      "id": 7,
+                      "firstName": "Clark",
+                      "lastName": "Kent",
+                      "email": "notsuperman@test.com",
+                      "type": "staff",
+                      "isadmin": true,
+                      "createdat": "2019-04-22T16:30:55.066Z"
+                    }
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Staff created successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Required Field Missing",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 400
+                },
+                "error": {
+                  "type": "string",
+                  "example": "First name is required"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Duplicate Email",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 409
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Staff already exists"
                 }
               }
             }

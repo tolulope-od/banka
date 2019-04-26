@@ -13,7 +13,7 @@ const API_PREFIX = '/api/v1/auth';
 /**
  * @description Test for sign up endpoint
  */
-describe('User Route', () => {
+describe('Auth Routes', () => {
   it('Should register a new user', done => {
     const newUser = {
       firstName: 'Darth',

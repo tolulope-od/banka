@@ -293,4 +293,288 @@ describe('User Routes', () => {
         done();
       });
   });
+
+  it('Should create a new staff', done => {
+    const newUser = {
+      firstName: 'Clark',
+      lastName: 'Kent',
+      email: 'notsuperman@test.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(201);
+        expect(res.body)
+          .to.have.nested.property('data[0].type')
+          .eql('staff');
+        expect(res.status).to.equal(201);
+        done();
+      });
+  });
+
+  it('Should create a new staff', done => {
+    const newUser = {
+      admin: true,
+      firstName: 'Bruce',
+      lastName: 'Wayne',
+      email: 'realbatman@wayne.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(201);
+        expect(res.body)
+          .to.have.nested.property('data[0].type')
+          .eql('staff');
+        expect(res.status).to.equal(201);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the user is a not an admin', done => {
+    const newUser = {
+      admin: false,
+      firstName: 'Bruce',
+      lastName: 'Wayne',
+      email: 'realbatman@wayne.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', nonAdminStaffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('You are not allowed to carry out that action');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the email already exists', done => {
+    const newUser = {
+      admin: false,
+      firstName: 'Bruce',
+      lastName: 'Wayne',
+      email: 'realbatman@wayne.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(409);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Staff already exists');
+        expect(res.status).to.equal(409);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the email field is empty', done => {
+    const newUser = {
+      admin: false,
+      firstName: 'Bruce',
+      lastName: 'Wayne',
+      email: ''
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Email is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the first name field is empty', done => {
+    const newUser = {
+      admin: false,
+      firstName: '',
+      lastName: 'Wayne',
+      email: 'something@email.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('First name is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the last name field is empty', done => {
+    const newUser = {
+      admin: false,
+      firstName: 'Bruce',
+      lastName: '',
+      email: 'something@email.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Last name is required');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if all the required fields are empty', done => {
+    const newUser = {
+      firstName: '',
+      lastName: '',
+      email: ''
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Please enter all required fields');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the email field is empty', done => {
+    const newUser = {
+      admin: false,
+      firstName: 'Bruce',
+      lastName: 'Wayne',
+      email: 'notemail'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Please provide a valid email address');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the admin value is not a boolean', done => {
+    const newUser = {
+      admin: 'lol',
+      firstName: 'Bruce',
+      lastName: 'Wayne',
+      email: 'email@isreal.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Please specify true or false for admin');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the first name contains non-alphabets', done => {
+    const newUser = {
+      firstName: 'Cla77rk',
+      lastName: 'Kent',
+      email: 'notsuperman@test.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('First name can only contain alphabets');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not create a new staff if the last name contains non-alphabets', done => {
+    const newUser = {
+      firstName: 'Clark',
+      lastName: '====00',
+      email: 'notsuperman@test.com'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Last name can only contain alphabets');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
 });
