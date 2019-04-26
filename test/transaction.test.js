@@ -89,6 +89,28 @@ describe('Transaction Route', () => {
       });
   });
 
+  it('Should not credit a dormant account', done => {
+    const creditTransaction = {
+      creditAmount: 90900.05
+    };
+    const accountNumber = 6754354123;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/credit`)
+      .set('Authorization', staffAuthToken)
+      .send(creditTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account is dormant, please activate it to carry out a transaction');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
   it('Should not let a customer credit an account', done => {
     const creditTransaction = {
       creditAmount: 500900.05
@@ -266,6 +288,28 @@ describe('Transaction Route', () => {
           .to.have.property('message')
           .eql('Account debited successfully');
         expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not debit a dormant account', done => {
+    const debitTransaction = {
+      debitAmount: 90900.05
+    };
+    const accountNumber = 6754354123;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', staffAuthToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Account is dormant, please activate it to carry out a transaction');
+        expect(res.status).to.equal(400);
         done();
       });
   });
