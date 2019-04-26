@@ -63,8 +63,8 @@ export default class UserController {
       }
       const { type, isAdmin } = findUser[0];
       if (type === 'staff' || isAdmin) {
-        return res.status(400).json({
-          status: 400,
+        return res.status(409).json({
+          status: 409,
           error: 'User is already a staff'
         });
       }

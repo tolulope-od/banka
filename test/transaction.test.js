@@ -12,6 +12,7 @@ const API_PREFIX = '/api/v1';
 
 let authToken;
 let staffAuthToken;
+let upgradedUserToken;
 
 /**
  * @description Tests for transactions routes
@@ -34,7 +35,7 @@ describe('Transaction Route', () => {
 
   before(done => {
     const staff = {
-      email: 'kyloren@vader.com',
+      email: 'obiwan@therebellion.com',
       password: 'password123'
     };
     chai
@@ -43,6 +44,21 @@ describe('Transaction Route', () => {
       .send(staff)
       .end((_err, res) => {
         staffAuthToken = res.body.data[0].token;
+        done();
+      });
+  });
+
+  before(done => {
+    const staff = {
+      email: 'kyloren@vader.com',
+      password: 'password123'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/auth/signin`)
+      .send(staff)
+      .end((_err, res) => {
+        upgradedUserToken = res.body.data[0].token;
         done();
       });
   });
@@ -90,6 +106,28 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.property('error')
           .eql('You are not authorized to carry out that action');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
+
+  it('Should not let a former client upgraded to a staff credit their account', done => {
+    const creditTransaction = {
+      creditAmount: 500900.05
+    };
+    const accountNumber = 6754354123;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/credit`)
+      .set('Authorization', upgradedUserToken)
+      .send(creditTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('You are not allowed to carry out that action');
         expect(res.status).to.equal(401);
         done();
       });
@@ -249,6 +287,28 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.property('error')
           .eql('You are not authorized to carry out that action');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
+
+  it('Should not let a former client upgraded to a staff debit their account', done => {
+    const debitTransaction = {
+      debitAmount: 500900.05
+    };
+    const accountNumber = 6754354123;
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/transactions/${accountNumber}/debit`)
+      .set('Authorization', upgradedUserToken)
+      .send(debitTransaction)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('You are not allowed to carry out that action');
         expect(res.status).to.equal(401);
         done();
       });
