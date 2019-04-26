@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    <title>Banka - Dashboard</title>
+    <title>Banka - Profile</title>
   </head>
 
   <body>
@@ -35,28 +35,27 @@
           <div class="side-nav-content">
             <h5 class="side-nav-greet-admin">Welcome,</h5>
             <h4 class="side-nav-name">Obiwan</h4>
-            <a href="dashboard.html" class="side-link" id="sidelink-active"
-              ><i class="fas fa-columns"></i> Dashboard</a
-            >
+            <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
             <a href="viewaccounts.html" class="side-link"
               ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
             >
-            <a href="profile.html" class="side-link"><i class="fas fa-user-circle"></i> Profile</a>
-
+            <a href="profile.html" class="side-link" id="sidelink-active"
+              ><i class="fas fa-user-circle"></i> Profile</a
+            >
             <a href="users.html" class="side-link"><i class="fas fa-users"></i> Users</a>
           </div>
         </div>
         <div class="item-content-container dashboard">
           <div class="col s5">
-            <h2 class="label-lg"><strong>DASHBOARD</strong></h2>
+            <h2 class="label-lg"><strong>PROFILE</strong></h2>
             <div class="dashboard-links">
-              <a href="dashboard.html" class="dash-nav-link active" id="active"
+              <a href="dashboard.html" class="dash-nav-link active"
                 ><i class="fas fa-columns"></i> Dashboard</a
               >
               <a href="viewaccounts.html" class="dash-nav-link"
                 ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
               >
-              <a href="profile.html" class="dash-nav-link"
+              <a href="profile.html" class="dash-nav-link" id="active"
                 ><i class="fas fa-user-circle"></i> Profile</a
               >
             </div>
@@ -64,47 +63,26 @@
         </div>
       </div>
       <div class="nav-area"></div>
+      <div class="shortcut-btns">
+        <a href="editprofile.html"><i class="far fa-edit"></i> Edit Profile</a>
+      </div>
       <div class="main-dashboard">
         <div class="account-stats">
-          <div class="account-stats-card">
-            <p class="badge-active">Active</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 200,023.09</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903220321</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Savings</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
+          <div class="account-stats-card profile-card">
+            <img src="../images/avatar.png" alt="Profile Picture" class="profile-img" />
+            <p class="sm-text">First Name</p>
+            <h3 class="lg-text">Obiwan</h3>
+            <p class="sm-text">Last Name</p>
+            <h3 class="lg-text">Kenobi</h3>
+            <p class="sm-text">Phone Number</p>
+            <h3 class="lg-text">08033048927</h3>
+            <p class="sm-text">Address</p>
+            <h3 class="lg-text">Block C3PO, Aldeeran, Galaxy F2, R2D2</h3>
           </div>
-          <div class="account-stats-card">
-            <p class="badge-inactive">Inactive</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 4,600,013.36</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903225001</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Savings</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
-          </div>
-          <div class="account-stats-card">
-            <p class="badge-active">Active</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 600,423.99</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903224005</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Current</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
-          </div>
-          <div class="account-stats-card">
-            <p class="badge-active">Active</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 1,700,253.88</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903220662</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Current</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
+        </div>
+        <div id="myModal" class="modal">
+          <div class="modal-content" id="account-modal-content">
+            <span class="close">&times;</span>
           </div>
         </div>
       </div>
@@ -113,5 +91,6 @@
       <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
     </footer>
     <script src="../js/authNav.js"></script>
+    <script src="../js/createAccount.js"></script>
   </body>
 </html>
