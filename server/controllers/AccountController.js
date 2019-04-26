@@ -178,11 +178,11 @@ export default class AccountController {
    * @param {Object} res The response object
    * @route DELETE /api/v1/accounts/:accountNumber
    * @returns {Object} status code, data and message properties
-   * @access private Staff only
+   * @access private Admin only
    */
   static async deleteAccount(req, res) {
     const { accountNumber } = req.params;
-    if (req.decoded.type === 'staff') {
+    if (req.decoded.type === 'staff' && req.decoded.isAdmin) {
       const accountToDelete = await accounts.select(
         ['*'],
         [`accountnumber=${parseInt(accountNumber, 10)}`]
