@@ -278,6 +278,11 @@
     "/api/v1/accounts": {
       "get": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Return all user bank accounts in the system",
         "summary": "Get All Bank Accounts",
         "consumes": ["application/json"],
@@ -390,6 +395,11 @@
       },
       "post": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "User can create a bank account",
         "summary": "Create Bank Account",
         "consumes": ["application/json"],
@@ -509,6 +519,11 @@
     "/api/v1/accounts/{accountNumber}/transactions": {
       "get": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "View an account’s transaction history",
         "summary": "View Account Transaction History",
         "consumes": ["application/json"],
@@ -664,6 +679,11 @@
     "/api/v1/accounts?status=active": {
       "get": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Return all active accounts in the system",
         "summary": "Get All Active Bank Accounts",
         "consumes": ["application/json"],
@@ -778,6 +798,11 @@
     "/api/v1/accounts?status=dormant": {
       "get": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Return all dormant accounts in the system",
         "summary": "Get All Dormant Bank Accounts",
         "consumes": ["application/json"],
@@ -892,6 +917,11 @@
     "/api/v1/accounts/{accountNumber}": {
       "patch": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Edit a bank account's status",
         "summary": "Edit Bank Account Status",
         "consumes": ["application/json"],
@@ -1043,6 +1073,11 @@
       },
       "get": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Return a single user's bank account in the system",
         "summary": "View an Account's details",
         "consumes": ["application/json"],
@@ -1151,6 +1186,11 @@
       },
       "delete": {
         "tags": ["Accounts"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Delete a user's account in the system",
         "summary": "Delete Bank Account",
         "consumes": ["application/json"],
@@ -1218,6 +1258,11 @@
     "/api/v1/user/{userEmail}/accounts": {
       "get": {
         "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Fetch all accounts a user owns",
         "summary": "Get all accounts a user owns",
         "consumes": ["application/json"],
@@ -1362,6 +1407,11 @@
     "/api/v1/transactions/{accountNumber}/credit": {
       "post": {
         "tags": ["Transactions"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Credit a user's account",
         "summary": "Credit Transaction",
         "consumes": ["application/json"],
@@ -1490,6 +1540,11 @@
     "/api/v1/transactions/{accountNumber}/debit": {
       "post": {
         "tags": ["Transactions"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Debit a user's bank account in the system",
         "summary": "Debit Transaction",
         "consumes": ["application/json"],
@@ -1635,6 +1690,11 @@
     "/api/v1/transactions/{transactionId}": {
       "get": {
         "tags": ["Transactions"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Get a single transaction record",
         "summary": "Fetch a single transaction",
         "consumes": ["application/json"],
@@ -1747,6 +1807,11 @@
     "/api/v1/users": {
       "patch": {
         "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Change a user type from client to staff",
         "summary": "Change a user type",
         "consumes": ["application/json"],
@@ -1901,6 +1966,11 @@
       },
       "post": {
         "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "description": "Create a Staff",
         "summary": "Admin Staff Registration",
         "consumes": ["application/json", "application/x-www-form-urlencoded"],
