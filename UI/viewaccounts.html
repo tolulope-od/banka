@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
-    <title>Banka - Add Account</title>
+    <title>Banka - Accounts</title>
   </head>
 
   <body>
@@ -33,8 +33,8 @@
       <div class="item-content-container">
         <div class="side-nav">
           <div class="side-nav-content">
-            <h5 class="side-nav-greet">Welcome,</h5>
-            <h4 class="side-nav-name">Obiwan</h4>
+            <h5 class="side-nav-greet-admin">Welcome,</h5>
+            <h4 class="side-nav-name">Anakin</h4>
             <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
             <a href="viewaccounts.html" class="side-link" id="sidelink-active"
               ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
@@ -63,35 +63,53 @@
       <div class="shortcut-btns">
         <a href="dashboard.html"><i class="fas fa-chevron-left"></i> Dashboard</a>
       </div>
-      <div class="main-dashboard">
-        <div class="account-stats">
-          <div class="account-stats-card">
-            <form onsubmit="event.preventDefault(); handleAccountSubmit();" class="add-account">
-              First name:
-              <input
-                type="text"
-                class="accnt-create-input"
-                name="firstNname"
-                value="Obiwan"
-                disabled
-              /><br />
-              Last name:
-              <input
-                type="text"
-                class="accnt-create-input"
-                name="firstNname"
-                value="Kenobi"
-                disabled
-              /><br />
-              <select name="accountType" class="account-type" id="account-type">
-                <option value="" class="default-slct">-- Select an account type</option>
-                <option value="current" class="current-acct">Current</option>
-                <option value="savings" class="savings-acct">Savings</option>
-              </select>
-              <input type="submit" class="accnt-create-btn" name="addAccount" value="Submit" />
-            </form>
-          </div>
-        </div>
+      <div class="accnt-info-disp">
+        <table class="admin-accnts-view">
+          <thead>
+            <tr class="admin-accnts-tr">
+              <th class="admin-accnts-th">Account Name</th>
+              <th class="admin-accnts-th">Account Number</th>
+              <th class="admin-accnts-th">Created</th>
+              <th class="admin-accnts-th">Status</th>
+              <th class="admin-accnts-th"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="admin-accnts-tr">
+              <td class="admin-accnts-td">Thor Odinson</td>
+              <td class="admin-accnts-td">1304300094</td>
+              <td class="admin-accnts-td">18-01-2019</td>
+              <td class="admin-accnts-td">
+                <p class="badge-active accnt-badge" id="accnt-badge">Active</p>
+              </td>
+              <td class="admin-accnts-td">
+                <a href="accountinfo.html" class="admin-view-details">Details</a>
+              </td>
+            </tr>
+            <tr class="admin-accnts-tr">
+              <td class="admin-accnts-td">Thor Odinson</td>
+              <td class="admin-accnts-td">1708300494</td>
+              <td class="admin-accnts-td">04-02-2015</td>
+              <td class="admin-accnts-td">
+                <p class="badge-inactive accnt-badge" id="accnt-badge">Inactive</p>
+              </td>
+              <td class="admin-accnts-td">
+                <a href="accountinfo.html" class="admin-view-details">Details</a>
+              </td>
+            </tr>
+            <tr class="admin-accnts-tr">
+              <td class="admin-accnts-td">Thor Odinson</td>
+              <td class="admin-accnts-td">1708345325</td>
+              <td class="admin-accnts-td">08-01-2014</td>
+              <td class="admin-accnts-td">
+                <p class="badge-inactive accnt-badge" id="accnt-badge">Inactive</p>
+              </td>
+              <td class="admin-accnts-td">
+                <a href="accountinfo.html" class="admin-view-details">Details</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <div id="myModal" class="modal">
           <div class="modal-content" id="account-modal-content">
             <span class="close">&times;</span>
