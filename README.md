@@ -60,6 +60,8 @@ To clone and run this application, you'll need [Git](https://git-scm.com) instal
 $ git clone https://github.com/tolulope-od/banka.git
 ```
 
+Refer to the [.env.sample](.env.sample) file for the required environment variables to get the application up and running.
+
 **Production**
 
 This application's frontend is served on [this](https://tolulope-od.github.io/banka/) url and accomodates two types of users; a **client** and an **admin/staff**. All types of users share the same login page. The idea is to check the type of user upon login and then redirect to the appropriate pages. A sample admin login credential as it's stored in the database is:
@@ -69,7 +71,7 @@ email: obiwan@therebellion.com
 password: password123
 ```
 
-Upon successful login, the sole admin has the ability to add other staff and/or admin
+Upon successful login, the sole admin has the ability to add other staff and/or admin.
 
 ## Application Features
 
@@ -176,6 +178,8 @@ $ npm run build
 | `GET`    |         `api/v1/accounts?status=active`         |  View a list of all active bank accounts   |      Admin/Staff      |
 | `GET`    |        `api/v1/accounts?status=dormant`         |  View a list of all dormant bank accounts  |      Admin/Staff      |
 | `GET`    |   `api/v1/user/<user-email-address>/accounts`   | View all accounts owned by a specific user |      Admin/Staff      |
+| `PATCH`  |                 `api/v1/users`                  |        Upgrade a client to a staff         |      Admin Only       |
+| `POST`   |                 `api/v1/users`                  |            Admin create cashier            |      Admin Only       |
 
 Refer to the [API Documentation](https://bankaa-app.herokuapp.com/api-docs/) for detailed information on all endpoints
 
