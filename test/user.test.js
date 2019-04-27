@@ -152,7 +152,7 @@ describe('User Routes', () => {
     };
     chai
       .request(app)
-      .patch(`${API_PREFIX}/user`)
+      .patch(`${API_PREFIX}/users`)
       .set('Authorization', staffAuthToken)
       .send(userToUpdate)
       .end((err, res) => {
@@ -173,7 +173,7 @@ describe('User Routes', () => {
     };
     chai
       .request(app)
-      .patch(`${API_PREFIX}/user`)
+      .patch(`${API_PREFIX}/users`)
       .set('Authorization', staffAuthToken)
       .send(userToUpdate)
       .end((err, res) => {
@@ -194,7 +194,7 @@ describe('User Routes', () => {
     };
     chai
       .request(app)
-      .patch(`${API_PREFIX}/user`)
+      .patch(`${API_PREFIX}/users`)
       .set('Authorization', staffAuthToken)
       .send(userToUpdate)
       .end((err, res) => {
@@ -215,7 +215,7 @@ describe('User Routes', () => {
     };
     chai
       .request(app)
-      .patch(`${API_PREFIX}/user`)
+      .patch(`${API_PREFIX}/users`)
       .set('Authorization', nonAdminStaffAuthToken)
       .send(userToUpdate)
       .end((err, res) => {
@@ -236,7 +236,7 @@ describe('User Routes', () => {
     };
     chai
       .request(app)
-      .patch(`${API_PREFIX}/user`)
+      .patch(`${API_PREFIX}/users`)
       .set('Authorization', nonAdminStaffAuthToken)
       .send(userToUpdate)
       .end((err, res) => {
@@ -257,7 +257,7 @@ describe('User Routes', () => {
     };
     chai
       .request(app)
-      .patch(`${API_PREFIX}/user`)
+      .patch(`${API_PREFIX}/users`)
       .set('Authorization', nonAdminStaffAuthToken)
       .send(userToUpdate)
       .end((err, res) => {
@@ -279,7 +279,7 @@ describe('User Routes', () => {
     };
     chai
       .request(app)
-      .patch(`${API_PREFIX}/user`)
+      .patch(`${API_PREFIX}/users`)
       .set('Authorization', nonAdminStaffAuthToken)
       .send(userToUpdate)
       .end((err, res) => {

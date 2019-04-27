@@ -109,6 +109,52 @@ describe('Auth Routes', () => {
       });
   });
 
+  it('Should not register a user if the first name contains non-alphabets', done => {
+    const newUser = {
+      firstName: '=====00000',
+      lastName: 'MarVell',
+      email: 'captain@marvel.com',
+      password: 'quantum'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/signup`)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('First name can only contain alphabets');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
+  it('Should not register a user if the last name contains non-alphabets', done => {
+    const newUser = {
+      firstName: 'Carol',
+      lastName: 'MarVe11',
+      email: 'captain@marvel.com',
+      password: 'quantum'
+    };
+    chai
+      .request(app)
+      .post(`${API_PREFIX}/signup`)
+      .send(newUser)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(400);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Last name can only contain alphabets');
+        expect(res.status).to.equal(400);
+        done();
+      });
+  });
+
   it('Should not register a user with an empty last name field', done => {
     const newUser = {
       firstName: 'Carol',
@@ -218,7 +264,7 @@ describe('Auth Routes', () => {
           .eql(400);
         expect(res.body)
           .to.have.property('error')
-          .eql('All fields are required');
+          .eql('Please enter all required fields');
         expect(res.status).to.equal(400);
         done();
       });

@@ -72,9 +72,18 @@ export default class UserController {
       }
 
       const updatedUser = await users.update([`type='staff'`], [`email='${userEmail}'`]);
+      const data = {
+        id: updatedUser[0].id,
+        firstname: updatedUser[0].firstname,
+        lastname: updatedUser[0].lastname,
+        email: updatedUser[0].email,
+        type: updatedUser[0].type,
+        isadmin: updatedUser[0].isadmin,
+        createdat: updatedUser[0].createdat
+      };
       return res.status(200).json({
         status: 200,
-        data: updatedUser,
+        data: [data],
         message: 'User is now a staff'
       });
     }
