@@ -1,6 +1,7 @@
 import '@babel/polyfill';
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import logger from 'morgan';
 import Debug from 'debug';
@@ -16,6 +17,9 @@ const debug = Debug('dev');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const API_PREFIX = '/api/v1';
+
+// Set up app to use Cross-Origin Resource Sharing
+app.use(cors());
 
 /**
  * @route /test
