@@ -33,10 +33,11 @@ export default class AuthValidation {
     const { firstName, lastName, email, password } = req.body;
     // Regular expression to check for valid email address - emailregex.com
     const validEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const containsAlphabets = /^[a-zA-Z ]*$/;
     if (isEmpty(firstName) && isEmpty(lastName) && isEmpty(email) && isEmpty(password)) {
       return res.status(400).json({
         status: 400,
-        error: 'All fields are required'
+        error: 'Please enter all required fields'
       });
     }
 
@@ -72,6 +73,20 @@ export default class AuthValidation {
       return res.status(400).json({
         status: 400,
         error: 'Password is required'
+      });
+    }
+
+    if (!containsAlphabets.test(firstName)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'First name can only contain alphabets'
+      });
+    }
+
+    if (!containsAlphabets.test(lastName)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Last name can only contain alphabets'
       });
     }
 

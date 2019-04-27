@@ -6,10 +6,11 @@ import asyncErrorHandler from '../middleware/asyncErrorHandler';
 
 const router = Router();
 
-const { createStaff } = UserController;
+const { adminAddStaff, createStaff } = UserController;
 const { checkToken } = Authorization;
-const { validateCreateStaff } = UserValidation;
+const { validateAddStaff, validateCreateStaff } = UserValidation;
 
+router.patch('/', checkToken, validateAddStaff, asyncErrorHandler(adminAddStaff));
 router.post('/', checkToken, validateCreateStaff, asyncErrorHandler(createStaff));
 
 export default router;
