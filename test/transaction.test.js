@@ -81,6 +81,8 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.nested.property('data[0].transactionType')
           .eql('credit');
+        expect(res.body).to.have.nested.property('data[0].oldBalance');
+        expect(res.body).to.have.nested.property('data[0].newBalance');
         expect(res.body)
           .to.have.property('message')
           .eql('Account credited successfully');
@@ -284,6 +286,8 @@ describe('Transaction Route', () => {
         expect(res.body)
           .to.have.nested.property('data[0].transactionType')
           .eql('debit');
+        expect(res.body).to.have.nested.property('data[0].oldBalance');
+        expect(res.body).to.have.nested.property('data[0].newBalance');
         expect(res.body)
           .to.have.property('message')
           .eql('Account debited successfully');
