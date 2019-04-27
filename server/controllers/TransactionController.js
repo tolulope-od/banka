@@ -102,6 +102,8 @@ export default class TransactionController {
       amount: newTransaction[0].amount,
       cashier: newTransaction[0].cashier,
       transactionType: newTransaction[0].type,
+      oldBalance: newTransaction[0].oldbalance,
+      newBalance: newTransaction[0].newbalance,
       accountBalance: updatedAccount[0].balance
     };
     return res.status(200).json({
@@ -194,6 +196,8 @@ export default class TransactionController {
       amount: newTransaction[0].amount,
       cashier: newTransaction[0].cashier,
       transactionType: newTransaction[0].type,
+      oldBalance: newTransaction[0].oldbalance,
+      newBalance: newTransaction[0].newbalance,
       accountBalance: updatedAccount[0].balance
     };
     return res.status(200).json({
