@@ -19,7 +19,7 @@ dropDownBtn.addEventListener('click', () => {
 const checkAuth = () => {
   const isToken = localStorage.getItem('banka-app-token');
   if (!isToken) {
-    window.location.href = '/login.html';
+    window.location = 'index.html';
   }
 };
 
