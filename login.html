@@ -12,7 +12,7 @@
   <title>Banka - Login</title>
 </head>
 
-<body>
+<body onload="checkToken()">
   <div id="navbar" class="menu-nav">
     <a href="index.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
   </div>
@@ -28,14 +28,18 @@
             <div class="form-card">
               <h1 class="signup-login-text">Log In</h1>
               <div class="form-body">
-                <form action="dashboard.html" class="sign-up-form" method="link">
+                <form action="dashboard.html" class="sign-up-form" id="login-form">
                   <br>
-                  <input type="email" name="email" placeholder="Email" required>
+                  <input type="email" name="email" placeholder="Email" id="user-email" required>
                   <br>
-                  <input type="password" name="password" placeholder="Enter Password" required>
+                  <input type="password" name="password" placeholder="Enter Password" id="user-password" required>
                   <br>
                   <div class="input-field-btn">
-                    <input type="submit" name="signUp" value="LOGIN">
+                    <input type="submit" name="signUp" id="login-btn" value="LOGIN">
+                  </div>
+                  <br>
+                  <div class="errors">
+                    <p class="auth-error-text" id="login-error"></p>
                   </div>
                   <br>
                   <div class="forgot-password">
@@ -54,7 +58,7 @@
     <footer class="footer">
       <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
     </footer>
-    <script src=""></script>
+    <script src="js/loginAuth.js"></script>
 </body>
 
 </html>

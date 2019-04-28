@@ -103,6 +103,10 @@ body {
   min-height: calc(100vh - 70px);
 }
 
+.auth-error-text {
+  color: orangered;
+}
+
 .item-content-container {
   max-height: 500px;
   width: 100%;
