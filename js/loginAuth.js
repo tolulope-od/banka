@@ -34,6 +34,8 @@ const loginUser = e => {
       if (response.status === 200) {
         localStorage.setItem('banka-app-token', data[0].token);
         localStorage.setItem('banka-app-user-type', data[0].type);
+        localStorage.setItem('banka-app-user-firstName', data[0].firstName);
+        localStorage.setItem('banka-app-user-lastName', data[0].lastName);
 
         if (data[0].type === 'client') {
           window.location = 'dashboard.html';
