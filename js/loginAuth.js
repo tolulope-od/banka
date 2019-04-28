@@ -36,11 +36,11 @@ const loginUser = e => {
         localStorage.setItem('banka-app-user-type', data[0].type);
 
         if (data[0].type === 'client') {
-          window.location = '/dashboard.html';
+          window.location.href = '/dashboard.html';
         }
 
         if (data[0].type === 'staff') {
-          window.location.href = 'banka/admin/dashboard.html';
+          window.location.href = '/admin/dashboard.html';
         }
       }
 
@@ -65,9 +65,9 @@ const checkToken = () => {
   if (isToken) {
     const userType = localStorage.getItem('banka-app-user-type');
     if (userType === 'staff') {
-      window.location.href = 'banka/admin/dashboard.html';
+      window.location.href = '/admin/dashboard.html';
     }
-    window.location.href = 'banka/dashboard.html';
+    window.location.href = '/dashboard.html';
   }
 };
 
