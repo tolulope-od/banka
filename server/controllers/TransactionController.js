@@ -88,7 +88,7 @@ export default class TransactionController {
       newTransaction[0],
       accountOwner[0],
       accountNumber,
-      accountToCredit[0]
+      updatedAccount[0]
     );
     transporter.sendMail(emailNotif.getMailOptions(), (err, info) => {
       if (err) {
@@ -187,7 +187,7 @@ export default class TransactionController {
       newTransaction[0],
       accountOwner[0],
       accountNumber,
-      accountToDebit[0]
+      updatedAccount[0]
     );
     transporter.sendMail(emailNotif.getMailOptions(), (err, info) => err || info);
     const data = {
