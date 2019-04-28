@@ -15,7 +15,7 @@
     <title>Banka - Dashboard</title>
   </head>
 
-  <body>
+  <body onload="checkAuth()">
     <div id="navbar" class="menu-nav">
       <a href="dashboard.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
       <div id="navbar-right">
@@ -27,7 +27,7 @@
     </div>
     <div class="profile-dropdown" id="dropdown-contents">
       <a href="profile.html" class="dropdown-item profile">Profile</a>
-      <a href="index.html" class="dropdown-item">Logout</a>
+      <a href="index.html" class="dropdown-item" id="logout-btn">Logout</a>
     </div>
     <div class="main">
       <div class="item-content-container">
