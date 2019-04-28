@@ -2,6 +2,7 @@
 const dropDownBtn = document.getElementById('drop-down');
 const dropDown = document.querySelector('.profile-dropdown');
 const logOutBtn = document.getElementById('logout-btn');
+const sideNavName = document.getElementById('side-nav-name');
 
 const myDropdown = () => {
   if (dropDown.style.display === 'none') {
@@ -20,12 +21,17 @@ const checkAuth = () => {
   const isToken = localStorage.getItem('banka-app-token');
   if (!isToken) {
     window.location = 'index.html';
+  } else {
+    const userFirstName = localStorage.getItem('banka-app-user-firstName');
+    sideNavName.innerHTML = `${userFirstName}`;
   }
 };
 
 const logOut = () => {
   localStorage.removeItem('banka-app-token');
   localStorage.removeItem('banka-app-user-type');
+  localStorage.removeItem('banka-app-user-firstName');
+  localStorage.removeItem('banka-app-user-lastName');
 };
 
 logOutBtn.addEventListener('click', logOut);
