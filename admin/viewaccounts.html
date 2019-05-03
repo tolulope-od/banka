@@ -26,8 +26,22 @@
       </div>
     </div>
     <div class="profile-dropdown" id="dropdown-contents">
-      <a href="profile.html" class="dropdown-item profile">Profile</a>
-      <a href="../index.html" class="dropdown-item">Logout</a>
+      <a href="dashboard.html" class="dropdown-item profile" id="inactive"
+        ><i class="fas fa-columns icon"></i> Dashboard</a
+      >
+
+      <a href="viewaccounts.html" class="dropdown-item profile" id="active"
+        ><i class="fas fa-file-invoice-dollar icon"></i> Accounts</a
+      >
+      <a href="users.html" class="dropdown-item profile" id="inactive"
+        ><i class="fas fa-users icon"></i> Users</a
+      >
+      <a href="profile.html" class="dropdown-item profile" id="inactive"
+        ><i class="fas fa-user-circle icon"></i> Profile</a
+      >
+      <a href="../index.html" class="dropdown-item" id="logout-btn"
+        ><i class="fas fa-sign-out-alt icon"></i>Logout</a
+      >
     </div>
     <div class="main">
       <div class="item-content-container">
@@ -46,17 +60,6 @@
         <div class="item-content-container dashboard">
           <div class="col s5">
             <h2 class="label-lg"><strong>ACCOUNTS</strong></h2>
-            <div class="dashboard-links">
-              <a href="dashboard.html" class="dash-nav-link active"
-                ><i class="fas fa-columns"></i> Dashboard</a
-              >
-              <a href="viewaccounts.html" class="dash-nav-link" id="active"
-                ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
-              >
-              <a href="profile.html" class="dash-nav-link"
-                ><i class="fas fa-user-circle"></i> Profile</a
-              >
-            </div>
           </div>
         </div>
       </div>
