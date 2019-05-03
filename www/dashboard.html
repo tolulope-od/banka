@@ -15,7 +15,7 @@
     <title>Banka - Dashboard</title>
   </head>
 
-  <body onload="checkAuth()">
+  <body onload="checkAuth();">
     <div id="navbar" class="menu-nav">
       <a href="dashboard.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
       <div id="navbar-right">
@@ -66,46 +66,10 @@
         <a href="createaccount.html">+ Add Account</a>
       </div>
       <div class="main-dashboard">
-        <div class="account-stats">
-          <div class="account-stats-card">
-            <p class="badge-active">Active</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 200,023.09</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903220321</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Savings</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
-          </div>
-          <div class="account-stats-card">
-            <p class="badge-inactive">Inactive</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 4,600,013.36</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903225001</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Savings</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
-          </div>
-          <div class="account-stats-card">
-            <p class="badge-active">Active</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 600,423.99</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903224005</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Current</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
-          </div>
-          <div class="account-stats-card">
-            <p class="badge-active">Active</p>
-            <p class="balance-text">Balance</p>
-            <h3 class="account-balance">&#x20A6; 1,700,253.88</h3>
-            <p class="balance-text">Account Number</p>
-            <h3 class="account-balance">1903220662</h3>
-            <p class="balance-text">Account Type</p>
-            <h3 class="account-balance">Current</h3>
-            <a href="accountinfo.html" class="accnt-info-btn">View Details</a>
+        <div class="account-stats" id="accnt-stats"></div>
+        <div id="myModal" class="modal">
+          <div class="modal-content" id="account-modal-content">
+            <span class="close">&times;</span>
           </div>
         </div>
       </div>
@@ -114,5 +78,6 @@
       <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
     </footer>
     <script src="js/authNav.js"></script>
+    <script src="js/fetchAccounts.js"></script>
   </body>
 </html>
