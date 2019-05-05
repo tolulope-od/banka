@@ -14,6 +14,45 @@ const formatNumber = num => {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 };
 
+const fetchSingleAccount = event => {
+  const reference = event.target.getAttribute('data-account-number');
+  const accountNumber = parseInt(reference, 10);
+  localStorage.setItem('banka-account-number', accountNumber);
+  event.preventDefault();
+  const token = localStorage.getItem('banka-app-token');
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', token);
+  fetch(`${API_PREFIX}/accounts/${accountNumber}`, {
+    method: 'GET',
+    headers
+  })
+    .then(res => res.json())
+    .then(response => {
+      if (response.status === 200) {
+        const { data } = response;
+        localStorage.setItem('banka-account-owner', data[0].owner); // Should be the owners name
+        localStorage.setItem('banka-account-status', data[0].type); // should be the status
+        localStorage.setItem('banka-account-number-view', data[0].accountNumber);
+        localStorage.setItem('banka-account-created-date', data[0].createdon);
+        window.location = 'accountinfo.html';
+      } else {
+        para.innerHTML = '';
+        text = document.createTextNode(response.error);
+        para.appendChild(text);
+        modalContent.appendChild(para);
+        modal.style.display = 'block';
+      }
+    })
+    .catch(err => {
+      para.innerHTML = '';
+      text = document.createTextNode(err.message);
+      para.appendChild(text);
+      modalContent.appendChild(para);
+      modal.style.display = 'block';
+    });
+};
+
 const fetchAllAccounts = () => {
   para.innerHTML = '';
   text = document.createTextNode('Loading...');
@@ -32,10 +71,11 @@ const fetchAllAccounts = () => {
   })
     .then(res => res.json())
     .then(response => {
-      if (response.status === 200) modal.style.display = 'none';
-      const { data } = response;
-      data.forEach(datum => {
-        const accounts = `<div class="account-stats-card">
+      if (response.status === 200) {
+        modal.style.display = 'none';
+        const { data } = response;
+        data.forEach(datum => {
+          const accounts = `<div class="account-stats-card">
         ${
           datum.status === 'active'
             ? `<p class="badge-active" id="accnt-status">${datum.status}</p>`
@@ -49,12 +89,18 @@ const fetchAllAccounts = () => {
             <h3 class="account-balance" id="accnt-number">${datum.accountnumber}</h3>
             <p class="balance-text">Account Type</p>
             <h3 class="account-balance" id="accnt-type">${datum.type}</h3>
-            <a href="accountinfo.html" class="accnt-info-btn" id="account-details" data-account-id=${
-              datum.id
+            <a href="accountinfo.html" class="accnt-info-btn" data-account-number=${
+              datum.accountnumber
             }>View Details</a>
         </div>`;
-        accountStats.innerHTML += accounts;
-      });
+          accountStats.innerHTML += accounts;
+        });
+
+        const accountDetailsBtn = document.querySelectorAll('.accnt-info-btn');
+        accountDetailsBtn.forEach((elem, key) => {
+          accountDetailsBtn[key].addEventListener('click', fetchSingleAccount);
+        });
+      }
 
       if (response.data.length === 0) {
         accountStats.innerHTML = `<h1>You have no accounts at this time.</h1>`;
@@ -62,7 +108,7 @@ const fetchAllAccounts = () => {
     })
     .catch(err => {
       para.innerHTML = '';
-      text = document.createTextNode(`${err.message}`);
+      text = document.createTextNode(err.message);
       para.appendChild(text);
       modalContent.appendChild(para);
       modal.style.display = 'block';

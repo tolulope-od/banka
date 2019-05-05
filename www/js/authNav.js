@@ -28,10 +28,7 @@ const checkAuth = () => {
 };
 
 const logOut = () => {
-  localStorage.removeItem('banka-app-token');
-  localStorage.removeItem('banka-app-user-type');
-  localStorage.removeItem('banka-app-user-firstName');
-  localStorage.removeItem('banka-app-user-lastName');
+  localStorage.clear();
 };
 
 logOutBtn.addEventListener('click', logOut);
