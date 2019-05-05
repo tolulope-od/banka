@@ -10,6 +10,45 @@ const modalContent = document.getElementById('account-modal-content');
 const para = document.createElement('P');
 let text;
 
+const fetchSingleAccount = event => {
+  const reference = event.target.getAttribute('data-account-number');
+  const accountNumber = parseInt(reference, 10);
+  localStorage.setItem('banka-account-number', accountNumber);
+  event.preventDefault();
+  const token = localStorage.getItem('banka-app-token');
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', token);
+  fetch(`${API_PREFIX}/accounts/${accountNumber}`, {
+    method: 'GET',
+    headers
+  })
+    .then(res => res.json())
+    .then(response => {
+      if (response.status === 200) {
+        const { data } = response;
+        localStorage.setItem('banka-account-owner', data[0].owner); // Should be the owners name
+        localStorage.setItem('banka-account-status', data[0].type); // should be the status
+        localStorage.setItem('banka-account-number-view', data[0].accountNumber);
+        localStorage.setItem('banka-account-created-date', data[0].createdon);
+        window.location = 'accountinfo.html';
+      } else {
+        para.innerHTML = '';
+        text = document.createTextNode(response.error);
+        para.appendChild(text);
+        modalContent.appendChild(para);
+        modal.style.display = 'block';
+      }
+    })
+    .catch(err => {
+      para.innerHTML = '';
+      text = document.createTextNode(err.message);
+      para.appendChild(text);
+      modalContent.appendChild(para);
+      modal.style.display = 'block';
+    });
+};
+
 const fetchAccounts = () => {
   para.innerHTML = '';
   text = document.createTextNode('Loading...');
@@ -47,12 +86,16 @@ const fetchAccounts = () => {
                 
               </td>
               <td class="admin-accnts-td">
-                <a href="accountinfo.html" class="admin-view-details" data-account-id=${
-                  datum.id
+                <a href="accountinfo.html" class="admin-view-details" data-account-number=${
+                  datum.accountnumber
                 }>Details</a>
               </td>
             </tr>`;
           accountsTable.innerHTML += allAccounts;
+        });
+        const accountDetailsBtn = document.querySelectorAll('.admin-view-details');
+        accountDetailsBtn.forEach((elem, key) => {
+          accountDetailsBtn[key].addEventListener('click', fetchSingleAccount);
         });
       }
       if (response.data.length === 0) {
