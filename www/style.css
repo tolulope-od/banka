@@ -573,7 +573,7 @@ button.dropdown-trigger:focus {
   background-color: green;
   color: white;
   border-radius: 15px;
-  padding: 5px 5px;
+  padding: 5px 10px;
 }
 
 .badge-inactive {
@@ -582,7 +582,7 @@ button.dropdown-trigger:focus {
   background-color: red;
   color: white;
   border-radius: 15px;
-  padding: 5px;
+  padding: 5px 10px;
 }
 
 .balance-text {
@@ -1074,10 +1074,13 @@ td.user-info {
     content: 'Amount';
   }
   td:nth-of-type(4):before {
+    content: 'Old Balance';
+  }
+  td:nth-of-type(5):before {
     content: 'Balance';
   }
 
-  td:nth-of-type(5):before {
+  td:nth-of-type(6):before {
     content: 'Cashier';
   }
 
