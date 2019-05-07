@@ -44,6 +44,7 @@ const createTable = async () => {
     id SERIAL PRIMARY KEY,
     accountNumber BIGINT NOT NULL,
     owner INT NOT NULL,
+    ownerName VARCHAR NOT NULL,
     type VARCHAR NOT NULL,
     status VARCHAR NOT NULL,
     balance NUMERIC NOT NULL,
@@ -74,16 +75,16 @@ const createTable = async () => {
   VALUES('olegunnar@manutd.com', 'Ole', 'Solksjaer', '${userPass}', 'Old Trafford, Manchester', '/uploads/avatar/ole.jpg', 08739084, 'client', false);
   INSERT INTO users (email, firstName, lastName, password, address, avatar, phoneNumber, type, isAdmin)
   VALUES('kyloren@vader.com', 'Kylo', 'Ren', '${adminPass}', 'Tatooine, Planet C53', '/uploads/avatar/kylo.jpg', 08939084, 'staff', false);
-  INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
-  VALUES(5563847290, 2, 'thor@avengers.com', 'current', 'active', 349876358.08);
-  INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
-  VALUES(8897654324, 3, 'olegunnar@manutd.com', 'savings', 'dormant', 7665435.97);
-  INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
-  VALUES(8894354324, 3, 'olegunnar@manutd.com', 'current', 'draft', 43435.97);
-  INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
-  VALUES(4294354324, 2, 'thor@avengers.com', 'current', 'draft', 43435.97);
-  INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
-  VALUES(6754354123, 4, 'kyloren@vader.com', 'savings', 'dormant', 321324.7);
+  INSERT INTO accounts (accountNumber, owner, ownerName, ownerEmail, type, status, balance)
+  VALUES(5563847290, 2, 'Thor Odinson','thor@avengers.com', 'current', 'active', 349876358.08);
+  INSERT INTO accounts (accountNumber, owner, ownerName, ownerEmail, type, status, balance)
+  VALUES(8897654324, 3, 'Ole Solksjaer', 'olegunnar@manutd.com', 'savings', 'dormant', 7665435.97);
+  INSERT INTO accounts (accountNumber, owner, ownerName, ownerEmail, type, status, balance)
+  VALUES(8894354324, 3, 'Ole Solksjaer', 'olegunnar@manutd.com', 'current', 'draft', 43435.97);
+  INSERT INTO accounts (accountNumber, owner, ownerName, ownerEmail, type, status, balance)
+  VALUES(4294354324, 2, 'Thor Odinson', 'thor@avengers.com', 'current', 'draft', 43435.97);
+  INSERT INTO accounts (accountNumber, owner, ownerName, ownerEmail, type, status, balance)
+  VALUES(6754354123, 4, 'Kylo Ren', 'kyloren@vader.com', 'savings', 'dormant', 321324.7);
   INSERT INTO transactions (type, accountNumber, owner, cashier, cashierName, amount, oldBalance, newBalance)
   VALUES('credit', 8897654324, 3, 4, 'Kylo Ren', 400500.0, 7264935.97, 7665435.97);
   INSERT INTO transactions (type, accountNumber, owner, cashier, cashierName, amount, oldBalance, newBalance)
