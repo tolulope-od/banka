@@ -66,8 +66,8 @@
       <div class="nav-area"></div>
       <div class="shortcut-btns">
         <a href="#" onclick="handleStatusChange()" id="accnt-status-btn">Activate Account</a>
-        <a href="#" onclick="handleAccountDebit()" id="accnt-status-btn">Debit Account</a>
-        <a href="#" onclick="handleAccountCredit()" id="accnt-status-btn">Credit Account</a>
+        <a href="#" onclick="showDebitForm()" id="accnt-status-btn">Debit Account</a>
+        <a href="#" onclick="showCreditForm()" id="accnt-status-btn">Credit Account</a>
         <a href="#" onclick="handleAccountDelete()" id="accnt-status-btn" class="accnt-delete-btn"
           >Delete Account</a
         >
@@ -109,19 +109,30 @@
         <div id="myModal" class="modal">
           <div class="modal-content" id="account-modal-content">
             <span class="close">&times;</span>
-            <form onsubmit="event.preventDefault()" class="accnt-debit-form" id="accnt-debit-form">
+            <form
+              onsubmit="event.preventDefault(); handleAccountDebit();"
+              class="accnt-debit-form"
+              id="accnt-debit-form"
+            >
               <h3>Debit Account</h3>
               <br />
               <label>Amount: </label>
               <br />
-              <input type="number" name="address" placeholder="Enter Amount" required />
+              <input
+                type="number"
+                step="0.01"
+                name="address"
+                placeholder="Enter Amount"
+                id="debit-amount"
+                required
+              />
               <br />
               <div class="input-field-btn">
-                <input type="submit" name="confirmDebit" value="Confirm" />
+                <input type="submit" name="confirmDebit" id="debit-btn" value="Confirm" />
               </div>
             </form>
             <form
-              onsubmit="event.preventDefault()"
+              onsubmit="event.preventDefault(); handleAccountCredit();"
               class="accnt-credit-form"
               id="accnt-credit-form"
             >
@@ -129,10 +140,17 @@
               <br />
               <label>Amount: </label>
               <br />
-              <input type="number" name="address" placeholder="Enter Amount" required />
+              <input
+                type="number"
+                step="0.01"
+                name="address"
+                placeholder="Enter Amount"
+                id="credit-amount"
+                required
+              />
               <br />
               <div class="input-field-btn">
-                <input type="submit" name="confirmCredit" value="Confirm" />
+                <input type="submit" name="confirmCredit" id="credit-btn" value="Confirm" />
               </div>
             </form>
             <div id="confirm-delete">

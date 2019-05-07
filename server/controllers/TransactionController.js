@@ -167,7 +167,7 @@ export default class TransactionController {
       });
     }
 
-    if (debitAmount > balance) {
+    if (parseFloat(debitAmount) > balance) {
       return res.status(400).json({
         status: 400,
         error: `Insufficient funds, your account balance is ${balance}`
