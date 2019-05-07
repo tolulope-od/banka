@@ -61,8 +61,27 @@ export default class AccountController {
           error: 'Account not found'
         });
       }
-      const { id, balance, owner, createdon, type, owneremail, status } = accountDetails[0];
-      const data = { id, accountNumber, owner, balance, createdon, type, owneremail, status };
+      const {
+        id,
+        balance,
+        owner,
+        createdon,
+        type,
+        owneremail,
+        status,
+        ownername
+      } = accountDetails[0];
+      const data = {
+        id,
+        accountNumber,
+        owner,
+        balance,
+        createdon,
+        type,
+        owneremail,
+        status,
+        ownername
+      };
       return res.status(200).json({
         status: 200,
         data: [data]
@@ -79,8 +98,27 @@ export default class AccountController {
         error: 'Account not found'
       });
     }
-    const { id, balance, owner, createdon, type, owneremail, status } = userAccountDetails[0];
-    const data = { id, accountNumber, owner, balance, createdon, type, owneremail, status };
+    const {
+      id,
+      balance,
+      owner,
+      createdon,
+      type,
+      owneremail,
+      status,
+      ownername
+    } = userAccountDetails[0];
+    const data = {
+      id,
+      accountNumber,
+      owner,
+      balance,
+      createdon,
+      type,
+      owneremail,
+      status,
+      ownername
+    };
     return res.status(200).json({
       status: 200,
       data: [data]
@@ -101,8 +139,12 @@ export default class AccountController {
     if (req.decoded.type === 'client') {
       const accountNumber = Math.floor(Math.random() * 10 ** 10);
       const newAccount = await accounts.create(
-        ['accountNumber', 'owner', 'ownerEmail', 'type', 'status', 'balance'],
-        [`${accountNumber}, ${id}, '${email}', '${type}', 'active', 0.0`]
+        ['accountNumber', 'owner', 'ownerName', 'ownerEmail', 'type', 'status', 'balance'],
+        [
+          `${accountNumber}, ${id}, '${req.decoded.firstName} ${
+            req.decoded.lastName
+          }', '${email}', '${type}', 'active', 0.0`
+        ]
       );
       const data = {
         accountNumber: newAccount[0].accountnumber,
