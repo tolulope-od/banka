@@ -83,7 +83,7 @@ const fetchAllAccounts = () => {
         }
             <p class="balance-text">Balance</p>
             <h3 class="account-balance" id="accnt-balance">&#x20A6; ${formatNumber(
-              Math.round(datum.balance * 100) / 10
+              parseFloat(datum.balance).toFixed(2)
             )}</h3>
             <p class="balance-text">Account Number</p>
             <h3 class="account-balance" id="accnt-number">${datum.accountnumber}</h3>
