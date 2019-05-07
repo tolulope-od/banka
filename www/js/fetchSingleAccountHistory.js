@@ -52,6 +52,15 @@ const fetchAccountTransactionHistory = () => {
       if (response.status === 200) {
         modal.style.display = 'none';
         const { data } = response;
+        const userType = localStorage.getItem('banka-app-user-type');
+
+        if (status === 'active' && userType === 'staff') {
+          document.getElementById('accnt-status-btn').innerHTML = 'Deactivate Account';
+        }
+
+        if (status !== 'active' && userType === 'staff') {
+          document.getElementById('accnt-status-btn').innerHTML = 'Activate Account';
+        }
 
         const deatils = `<div class="accnt-detail-hd">
             <p class="balance-text accnt-info-txt">Account Name:</p>
@@ -198,6 +207,54 @@ const handleAccountCredit = () => {
       const { log } = console;
       log(err.message);
       handleError('An error occurred');
+    });
+};
+
+const handleStatusChange = () => {
+  const currentStatus = document.getElementById('accnt-status-btn').innerHTML;
+  let newStatus;
+  if (currentStatus === 'Deactivate Account') {
+    newStatus = 'dormant';
+  } else {
+    newStatus = 'active';
+  }
+  const accountNumber = localStorage.getItem('banka-account-number-view');
+  const token = localStorage.getItem('banka-app-token');
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', token);
+  fetch(`${API_PREFIX}/accounts/${accountNumber}`, {
+    method: 'PATCH',
+    headers,
+    body: JSON.stringify({ status: newStatus })
+  })
+    .then(res => res.json())
+    .then(response => {
+      const { data } = response;
+      if (response.status === 200) {
+        const accntBadge = document.getElementById('accnt-badge');
+        localStorage.setItem('banka-account-status', data[0].status);
+        if (data[0].status === 'active') {
+          document.getElementById('accnt-status-btn').innerHTML = 'Deactivate Account';
+          accntBadge.className = 'badge-active accnt-badge';
+          accntBadge.innerHTML = `${data[0].status}`;
+        } else {
+          document.getElementById('accnt-status-btn').innerHTML = 'Activate Account';
+          accntBadge.className = 'badge-inactive accnt-badge';
+          accntBadge.innerHTML = `${data[0].status}`;
+        }
+      } else {
+        para.innerHTML = '';
+        text = document.createTextNode(response.error);
+        para.appendChild(text);
+        modalContent.appendChild(para);
+        modal.style.display = 'block';
+      }
+    })
+    .catch(err => {
+      const { log } = console;
+      log(err.message);
+      handleError('An error occurred. Please try again');
     });
 };
 
