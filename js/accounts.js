@@ -10,6 +10,14 @@ const modalContent = document.getElementById('account-modal-content');
 const para = document.createElement('P');
 let text;
 
+const handleError = errMessage => {
+  para.innerHTML = '';
+  text = document.createTextNode(errMessage);
+  para.appendChild(text);
+  modalContent.appendChild(para);
+  modal.style.display = 'block';
+};
+
 const fetchSingleAccount = event => {
   const reference = event.target.getAttribute('data-account-number');
   const accountNumber = parseInt(reference, 10);
@@ -102,11 +110,9 @@ const fetchAccounts = () => {
       }
     })
     .catch(err => {
-      para.innerHTML = '';
-      text = document.createTextNode(`${err.message}`);
-      para.appendChild(text);
-      modalContent.appendChild(para);
-      modal.style.display = 'block';
+      const { log } = console;
+      log(err.message);
+      handleError('An error occurred');
     });
 };
 

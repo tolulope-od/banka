@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* global window, document, fetch, localStorage, Headers */
 /* eslint no-param-reassign: ["error", { "props": true, "ignorePropertyModificationsFor": ["errors"] }] */
 
@@ -9,7 +10,18 @@ const para = document.createElement('P');
 const transactionsTable = document.getElementById('transactions-table');
 const transactionsDisplay = document.getElementById('transactions');
 const accountDetails = document.querySelector('.accnt-details');
+const debitForm = document.getElementById('accnt-debit-form');
+const creditForm = document.getElementById('accnt-credit-form');
+const confirmDeleteMsg = document.getElementById('confirm-delete');
 let text;
+
+const handleError = errMessage => {
+  para.innerHTML = '';
+  text = document.createTextNode(errMessage);
+  para.appendChild(text);
+  modalContent.appendChild(para);
+  modal.style.display = 'block';
+};
 
 // Gotten from https://blog.abelotech.com/posts/number-currency-formatting-javascript/
 const formatNumber = num => {
@@ -69,10 +81,10 @@ const fetchAccountTransactionHistory = () => {
           const transactionDetails = `<tr>
               <td>${transaction.createdon.split('T')[0]}</td>
               <td>${transaction.type}</td>
-              <td>&#x20A6; ${formatNumber(Math.round(transaction.amount * 100) / 10)}</td>
+              <td>&#x20A6; ${formatNumber(transaction.amount)}</td>
 
-              <td>&#x20A6; ${formatNumber(Math.round(transaction.oldbalance * 100) / 10)}</td>
-              <td>&#x20A6; ${formatNumber(Math.round(transaction.newbalance * 100) / 10)}</td>
+              <td>&#x20A6; ${formatNumber(parseFloat(transaction.oldbalance).toFixed(2))}</td>
+              <td>&#x20A6; ${formatNumber(parseFloat(transaction.newbalance).toFixed(2))}</td>
 
               <td>${transaction.cashiername}</td>
             </tr>`;
@@ -101,8 +113,102 @@ const fetchAccountTransactionHistory = () => {
     });
 };
 
+const showDebitForm = () => {
+  // clear form area before displaying
+  para.innerHTML = '';
+  confirmDeleteMsg.style.display = 'none';
+  creditForm.style.display = 'none';
+  debitForm.style.display = 'block';
+  modal.style.display = 'block';
+};
+
+const showCreditForm = () => {
+  // clear form area before displaying
+  para.innerHTML = '';
+  confirmDeleteMsg.style.display = 'none';
+  debitForm.style.display = 'none';
+  creditForm.style.display = 'block';
+  modal.style.display = 'block';
+};
+
+const handleAccountDebit = () => {
+  const debitAmount = document.getElementById('debit-amount').value;
+  const debitBtn = document.getElementById('debit-btn');
+  const accountNumber = localStorage.getItem('banka-account-number-view');
+  const token = localStorage.getItem('banka-app-token');
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', token);
+  para.innerHTML = 'Transaction in progress...';
+  debitBtn.value = 'LOADING..';
+  debitBtn.disabled = true;
+  debitBtn.style.backgroundColor = 'grey';
+  fetch(`${API_PREFIX}/transactions/${accountNumber}/debit`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ debitAmount })
+  })
+    .then(res => res.json())
+    .then(response => {
+      debitBtn.value = 'Confirm';
+      debitBtn.disabled = false;
+      debitBtn.style.backgroundColor = null;
+      if (response.status === 200) {
+        para.innerHTML = `${response.message}`;
+      } else {
+        para.innerHTML = `${response.error}`;
+      }
+    })
+    .catch(err => {
+      const { log } = console;
+      log(err.message);
+      handleError('An error occurred');
+    });
+};
+
+const handleAccountCredit = () => {
+  const creditAmount = document.getElementById('credit-amount').value;
+  const creditBtn = document.getElementById('credit-btn');
+  const accountNumber = localStorage.getItem('banka-account-number-view');
+  const token = localStorage.getItem('banka-app-token');
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', token);
+  para.innerHTML = 'Transaction in progress...';
+  creditBtn.value = 'LOADING..';
+  creditBtn.disabled = true;
+  creditBtn.style.backgroundColor = 'grey';
+  fetch(`${API_PREFIX}/transactions/${accountNumber}/credit`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ creditAmount })
+  })
+    .then(res => res.json())
+    .then(response => {
+      creditBtn.value = 'Confirm';
+      creditBtn.disabled = false;
+      creditBtn.style.backgroundColor = null;
+      if (response.status === 200) {
+        para.innerHTML = `${response.message}`;
+      } else {
+        para.innerHTML = `${response.error}`;
+      }
+    })
+    .catch(err => {
+      const { log } = console;
+      log(err.message);
+      handleError('An error occurred');
+    });
+};
+
 span.onclick = () => {
   modal.style.display = 'none';
+};
+
+window.onclick = event => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
 };
 
 window.onload(fetchAccountTransactionHistory());
