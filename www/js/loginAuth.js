@@ -56,7 +56,10 @@ const loginUser = e => {
     })
     .catch(err => {
       const { log } = console;
-      error.innerHTML = `${err.message}`;
+      loginBtn.value = 'LOGIN';
+      loginBtn.disabled = false;
+      loginBtn.style.backgroundColor = null;
+      error.innerHTML = 'An error occurred';
       log(err);
     });
 };
