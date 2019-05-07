@@ -27,8 +27,8 @@ const fetchSingleAccount = event => {
     .then(response => {
       if (response.status === 200) {
         const { data } = response;
-        localStorage.setItem('banka-account-owner', data[0].owner); // Should be the owners name
-        localStorage.setItem('banka-account-status', data[0].type); // should be the status
+        localStorage.setItem('banka-account-owner', data[0].ownername);
+        localStorage.setItem('banka-account-status', data[0].status);
         localStorage.setItem('banka-account-number-view', data[0].accountNumber);
         localStorage.setItem('banka-account-created-date', data[0].createdon);
         window.location = 'accountinfo.html';
@@ -58,8 +58,6 @@ const fetchAccounts = () => {
   modal.style.display = 'block';
 
   const token = localStorage.getItem('banka-app-token');
-  const firstName = localStorage.getItem('banka-app-user-firstName');
-  const lastName = localStorage.getItem('banka-app-user-lastName');
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
   headers.append('Authorization', token);
@@ -74,7 +72,7 @@ const fetchAccounts = () => {
         const { data } = response;
         data.forEach(datum => {
           const allAccounts = `<tr class="admin-accnts-tr">
-              <td class="admin-accnts-td">${firstName} ${lastName}</td>
+              <td class="admin-accnts-td">${datum.ownername}</td>
               <td class="admin-accnts-td">${datum.accountnumber}</td>
               <td class="admin-accnts-td">${datum.createdon.split('T')[0]}</td>
               <td class="admin-accnts-td">

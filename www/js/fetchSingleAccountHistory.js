@@ -8,6 +8,7 @@ const modalContent = document.getElementById('account-modal-content');
 const para = document.createElement('P');
 const transactionsTable = document.getElementById('transactions-table');
 const transactionsDisplay = document.getElementById('transactions');
+const accountDetails = document.querySelector('.accnt-details');
 let text;
 
 // Gotten from https://blog.abelotech.com/posts/number-currency-formatting-javascript/
@@ -22,8 +23,8 @@ const fetchAccountTransactionHistory = () => {
   para.appendChild(text);
   modalContent.appendChild(para);
   modal.style.display = 'block';
-  const owner = localStorage.getItem('banka-account-owner'); // Should be the owners name
-  const status = localStorage.getItem('banka-account-status'); // should be the account's status
+  const owner = localStorage.getItem('banka-account-owner');
+  const status = localStorage.getItem('banka-account-status');
   const accountNumber = localStorage.getItem('banka-account-number-view');
   const createdDate = localStorage.getItem('banka-account-created-date');
   const token = localStorage.getItem('banka-app-token');
@@ -39,10 +40,31 @@ const fetchAccountTransactionHistory = () => {
       if (response.status === 200) {
         modal.style.display = 'none';
         const { data } = response;
-        document.getElementById('accnt-name').innerHTML = owner;
-        document.getElementById('accnt-badge').innerHTML = status;
-        document.getElementById('accnt-number').innerHTML = accountNumber;
-        document.getElementById('created-date').innerHTML = `${createdDate.split('T')[0]}`;
+
+        const deatils = `<div class="accnt-detail-hd">
+            <p class="balance-text accnt-info-txt">Account Name:</p>
+            <h3 class="accnt-name" id="accnt-name">${owner}</h3>
+          </div>
+          <div class="accnt-detail-hd">
+            <p class="balance-text accnt-info-txt">Status:</p>
+            ${
+              status === 'active'
+                ? `<p class="badge-active accnt-badge" id="accnt-badge">${status}</p>`
+                : `<p class="badge-inactive accnt-badge" id="accnt-badge">${status}</p>`
+            }
+            
+          </div>
+          <div class="accnt-detail-hd">
+            <p class="balance-text accnt-info-txt">Account Number:</p>
+            <h3 class="accnt-name" id="accnt-number">${accountNumber}</h3>
+          </div>
+          <div class="accnt-detail-hd">
+            <p class="balance-text accnt-info-txt">Created:</p>
+            <h3 class="accnt-name" id="created-date">${createdDate.split('T')[0]}</h3>
+          </div>`;
+
+        accountDetails.innerHTML = deatils;
+
         data.forEach(transaction => {
           const transactionDetails = `<tr>
               <td>${transaction.createdon.split('T')[0]}</td>
@@ -52,7 +74,7 @@ const fetchAccountTransactionHistory = () => {
               <td>&#x20A6; ${formatNumber(Math.round(transaction.oldbalance * 100) / 10)}</td>
               <td>&#x20A6; ${formatNumber(Math.round(transaction.newbalance * 100) / 10)}</td>
 
-              <td>${transaction.cashier}</td>
+              <td>${transaction.cashiername}</td>
             </tr>`;
           transactionsTable.innerHTML += transactionDetails;
         });
@@ -69,7 +91,13 @@ const fetchAccountTransactionHistory = () => {
       }
     })
     .catch(err => {
-      console.log(err.message);
+      const { log } = console;
+      log(err.message);
+      para.innerHTML = '';
+      text = document.createTextNode('An error occurred');
+      para.appendChild(text);
+      modalContent.appendChild(para);
+      modal.style.display = 'block';
     });
 };
 
