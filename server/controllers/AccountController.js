@@ -61,8 +61,8 @@ export default class AccountController {
           error: 'Account not found'
         });
       }
-      const { id, balance, owner, createdon, type, owneremail } = accountDetails[0];
-      const data = { id, accountNumber, owner, balance, createdon, type, owneremail };
+      const { id, balance, owner, createdon, type, owneremail, status } = accountDetails[0];
+      const data = { id, accountNumber, owner, balance, createdon, type, owneremail, status };
       return res.status(200).json({
         status: 200,
         data: [data]
@@ -79,8 +79,8 @@ export default class AccountController {
         error: 'Account not found'
       });
     }
-    const { id, balance, owner, createdon, type, owneremail } = userAccountDetails[0];
-    const data = { id, accountNumber, owner, balance, createdon, type, owneremail };
+    const { id, balance, owner, createdon, type, owneremail, status } = userAccountDetails[0];
+    const data = { id, accountNumber, owner, balance, createdon, type, owneremail, status };
     return res.status(200).json({
       status: 200,
       data: [data]

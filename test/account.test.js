@@ -529,6 +529,7 @@ describe('Account Route', () => {
           .to.have.property('status')
           .eql(200);
         expect(res.body).to.have.nested.property('data[0].accountNumber');
+        expect(res.body).to.have.nested.property('data[0].status');
         expect(res.status).to.equal(200);
         done();
       });
@@ -545,6 +546,7 @@ describe('Account Route', () => {
           .to.have.property('status')
           .eql(200);
         expect(res.body).to.have.nested.property('data[0].accountNumber');
+        expect(res.body).to.have.nested.property('data[0].status');
         expect(res.status).to.equal(200);
         done();
       });

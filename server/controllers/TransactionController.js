@@ -69,11 +69,20 @@ export default class TransactionController {
     const accountOwner = await users.select(['*'], [`id='${owner}'`]);
     const newBalance = parseFloat(balance) + parseFloat(creditAmount);
     const newTransaction = await transactions.create(
-      ['type', 'accountNumber', 'owner', 'cashier', 'amount', 'oldBalance', 'newBalance'],
       [
-        `'credit', ${accountNumber}, ${owner}, '${req.decoded.id}', ${parseFloat(
-          creditAmount
-        )}, ${balance}, ${newBalance}`
+        'type',
+        'accountNumber',
+        'owner',
+        'cashier',
+        'cashierName',
+        'amount',
+        'oldBalance',
+        'newBalance'
+      ],
+      [
+        `'credit', ${accountNumber}, ${owner}, '${req.decoded.id}', '${req.decoded.firstName} ${
+          req.decoded.lastName
+        }', ${parseFloat(creditAmount)}, ${balance}, ${newBalance}`
       ]
     );
 
@@ -168,11 +177,20 @@ export default class TransactionController {
     const accountOwner = await users.select(['*'], [`id='${owner}'`]);
 
     const newTransaction = await transactions.create(
-      ['type', 'accountNumber', 'owner', 'cashier', 'amount', 'oldBalance', 'newBalance'],
       [
-        `'debit', ${accountNumber}, ${owner}, '${req.decoded.id}', ${parseFloat(
-          debitAmount
-        )}, ${balance}, ${balance - parseFloat(debitAmount)}`
+        'type',
+        'accountNumber',
+        'owner',
+        'cashier',
+        'cashierName',
+        'amount',
+        'oldBalance',
+        'newBalance'
+      ],
+      [
+        `'debit', ${accountNumber}, ${owner}, '${req.decoded.id}', '${req.decoded.firstName} ${
+          req.decoded.lastName
+        }', ${parseFloat(debitAmount)}, ${balance}, ${balance - parseFloat(debitAmount)}`
       ]
     );
 
