@@ -31,8 +31,8 @@ const fetchSingleAccount = event => {
     .then(response => {
       if (response.status === 200) {
         const { data } = response;
-        localStorage.setItem('banka-account-owner', data[0].owner); // Should be the owners name
-        localStorage.setItem('banka-account-status', data[0].type); // should be the status
+        localStorage.setItem('banka-account-owner', data[0].ownername);
+        localStorage.setItem('banka-account-status', data[0].status);
         localStorage.setItem('banka-account-number-view', data[0].accountNumber);
         localStorage.setItem('banka-account-created-date', data[0].createdon);
         window.location = 'accountinfo.html';
@@ -107,8 +107,10 @@ const fetchAllAccounts = () => {
       }
     })
     .catch(err => {
+      const { log } = console;
+      log(err.message);
       para.innerHTML = '';
-      text = document.createTextNode(err.message);
+      text = document.createTextNode('An error occurred');
       para.appendChild(text);
       modalContent.appendChild(para);
       modal.style.display = 'block';
