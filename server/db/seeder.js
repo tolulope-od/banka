@@ -57,6 +57,7 @@ const createTable = async () => {
     accountNumber BIGINT NOT NULL,
     owner INT NOT NULL,
     cashier INT NOT NULL,
+    cashierName VARCHAR NOT NULL,
     amount NUMERIC NOT NULL,
     oldBalance NUMERIC NOT NULL,
     newBalance NUMERIC NOT NULL,
@@ -83,12 +84,12 @@ const createTable = async () => {
   VALUES(4294354324, 2, 'thor@avengers.com', 'current', 'draft', 43435.97);
   INSERT INTO accounts (accountNumber, owner, ownerEmail, type, status, balance)
   VALUES(6754354123, 4, 'kyloren@vader.com', 'savings', 'dormant', 321324.7);
-  INSERT INTO transactions (type, accountNumber, owner, cashier, amount, oldBalance, newBalance)
-  VALUES('credit', 8897654324, 3, 4, 400500.0, 7264935.97, 7665435.97);
-  INSERT INTO transactions (type, accountNumber, owner, cashier, amount, oldBalance, newBalance)
-  VALUES('debit', 8897654324, 3, 1, 100500.0, 7264935.97, 7665435.97);
-  INSERT INTO transactions (type, accountNumber, owner, cashier, amount, oldBalance, newBalance)
-  VALUES('credit', 5563847290, 2, 4, 400500.0, 7264935.97, 7665435.97);`;
+  INSERT INTO transactions (type, accountNumber, owner, cashier, cashierName, amount, oldBalance, newBalance)
+  VALUES('credit', 8897654324, 3, 4, 'Kylo Ren', 400500.0, 7264935.97, 7665435.97);
+  INSERT INTO transactions (type, accountNumber, owner, cashier, cashierName, amount, oldBalance, newBalance)
+  VALUES('debit', 8897654324, 3, 1, 'Obiwan Kenobi', 100500.0, 7264935.97, 7665435.97);
+  INSERT INTO transactions (type, accountNumber, owner, cashier, cashierName, amount, oldBalance, newBalance)
+  VALUES('credit', 5563847290, 2, 4, 'Kylo Ren', 20500.87, 4935.97, 25436.84);`;
 
     const seeder = await connString.query(query);
     debug(seeder);
