@@ -140,6 +140,14 @@ const showCreditForm = () => {
   modal.style.display = 'block';
 };
 
+const showDeleteModal = () => {
+  para.innerHTML = '';
+  debitForm.style.display = 'none';
+  creditForm.style.display = 'none';
+  confirmDeleteMsg.style.display = 'block';
+  modal.style.display = 'block';
+};
+
 const handleAccountDebit = () => {
   const debitAmount = document.getElementById('debit-amount').value;
   const debitBtn = document.getElementById('debit-btn');
@@ -256,6 +264,39 @@ const handleStatusChange = () => {
       log(err.message);
       handleError('An error occurred. Please try again');
     });
+};
+
+const handleAccountDelete = () => {
+  const accountNumber = localStorage.getItem('banka-account-number-view');
+  const token = localStorage.getItem('banka-app-token');
+  const headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  headers.append('Authorization', token);
+  confirmDeleteMsg.innerHTML = 'Loading...';
+  fetch(`${API_PREFIX}/accounts/${accountNumber}`, {
+    method: 'DELETE',
+    headers
+  })
+    .then(res => res.json())
+    .then(response => {
+      if (response.status === 200) {
+        confirmDeleteMsg.innerHTML = `${response.message}`;
+        setTimeout(() => {
+          window.location = 'dashboard.html';
+        }, 2000);
+      } else {
+        confirmDeleteMsg.innerHTML = `${response.error}`;
+      }
+    })
+    .catch(err => {
+      const { log } = console;
+      log(err.message);
+      handleError('An error occurred');
+    });
+};
+
+const hideDeleteDisplay = () => {
+  modal.style.display = 'none';
 };
 
 span.onclick = () => {
