@@ -577,4 +577,36 @@ describe('User Routes', () => {
         done();
       });
   });
+
+  it('Should return all staff', done => {
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/users`)
+      .set('Authorization', staffAuthToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(200);
+        expect(res.body).to.have.property('data');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('Should not return all staff if a user tries to access the route', done => {
+    chai
+      .request(app)
+      .get(`${API_PREFIX}/users`)
+      .set('Authorization', authToken)
+      .end((err, res) => {
+        expect(res.body)
+          .to.have.property('status')
+          .eql(401);
+        expect(res.body)
+          .to.have.property('error')
+          .eql('Not allowed!');
+        expect(res.status).to.equal(401);
+        done();
+      });
+  });
 });

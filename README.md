@@ -178,6 +178,7 @@ $ npm run build
 | `GET`    |         `api/v1/accounts?status=active`         |  View a list of all active bank accounts   |      Admin/Staff      |
 | `GET`    |        `api/v1/accounts?status=dormant`         |  View a list of all dormant bank accounts  |      Admin/Staff      |
 | `GET`    |   `api/v1/user/<user-email-address>/accounts`   | View all accounts owned by a specific user |      Admin/Staff      |
+| `GET`    |                 `api/v1/users`                  |            Admin get all staff             |      Admin/Staff      |
 | `PATCH`  |                 `api/v1/users`                  |        Upgrade a client to a staff         |      Admin Only       |
 | `POST`   |                 `api/v1/users`                  |            Admin create cashier            |      Admin Only       |
 
