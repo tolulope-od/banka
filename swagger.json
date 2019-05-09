@@ -1805,6 +1805,98 @@
       }
     },
     "/api/v1/users": {
+      "get": {
+        "tags": ["User"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "description": "Get all Staff",
+        "summary": "Return all staff in the DB",
+        "consumes": ["application/json", "application/x-www-form-urlencoded"],
+        "parameters": [],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "All staff returned successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 200
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "firstname": {
+                        "type": "string"
+                      },
+                      "lastname": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "isadmin": {
+                        "type": "boolean"
+                      },
+                      "createdat": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": 1,
+                      "firstname": "Obiwan",
+                      "lastname": "Kenobi",
+                      "email": "obiwan@therebellion.com",
+                      "type": "staff",
+                      "isadmin": true,
+                      "createdat": "2019-05-09T09:04:36.181Z"
+                    },
+                    {
+                      "id": 4,
+                      "firstname": "Kylo",
+                      "lastname": "Ren",
+                      "email": "kyloren@vader.com",
+                      "type": "staff",
+                      "isadmin": false,
+                      "createdat": "2019-05-09T09:04:36.181Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Non-staff trying to access the route",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "number",
+                  "example": 401
+                },
+                "error": {
+                  "type": "string",
+                  "example": "Not allowed!"
+                }
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "tags": ["User"],
         "security": [

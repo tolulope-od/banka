@@ -130,7 +130,9 @@ export default class UserController {
         lastName: newUser[0].lastname,
         isAdmin: newUser[0].isadmin
       };
-      const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1hr' });
+      const token = jwt.sign(payload, process.env.SECRET_KEY, {
+        expiresIn: '1hr'
+      });
       const data = {
         token,
         id: newUser[0].id,
@@ -151,6 +153,33 @@ export default class UserController {
     return res.status(401).json({
       status: 401,
       error: 'You are not allowed to carry out that action'
+    });
+  }
+
+  /**
+   * @description Get all stall
+   * @param {Object} req The request object
+   * @param {Object} res The response object
+   * @route GET /api/v1/users/
+   * @returns {Object} status code, data and message properties
+   * @access private Admin
+   */
+  static async getAllStaff(req, res) {
+    const { type } = req.decoded;
+    if (type !== 'staff') {
+      res.status(401).json({
+        status: 401,
+        error: 'Not allowed!'
+      });
+    }
+
+    const allStaff = await users.select(
+      ['id', 'firstname', 'lastname', 'email', 'type', 'isadmin', 'createdat'],
+      [`type='staff'`]
+    );
+    res.status(200).json({
+      status: 200,
+      data: allStaff
     });
   }
 }
