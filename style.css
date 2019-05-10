@@ -709,6 +709,10 @@ th {
   border-bottom: 1px solid black;
 }
 
+.add-account {
+  margin: 15px;
+}
+
 .admin-accnts-tr {
   background: white !important;
 }
