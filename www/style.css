@@ -677,7 +677,7 @@ input.accnt-create-input {
 
 .accnt-badge {
   float: left !important;
-  width: 40px;
+  width: 60px;
   text-align: center;
 }
 
@@ -707,6 +707,10 @@ th {
   padding: 8px;
   border: none;
   border-bottom: 1px solid black;
+}
+
+.add-account {
+  margin: 15px;
 }
 
 .admin-accnts-tr {
