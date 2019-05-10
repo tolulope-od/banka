@@ -12,7 +12,7 @@
   <title>Banka - Add Staff</title>
 </head>
 
-<body>
+<body onload="checkAuth();">
   <div id="navbar" class="menu-nav">
     <a href="dashboard.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
     <div id="navbar-right">
@@ -37,7 +37,7 @@
       <div class="side-nav">
         <div class="side-nav-content">
           <h5 class='side-nav-greet-admin'>Welcome,</h5>
-          <h4 class='side-nav-name'>Anakin</h4>
+          <h4 class='side-nav-name' id="side-nav-name">Anakin</h4>
           <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
           <a href="viewaccounts.html" class="side-link"><i class="fas fa-file-invoice-dollar"></i> Accounts</a>
           <a href="profile.html" class="side-link"><i class="fas fa-user-circle"></i> Profile</a>
@@ -55,39 +55,35 @@
     <div class="main-dashboard">
     <div class="account-stats">
         <div class="edit-profile">
-          <form onclick="event.preventDefault()" class="add-account">
+          <form onsubmit="event.preventDefault(); addNewStaff();" class="add-account">
             <h2>Add Staff</h2>
             <br>
             <div id="input-area">
               <label>First Name: </label>
-              <input type="text" name="firstName" placeholder="First Name" class='edit-profile-fields'>
+              <input type="text" name="firstName" placeholder="First Name" id="staff-first-name" class='edit-profile-fields'>
             </div>
             <br>
             <div id="input-area">
               <label>Last Name: </label>
-              <input type="text" name="lastName" placeholder="Last Name" class='edit-profile-fields'>
+              <input type="text" name="lastName" placeholder="Last Name" id="staff-last-name" class='edit-profile-fields'>
             </div>
             <br>
             <div id="input-area">
-            <label>Phone Number: </label>
-            <input type="text" name="phoneNumber" placeholder="Enter Phone Number" class='edit-profile-fields'>
+            <label>Email: </label>
+            <input type="email" name="email" placeholder="Enter e-Mail" id="staff-email" class='edit-profile-fields'>
             </div>
             <br>
-            <div id="input-area">
-            <label>Address: </label>
-            <input type="text" name="address" placeholder="Enter address" class='edit-profile-fields'>
-            </div>
             <br>
             <div id="input-area">
               <label>Staff Type: </label>
               <select name="userType" class="user-type" id='user-type'>
                 <option value="" class="default-slct">-- Select staff type</option>
                 <option value="admin" class="current-acct">Admin</option>
-                <option value="staff" class="savings-acct">Cashier</option>
+                <option value="not-admin" class="savings-acct">Non-Admin</option>
               </select>
             </div>
             <div class="input-field-btn">
-              <input type="submit" name="addStaff" value="Add Staff">
+              <input type="submit" name="addStaff" id="add-staff-btn" value="Add Staff">
             </div>
             <br>
           </form>
@@ -105,7 +101,7 @@
     <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
   </footer>
   <script src="../js/authNav.js"></script>
-  <script src="../js/createAccount.js"></script>
+  <script src="../js/addStaff.js"></script>
 </body>
 
 </html>
