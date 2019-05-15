@@ -15,7 +15,7 @@
     <title>Banka - Profile</title>
   </head>
 
-  <body>
+  <body onload="checkAuth();">
     <div id="navbar" class="menu-nav">
       <a href="dashboard.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
       <div id="navbar-right">
@@ -48,7 +48,7 @@
         <div class="side-nav">
           <div class="side-nav-content">
             <h5 class="side-nav-greet-admin">Welcome,</h5>
-            <h4 class="side-nav-name">Obiwan</h4>
+            <h4 class="side-nav-name" id="side-nav-name"></h4>
             <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
             <a href="viewaccounts.html" class="side-link"
               ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
@@ -74,13 +74,13 @@
           <div class="account-stats-card profile-card">
             <img src="../images/avatar.png" alt="Profile Picture" class="profile-img" />
             <p class="sm-text">First Name</p>
-            <h3 class="lg-text">Obiwan</h3>
+            <h3 class="lg-text" id="profile-first-name"></h3>
             <p class="sm-text">Last Name</p>
-            <h3 class="lg-text">Kenobi</h3>
+            <h3 class="lg-text" id="profile-last-name"></h3>
             <p class="sm-text">Phone Number</p>
-            <h3 class="lg-text">08033048927</h3>
+            <h3 class="lg-text" id="profile-phone"></h3>
             <p class="sm-text">Address</p>
-            <h3 class="lg-text">Block C3PO, Aldeeran, Galaxy F2, R2D2</h3>
+            <h3 class="lg-text" id="profile-address"></h3>
           </div>
         </div>
         <div id="myModal" class="modal">
@@ -94,6 +94,6 @@
       <p class="footerTxt center-text">Banka Inc &copy; 2019</p>
     </footer>
     <script src="../js/authNav.js"></script>
-    <script src="../js/createAccount.js"></script>
+    <script src="../js/profile.js"></script>
   </body>
 </html>

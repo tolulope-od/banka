@@ -647,6 +647,10 @@ input.accnt-create-input {
   cursor: pointer;
 }
 
+.loading-img {
+  align-self: center;
+}
+
 .accnt-info-disp {
   margin-left: 240px;
   display: flex;

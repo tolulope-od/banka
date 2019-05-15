@@ -16,6 +16,8 @@ const loginUser = e => {
   loginBtn.value = 'LOADING..';
   loginBtn.disabled = true;
   loginBtn.style.backgroundColor = 'grey';
+  error.innerHTML =
+    '<center><img src="https://res.cloudinary.com/tolulope-od/image/upload/v1557908999/loading_o1y5v6.gif" width="150" /></center>';
   const email = document.getElementById('user-email').value;
   const password = document.getElementById('user-password').value;
   const headers = new Headers();
@@ -32,7 +34,10 @@ const loginUser = e => {
       loginBtn.disabled = false;
       loginBtn.style.backgroundColor = null;
       if (response.status === 200) {
+        const now = Date.now();
+        const tokenExp = parseInt(now, 10) + 3600000;
         localStorage.setItem('banka-app-token', data[0].token);
+        localStorage.setItem('banka-app-token:exp', tokenExp);
         localStorage.setItem('banka-app-user-type', data[0].type);
         localStorage.setItem('banka-app-user-firstName', data[0].firstName);
         localStorage.setItem('banka-app-user-lastName', data[0].lastName);
@@ -67,7 +72,9 @@ const loginUser = e => {
 // eslint-disable-next-line no-unused-vars
 const checkToken = () => {
   const isToken = localStorage.getItem('banka-app-token');
-  if (isToken) {
+  const tokenExp = localStorage.getItem('banka-app-token:exp');
+  const now = Date.now();
+  if (isToken && parseInt(tokenExp, 10) > now) {
     const userType = localStorage.getItem('banka-app-user-type');
     if (userType === 'staff') {
       window.location = 'admin/dashboard.html';

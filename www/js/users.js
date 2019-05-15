@@ -18,8 +18,16 @@ const displayModalWithMessage = message => {
   modal.style.display = 'block';
 };
 
+const displayModalWithImage = image => {
+  para.innerHTML = image;
+  modalContent.appendChild(para);
+  modal.style.display = 'block';
+};
+
 const fetchStaff = () => {
-  displayModalWithMessage('Loading...');
+  displayModalWithImage(
+    '<center><img src="https://res.cloudinary.com/tolulope-od/image/upload/v1557908999/loading_o1y5v6.gif" width="150" /></center>'
+  );
   const token = localStorage.getItem('banka-app-token');
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');

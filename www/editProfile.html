@@ -15,7 +15,7 @@
     <title>Banka - Edit Profile</title>
   </head>
 
-  <body>
+  <body onload="checkAuth();">
     <div id="navbar" class="menu-nav">
       <a href="dashboard.html" id="logo"><i class="fas fa-coins"></i>Banka</a>
       <div id="navbar-right">
@@ -45,7 +45,7 @@
         <div class="side-nav">
           <div class="side-nav-content">
             <h5 class="side-nav-greet">Welcome,</h5>
-            <h4 class="side-nav-name">Obiwan</h4>
+            <h4 class="side-nav-name" id="side-nav-name"></h4>
             <a href="dashboard.html" class="side-link"><i class="fas fa-columns"></i> Dashboard</a>
             <a href="viewaccounts.html" class="side-link"
               ><i class="fas fa-file-invoice-dollar"></i> Accounts</a
