@@ -30,9 +30,8 @@ const formatNumber = num => {
 
 const fetchAccountTransactionHistory = () => {
   para.innerHTML = '';
-  text = document.createTextNode('Loading...');
-
-  para.appendChild(text);
+  para.innerHTML =
+    '<center><img src="https://res.cloudinary.com/tolulope-od/image/upload/v1557908999/loading_o1y5v6.gif" width="150" /></center>';
   modalContent.appendChild(para);
   modal.style.display = 'block';
   const owner = localStorage.getItem('banka-account-owner');

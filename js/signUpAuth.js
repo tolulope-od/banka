@@ -30,6 +30,8 @@ const registerUser = e => {
   signUpBtn.value = 'LOADING..';
   signUpBtn.disabled = true;
   signUpBtn.style.backgroundColor = 'grey';
+  error.innerHTML =
+    '<center><img src="https://res.cloudinary.com/tolulope-od/image/upload/v1557908999/loading_o1y5v6.gif" width="150" /></center>';
   const firstName = document.getElementById('first-name').value;
   const lastName = document.getElementById('last-name').value;
   const email = document.getElementById('user-signup-email').value;
