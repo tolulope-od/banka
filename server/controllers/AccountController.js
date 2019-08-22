@@ -152,7 +152,8 @@ export default class AccountController {
         lastName,
         email,
         type: newAccount[0].type,
-        openingBalance: newAccount[0].balance
+        openingBalance: newAccount[0].balance,
+        newAccount: newAccount[0]
       };
       return res.status(201).json({
         status: 201,

@@ -1,6 +1,5 @@
 import '@babel/polyfill';
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
 import logger from 'morgan';
@@ -31,8 +30,8 @@ app.get('/', (req, res) => res.status(200).json({ message: 'BANKA APP API RESPON
 app.use(logger('dev'));
 
 // Body parser middleware
-app.use(bodyParser({ extended: false }));
-app.use(bodyParser.json());
+app.use(express({ extended: false }));
+app.use(express.json());
 
 // Use the routes for the apps routing logic
 app.use(`${API_PREFIX}`, routes);
